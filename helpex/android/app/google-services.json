@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "1011612201216",
-    "firebase_url": "https://email-login-34a4a-default-rtdb.firebaseio.com",
-    "project_id": "email-login-34a4a",
-    "storage_bucket": "email-login-34a4a.appspot.com"
+    "project_number": "677636470647",
+    "project_id": "helpexfyp",
+    "storage_bucket": "helpexfyp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1011612201216:android:12002b36417f7d425283e5",
+        "mobilesdk_app_id": "1:677636470647:android:e899b8079e62a6b26d1372",
         "android_client_info": {
-          "package_name": "com.example.login_app"
+          "package_name": "com.example.helpex_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1011612201216-ljdughgms36kdmkfs590hmn9jtkcs29o.apps.googleusercontent.com",
+          "client_id": "677636470647-3qqss7a01gcptqe7ivvumjgs49ptbr3u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDdjFHcOzEj06xWQ0SGlaXDuGXITDwrNcQ"
+          "current_key": "AIzaSyCU8Jl12xCMrctssVUet5KZ04tmcblrKc8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1011612201216-ljdughgms36kdmkfs590hmn9jtkcs29o.apps.googleusercontent.com",
+              "client_id": "677636470647-3qqss7a01gcptqe7ivvumjgs49ptbr3u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
