@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/authenticate/authenticate.dart';
-import 'package:helpex_app/screens/home/home.dart';
+import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:provider/provider.dart';
 
 class Wraper extends StatefulWidget {
@@ -18,10 +18,10 @@ class _WraperState extends State<Wraper> {
     //auth or home
     if (user?.uid == null) {
       return const Authenticate();
-    } else{
+    } else {
       //to be removed later
       print(user?.uid);
-      return Home();
+      return AdvisorHome();
     }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-//import 'package:login_app/screens/authenticate/register.dart';
 import 'package:helpex_app/screens/wrapper.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:provider/provider.dart';
+
 
 import 'models/user.dart';
 
@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
           // When navigating to the "/" route, build the FirstScreen widget.
           '/': (context) => Wraper(),
           // When navigating to the "/second" route, build the SecondScreen widget.
-         // '/signUp': (context) => Register(toggleView: toggleView),
+          // '/signUp': (context) => Register(toggleView: toggleView),
         },
-       // home: Wraper(),
+        // home: Wraper(),
       ),
     );
   }
