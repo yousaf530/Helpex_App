@@ -18,6 +18,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
         Center(
           child: AppCard(
             child: Text("what the fuck"),
+            
           ),
         )
       ],
