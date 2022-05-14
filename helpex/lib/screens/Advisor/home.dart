@@ -49,7 +49,10 @@ class _AdvisorHomeState extends State<AdvisorHome> {
           )
         ],
       ),
-      body: screens[currentIndex],
+      body: IndexedStack(
+        index: currentIndex,
+        children: screens,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         selectedItemColor: Color(0xff2D7567),
