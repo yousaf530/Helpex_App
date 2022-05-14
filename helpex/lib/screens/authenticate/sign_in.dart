@@ -67,6 +67,7 @@ class _SignInState extends State<SignIn> {
                                 setState(() => email = val);
                               },
                               decoration: InputDecoration(
+                                border: InputBorder.none,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
                                   borderSide: BorderSide(
@@ -94,6 +95,7 @@ class _SignInState extends State<SignIn> {
                                 setState(() => password = val);
                               },
                               decoration: InputDecoration(
+                                border: InputBorder.none,
                                 //fillColor: const Color(),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
