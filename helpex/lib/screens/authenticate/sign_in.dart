@@ -49,67 +49,74 @@ class _SignInState extends State<SignIn> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25, 33, 25, 0),
-                  child: Material(
-                    
-                    elevation: 10.0,
-                    shadowColor: Colors.grey,
-                    borderRadius: BorderRadius.circular(40),
-                    child: Form(
-                      key: _formKey,
+                  child: Form(
+                    key: _formKey,
+                    child: Container(
                       child: Column(
                         children: [
-                          TextFormField(
-                            validator: (val) => !(EmailValidator.validate(val!))
-                                ? 'Not a valid email.'
-                                : null,
-                            onChanged: (val) {
-                              setState(() => email = val);
-                            },
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(40),
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 0.0),
+                          Material(
+                            elevation: 10.0,
+                            shadowColor: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(40),
+                            child: TextFormField(
+                              validator: (val) =>
+                                  !(EmailValidator.validate(val!))
+                                      ? 'Not a valid email.'
+                                      : null,
+                              onChanged: (val) {
+                                setState(() => email = val);
+                              },
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(40),
+                                  borderSide: BorderSide(
+                                      color: Colors.white, width: 0.0),
+                                ),
+                                prefixIcon: Icon(Icons.mail_outline),
+                                hintText: 'Email',
+                                hintStyle: GoogleFonts.mulish(),
                               ),
-                              prefixIcon: Icon(Icons.mail_outline),
-                              hintText: 'Email',
-                              hintStyle: GoogleFonts.mulish(),
                             ),
                           ),
                           SizedBox(
                             height: 20,
                           ),
-                          TextFormField(
-                            obscureText: !_passwordVisible,
-                            validator: ((val) => val!.length < 6
-                                ? 'Min password length is 6'
-                                : null),
-                            onChanged: (val) {
-                              setState(() => password = val);
-                            },
-                            decoration: InputDecoration(
-                              //fillColor: const Color(),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(40),
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 0.0),
-                              ),
-                              prefixIcon: Icon(Icons.lock_outline),
-                              hintText: 'Password',
-                              hintStyle: GoogleFonts.mulish(),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  // Based on passwordVisible state choose the icon
-                                  _passwordVisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
+                          Material(
+                            elevation: 10.0,
+                            shadowColor: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(40),
+                            child: TextFormField(
+                              obscureText: !_passwordVisible,
+                              validator: ((val) => val!.length < 6
+                                  ? 'Min password length is 6'
+                                  : null),
+                              onChanged: (val) {
+                                setState(() => password = val);
+                              },
+                              decoration: InputDecoration(
+                                //fillColor: const Color(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(40),
+                                  borderSide: BorderSide(
+                                      color: Colors.white, width: 0.0),
                                 ),
-                                onPressed: () {
-                                  // Update the state i.e. toogle the state of passwordVisible variable
-                                  setState(() {
-                                    _passwordVisible = !_passwordVisible;
-                                  });
-                                },
+                                prefixIcon: Icon(Icons.lock_outline),
+                                hintText: 'Password',
+                                hintStyle: GoogleFonts.mulish(),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    _passwordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                ),
                               ),
                             ),
                           ),
