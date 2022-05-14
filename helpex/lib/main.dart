@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           // When navigating to the "/" route, build the FirstScreen widget.
-          '/': (context) => Wraper(),
+          '/': (context) => const Wraper(),
           // When navigating to the "/second" route, build the SecondScreen widget.
           // '/signUp': (context) => Register(toggleView: toggleView),
         },
