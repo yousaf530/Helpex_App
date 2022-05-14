@@ -17,6 +17,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool _passwordVisible = false;
 
   //text field state
   String email = '';
@@ -27,6 +28,10 @@ class _RegisterState extends State<Register> {
   /*final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();*/
   @override
+  void initState() {
+    _passwordVisible = false;
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -69,6 +74,7 @@ class _RegisterState extends State<Register> {
                             height: 20,
                           ),
                           TextFormField(
+                            validator: (value) => value!.length < 1 ? 'Enter Name' : null,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -132,7 +138,7 @@ class _RegisterState extends State<Register> {
                             height: 20,
                           ),
                           TextFormField(
-                            obscureText: true,
+                            obscureText: !_passwordVisible,
                             validator: ((val) => val!.length < 6
                                 ? 'Min password length is 6'
                                 : null),
@@ -154,6 +160,20 @@ class _RegisterState extends State<Register> {
                                 hintStyle: GoogleFonts.mulish(
                                   textStyle: TextStyle(color: Colors.black),
                                 ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    _passwordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
@@ -165,7 +185,13 @@ class _RegisterState extends State<Register> {
                             height: 20,
                           ),
                           TextFormField(
-                            obscureText: true,
+                            validator: (value) {
+                              if (value != password) {
+                                return 'Passwords Don\'t match';
+                              } else
+                                return null;
+                            },
+                            obscureText: !_passwordVisible,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -183,6 +209,20 @@ class _RegisterState extends State<Register> {
                                 hintText: "Confirm Password",
                                 hintStyle: GoogleFonts.mulish(
                                   textStyle: TextStyle(color: Colors.black),
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    _passwordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
