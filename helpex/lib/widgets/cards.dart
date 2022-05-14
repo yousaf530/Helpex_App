@@ -17,7 +17,7 @@ class _AppCardState extends State<AppCard> {
       children: [
         Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          margin: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0), 
           color: Colors.white,
           child: Container(
             padding: const EdgeInsets.all(20.0),

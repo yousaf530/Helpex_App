@@ -174,7 +174,8 @@ class _SignInState extends State<SignIn> {
                       }
                     }
                   },
-                  child: Text('Log In'),
+                  child: Text('Log In',
+                  style: GoogleFonts.mulish(),),
                 ),
                 SizedBox(
                   height: 10,
