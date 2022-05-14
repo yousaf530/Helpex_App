@@ -22,6 +22,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                 height: 10,
               ),
               CircleAvatar(
+                //backgroundImage: (),
                 backgroundColor: Colors.grey[400],
                 radius: 62.5,
                 child: const Text(
@@ -192,7 +193,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         color: Colors.black,
                       ),
                       Text(
-                        'Monday:\nTueday:\nWednesday:\nThursday:\nFriday:\nSaturday:\nSunday:',
+                        'Monday:\nTuesday:\nWednesday:\nThursday:\nFriday:\nSaturday:\nSunday:',
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(fontSize: 16),
                         ),
