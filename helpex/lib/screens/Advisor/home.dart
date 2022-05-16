@@ -8,7 +8,7 @@ import 'package:helpex_app/screens/Advisor/profile.dart';
 import 'package:helpex_app/services/auth.dart';
 
 class AdvisorHome extends StatefulWidget {
-  AdvisorHome({Key? key}) : super(key: key);
+  const AdvisorHome({Key? key}) : super(key: key);
 
   @override
   State<AdvisorHome> createState() => _AdvisorHomeState();

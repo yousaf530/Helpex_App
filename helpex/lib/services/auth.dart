@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:helpex_app/models/google_user.dart';
 import 'package:helpex_app/models/user.dart';
 
 class AuthService {
@@ -13,6 +14,15 @@ class AuthService {
   Stream<MyUser?> get user {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
+
+  //create googleUser Object
+  // GoogleUser? _userFromGoogleUser(User? user) {
+  //   return GoogleUser(uid: uid);
+  // }
+
+  // Stream<GoogleUser?> get gUser {
+  //   return _auth.authStateChanges().map(_userFromGoogleUser);
+  // }
 
   //sign in anonn
   Future signInAnon() async {

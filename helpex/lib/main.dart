@@ -4,7 +4,6 @@ import 'package:helpex_app/screens/wrapper.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:provider/provider.dart';
 
-
 import 'models/user.dart';
 
 void main() async {

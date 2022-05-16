@@ -2,6 +2,7 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:date_field/date_field.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  MyUser user = MyUser();
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool _passwordVisible = false;
@@ -24,9 +26,10 @@ class _RegisterState extends State<Register> {
   String password = '';
   String error = '';
   String name = '';
+  String dateOfBirth = '';
+  bool isAdvisee = false;
+  bool isAdvisor = true;
 
-  /*final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();*/
   @override
   void initState() {
     _passwordVisible = false;
@@ -259,7 +262,8 @@ class _RegisterState extends State<Register> {
                               ? 'Please not the first day'
                               : null,
                           onDateSelected: (DateTime value) {
-                            print(value);
+                            //print(value);
+                            dateOfBirth = value.toString();
                           },
                         ),
                         SizedBox(
@@ -283,7 +287,14 @@ class _RegisterState extends State<Register> {
                           activeBgColor: const [Color(0xff2D7567)],
                           labels: const ['Advisor', 'Advisee'],
                           onToggle: (index) {
-                            print('switched to: $index');
+                            if (index == 0) {
+                              isAdvisor = true;
+                              isAdvisee = false;
+                            } else if (index == 1) {
+                              isAdvisor = false;
+                              isAdvisee = true;
+                            }
+                            //print('switched to: $index');
                           },
                         ),
                         SizedBox(
@@ -306,12 +317,22 @@ class _RegisterState extends State<Register> {
                                   color: Colors.white,
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      dynamic result = await _auth
-                                          .registerWithEmailAndPass(
+                                      dynamic result =
+                                          await _auth.registerWithEmailAndPass(
                                               email, password);
                                       if (result == null) {
                                         setState(() => error =
                                             'please supply valid email');
+                                      } else {
+                                        print('I work!');
+                                        //make User here
+                                        user.withAllInfo(
+                                            uid: result.uid,
+                                            name: name,
+                                            email: email,
+                                            dateOfBirth: dateOfBirth,
+                                            isAdvisee: isAdvisee,
+                                            isAdvisor: isAdvisor);
                                       }
                                     }
                                   },
