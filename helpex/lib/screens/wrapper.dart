@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
-import 'package:helpex_app/screens/authenticate/authenticate.dart';
+import 'package:helpex_app/authenticate/authenticate.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:provider/provider.dart';
 

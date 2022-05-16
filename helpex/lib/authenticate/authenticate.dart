@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:helpex_app/screens/authenticate/register.dart';
-import 'package:helpex_app/screens/authenticate/sign_in.dart';
+import 'package:helpex_app/authenticate/register.dart';
+import 'package:helpex_app/authenticate/sign_in.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({Key? key}) : super(key: key);
