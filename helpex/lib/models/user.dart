@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyUser {
@@ -18,7 +20,7 @@ class MyUser {
     this.isAdvisee = isAdvisee;
     this.isAdvisor = isAdvisor;
 
-    FirebaseFirestore.instance.collection("Users").add(toMap());
+    FirebaseFirestore.instance.collection("Users").doc(uid).set(toMap());
   }
 
   Map<String, dynamic> toMap() {
@@ -31,4 +33,6 @@ class MyUser {
       "isAdvisor": isAdvisor
     };
   }
+
+  String toJson() => json.encode(toMap());
 }

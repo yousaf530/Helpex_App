@@ -294,7 +294,6 @@ class _RegisterState extends State<Register> {
                               isAdvisor = false;
                               isAdvisee = true;
                             }
-                            //print('switched to: $index');
                           },
                         ),
                         SizedBox(
@@ -324,7 +323,6 @@ class _RegisterState extends State<Register> {
                                         setState(() => error =
                                             'please supply valid email');
                                       } else {
-                                        print('I work!');
                                         //make User here
                                         user.withAllInfo(
                                             uid: result.uid,

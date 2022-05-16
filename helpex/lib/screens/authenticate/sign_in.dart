@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, avoid_unnecessary_containers, sized_box_for_whitespace
 
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -24,6 +25,7 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String error = '';
+  Map<String, dynamic>? queryData;
 
   @override
   void initState() {
@@ -171,6 +173,9 @@ class _SignInState extends State<SignIn> {
                       if (result == null) {
                         setState(() =>
                             error = 'Could not sign in, Check Credentials');
+                      } else {
+                        //"Check advisor advisee here";
+                        print(queryData);
                       }
                     }
                   },
