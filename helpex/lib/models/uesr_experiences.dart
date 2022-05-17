@@ -2,17 +2,17 @@
 import 'dart:convert';
 
 class UserExperiences {
-  String companyName = "";
-  String jobTitle = "";
-  String startDate = "";
-  String endDate = "";
-  bool onGoing = false;
+  String? companyName = "";
+  String? jobTitle = "";
+  String? startDate = "";
+  String? endDate = "";
+  bool? onGoing = false;
   UserExperiences({
-    required this.companyName,
-    required this.jobTitle,
-    required this.startDate,
-    required this.endDate,
-    required this.onGoing,
+    this.companyName,
+    this.jobTitle,
+    this.startDate,
+    this.endDate,
+    this.onGoing,
   });
 
   UserExperiences copyWith({

@@ -6,15 +6,17 @@ import 'package:flutter/foundation.dart';
 import 'package:helpex_app/models/social_media_links.dart';
 
 class Advisor {
-  String cost = "";
-  double ratings = 0.0;
+  String? cost = "";
+  double? ratings = 0.0;
+  String? description = "";
   Map<String, String>? timeAvailable;
   SocialMediaLinks? socials;
   List<String>? experties;
 
   Advisor({
-    required this.cost,
-    required this.ratings,
+    this.cost,
+    this.ratings,
+    this.description,
     this.timeAvailable,
     this.socials,
     this.experties,
@@ -23,6 +25,7 @@ class Advisor {
   Advisor copyWith({
     String? cost,
     double? ratings,
+    String? description,
     Map<String, String>? timeAvailable,
     SocialMediaLinks? socials,
     List<String>? experties,
@@ -30,6 +33,7 @@ class Advisor {
     return Advisor(
       cost: cost ?? this.cost,
       ratings: ratings ?? this.ratings,
+      description: description ?? this.description,
       timeAvailable: timeAvailable ?? this.timeAvailable,
       socials: socials ?? this.socials,
       experties: experties ?? this.experties,
@@ -40,6 +44,7 @@ class Advisor {
     return <String, dynamic>{
       'cost': cost,
       'ratings': ratings,
+      'description': description,
       'timeAvailable': timeAvailable,
       'socials': socials?.toMap(),
       'experties': experties,
@@ -50,16 +55,10 @@ class Advisor {
     return Advisor(
       cost: map['cost'] as String,
       ratings: map['ratings'] as double,
-      timeAvailable: map['timeAvailable'] != null
-          ? Map<String, String>.from(
-              (map['timeAvailable'] as Map<String, String>))
-          : null,
-      socials: map['socials'] != null
-          ? SocialMediaLinks.fromMap(map['socials'] as Map<String, dynamic>)
-          : null,
-      experties: map['experties'] != null
-          ? List<String>.from((map['experties'] as List<String>))
-          : null,
+      description: map['description'] as String,
+      timeAvailable: map['timeAvailable'] != null ? Map<String, String>.from((map['timeAvailable'] as Map<String, String>)) : null,
+      socials: map['socials'] != null ? SocialMediaLinks.fromMap(map['socials'] as Map<String,dynamic>) : null,
+      experties: map['experties'] != null ? List<String>.from((map['experties'] as List<String>)) : null,
     );
   }
 
@@ -70,27 +69,29 @@ class Advisor {
 
   @override
   String toString() {
-    return 'Advisor(cost: $cost, ratings: $ratings, timeAvailable: $timeAvailable, socials: $socials, experties: $experties)';
+    return 'Advisor(cost: $cost, ratings: $ratings, description: $description, timeAvailable: $timeAvailable, socials: $socials, experties: $experties)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is Advisor &&
-        other.cost == cost &&
-        other.ratings == ratings &&
-        mapEquals(other.timeAvailable, timeAvailable) &&
-        other.socials == socials &&
-        listEquals(other.experties, experties);
+      other.cost == cost &&
+      other.ratings == ratings &&
+      other.description == description &&
+      mapEquals(other.timeAvailable, timeAvailable) &&
+      other.socials == socials &&
+      listEquals(other.experties, experties);
   }
 
   @override
   int get hashCode {
     return cost.hashCode ^
-        ratings.hashCode ^
-        timeAvailable.hashCode ^
-        socials.hashCode ^
-        experties.hashCode;
+      ratings.hashCode ^
+      description.hashCode ^
+      timeAvailable.hashCode ^
+      socials.hashCode ^
+      experties.hashCode;
   }
 }
