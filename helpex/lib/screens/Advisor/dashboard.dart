@@ -35,7 +35,94 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                 height: 10,
               ),
               Row(
-                children: [],
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    width: 200,
+                    child: Column(
+                      children: [
+                        AppCard(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Total\nAppointments',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.mulish(
+                                    textStyle: const TextStyle(
+                                        color: Color(0xff2D7567),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Divider(
+                                  color: Colors.black,
+                                ),
+                                Icon(
+                                  Icons.calendar_today_outlined,
+                                  color: Color(0xff4BDB6A),
+                                  size: 50,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('20',
+                                    style: GoogleFonts.mulish(
+                                    textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 200,
+                    child: Column(
+                      children: [
+                        AppCard(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Total\nEarnings',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.mulish(
+                                    textStyle: const TextStyle(
+                                        color: Color(0xff2D7567),
+
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Divider(
+                                  color: Colors.black,
+                                ),
+                                Icon(
+                                  Icons.attach_money,
+                                  color: Color(0xff4BDB6A),
+                                  size: 50,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('20,000',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               AppCard(
                 child: Column(

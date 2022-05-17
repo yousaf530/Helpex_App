@@ -71,6 +71,7 @@ class _AdvisorHomeState extends State<AdvisorHome> {
             icon: Icon(Icons.notifications),
             label: 'Notifications',
             backgroundColor: Colors.white,
+
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_outlined),
