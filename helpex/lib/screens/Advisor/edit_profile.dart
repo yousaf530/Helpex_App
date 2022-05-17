@@ -242,6 +242,8 @@ class _EditProfileState extends State<EditProfile> {
                                 color: Colors.white, width: 0.0),
                           ),
                         ),
+                        mode: DateTimeFieldPickerMode.date,
+                        autovalidateMode: AutovalidateMode.always,
                       ),
                       DateTimeFormField(
                         decoration: InputDecoration(
@@ -256,6 +258,8 @@ class _EditProfileState extends State<EditProfile> {
                                 color: Colors.white, width: 0.0),
                           ),
                         ),
+                        mode: DateTimeFieldPickerMode.date,
+                        autovalidateMode: AutovalidateMode.always,
                       ),
                     ]),
               ),
@@ -327,77 +331,101 @@ class _EditProfileState extends State<EditProfile> {
                       const Divider(
                         color: Colors.black,
                       ),
-                      Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:[
-                              Row(
-                                children: [
-                                  Text('Monday:',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),),
-                                ],
+                      Column(
+                        children:[
+                          Row(
+                            children: [
+                              Text("Monday", style: GoogleFonts.mulish(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),),
+                              const SizedBox(
+                                width: 10,
                               ),
-                              Row(
-                                children: [
-                                  Text('Tuesday:',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),),
-                                ],
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
                               ),
-                              Row(
-                                children: [
-                                  Text('Wednesday:',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),),
-                                ],
+                              const SizedBox(
+                                width: 10,
+                                child: Text("-", style: TextStyle(fontWeight: FontWeight.bold)),
                               ),
-                              Row(
-                                children: [
-                                  Text('Thursday:',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),),
-                                ],
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
                               ),
-                              Row(
-                                children: [
-                                  Text('Friday:',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text('Saturday',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text('Sunday:',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),),
-                                ],
                               ),
                             ],
                           ),
                           const SizedBox(
-                            width: 67,
+                            height: 10,
                           ),
-                          SizedBox(
-                            width: 100,
-                            child: Column(
-                              children: [
-                                TextFormField(
+                          Row(
+                            children: [
+                              Text("Tuesday", style: GoogleFonts.mulish(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                                child: Text("-", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
                                   decoration: InputDecoration(
                                     hintText: "Time",
                                     hintStyle: GoogleFonts.mulish(
@@ -410,95 +438,297 @@ class _EditProfileState extends State<EditProfile> {
                                           color: Colors.white, width: 0.0),
                                     ),
                                   ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
                                 ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Time",
-                                    hintStyle: GoogleFonts.mulish(
-                                      textStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                    border: InputBorder.none,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                  ),
-                                ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Time",
-                                    hintStyle: GoogleFonts.mulish(
-                                      textStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                    border: InputBorder.none,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                  ),
-                                ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Time",
-                                    hintStyle: GoogleFonts.mulish(
-                                      textStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                    border: InputBorder.none,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                  ),
-                                ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Time",
-                                    hintStyle: GoogleFonts.mulish(
-                                      textStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                    border: InputBorder.none,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                  ),
-                                ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Time",
-                                    hintStyle: GoogleFonts.mulish(
-                                      textStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                    border: InputBorder.none,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                  ),
-                                ),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Time",
-                                    hintStyle: GoogleFonts.mulish(
-                                      textStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                    border: InputBorder.none,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0.0),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Text("Wednesday", style: GoogleFonts.mulish(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                                child: Text("-", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Text("Thursday", style: GoogleFonts.mulish(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                                child: Text("-", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Text("Friday", style: GoogleFonts.mulish(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                                child: Text("-", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Text("Saturday", style: GoogleFonts.mulish(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                                child: Text("-", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Text("Sunday", style: GoogleFonts.mulish(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                                child: Text("-", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DateTimeFormField(
+                                  decoration: InputDecoration(
+                                    hintText: "Time",
+                                    hintStyle: GoogleFonts.mulish(
+                                      textStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 0.0),
+                                    ),
+                                  ),
+                                  mode: DateTimeFieldPickerMode.time,
+                                  autovalidateMode: AutovalidateMode.always,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
 
