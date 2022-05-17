@@ -40,13 +40,13 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('HelpEx'),
-        foregroundColor: Color(0xff2D7567),
-        backgroundColor: Color.fromARGB(255, 215, 255, 192),
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
+        title: Text('HelpEx',
+          style: GoogleFonts.mulish(
+            textStyle: TextStyle(color: Color(0xff2D7567), fontWeight: FontWeight.bold, fontSize: 24,),
+          ),
         ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         centerTitle: true,
       ),
       body: Stack(

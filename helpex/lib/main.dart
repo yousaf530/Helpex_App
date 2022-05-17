@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:helpex_app/screens/wrapper.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:helpex_app/screens/Advisor/edit_profile.dart';
 
 import 'models/user.dart';
 
@@ -28,10 +29,8 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          // When navigating to the "/" route, build the FirstScreen widget.
           '/': (context) => const Wraper(),
-          // When navigating to the "/second" route, build the SecondScreen widget.
-          // '/signUp': (context) => Register(toggleView: toggleView),
+          '/edit_pro': (context) => const EditProfile(),
         },
         // home: Wraper(),
       ),

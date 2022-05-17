@@ -74,7 +74,9 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40)),
                     textStyle: const TextStyle(fontSize: 20)),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/edit_pro');
+                },
                 child: Text('Edit', style: GoogleFonts.mulish()),
               ),
               const SizedBox(
@@ -192,20 +194,133 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                       const Divider(
                         color: Colors.black,
                       ),
-                      Text(
-                        'Monday:\nTuesday:\nWednesday:\nThursday:\nFriday:\nSaturday:\nSunday:',
-                        style: GoogleFonts.mulish(
-                          textStyle: const TextStyle(fontSize: 16),
-                        ),
+                      Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:[
+                              Row(
+                                children: [
+                                  Text('Monday:',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('Tuesday:',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('Wednesday:',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('Thursday:',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('Friday:',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('Saturday',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text('Sunday:',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 67,
+                          ),
+                          Column(
+                            children: [
+                              Text('3:30',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),),
+                              Text('3:30',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),),
+                              Text('3:30',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),),
+                              Text('3:30',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),),
+                              Text('3:30',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),),
+                              Text('3:30',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),),
+                              Text('3:30',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),),
+                            ],
+                          ),
+                        ],
                       ),
+
                       const Divider(
                         color: Colors.black,
                       ),
-                      Text(
-                        'Time Duration:',
-                        style: GoogleFonts.mulish(
-                          textStyle: const TextStyle(fontSize: 16),
-                        ),
+                      Row(
+                        children:[
+                          Column(
+                              children:[
+                                Text('Time Duration',
+                                  style: GoogleFonts.mulish(
+                                    textStyle: const TextStyle(fontSize: 16),
+                                  ),),
+                              ],
+                          ),
+                          const SizedBox(
+                            width: 67,
+                          ),
+                          Column(
+                            children:[
+                              Text('30 mins',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ]),
               ),
