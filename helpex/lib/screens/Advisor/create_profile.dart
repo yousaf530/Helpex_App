@@ -35,19 +35,13 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          color: Colors.black,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: Text(
-          widget.uid,
+          "Create Profile",
           style: GoogleFonts.mulish(
             textStyle: TextStyle(
               color: Color(0xff2D7567),
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 20,
             ),
           ),
         ),
@@ -912,6 +906,7 @@ class _CreateProfileState extends State<CreateProfile> {
                           TextFormField(
                             validator: (value) =>
                                 value!.isEmpty ? 'Required' : null,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               hintText: "Price",
                               hintStyle: GoogleFonts.mulish(
@@ -980,6 +975,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                           uid: widget.uid,
                                           ratesTime: ratesTime,
                                           userExperience: userExperience);
+                                  print(widget.uid);
                                   //store data to class and firebase firestore
                                   //db.collection("Users").doc(User.uid);
                                 }

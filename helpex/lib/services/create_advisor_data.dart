@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helpex_app/models/availability.dart';
@@ -17,7 +16,6 @@ class AdvisorToFirestore {
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-
   AdvisorToFirestore({
     required this.uid,
     required this.description,
@@ -28,7 +26,6 @@ class AdvisorToFirestore {
     required this.ratesTime,
   });
 
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'description': description,
@@ -38,6 +35,21 @@ class AdvisorToFirestore {
   }
 
   Future newAdvisorDataToFirebase() async {
-    return db.collection("Uers").doc(uid).collection("Advisor").add(userExperience.toMap());
+    await db
+        .collection("Uers")
+        .doc(uid)
+        .collection("Advisor")
+        .add(userExperience.toMap());
+    await db
+        .collection("Uers")
+        .doc(uid)
+        .collection("Advisor")
+        .add(socialMediaLinks.toMap());
+    await db
+        .collection("Uers")
+        .doc(uid)
+        .collection("Advisor")
+        .add(availability.toMap());
+    print("This is done! ");
   }
 }
