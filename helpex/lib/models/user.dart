@@ -56,6 +56,12 @@ class MyUser {
     );
   }
 
+  factory MyUser.fromDocument(DocumentSnapshot doc) {
+    return MyUser(
+      uid: doc['uid'],
+    );
+  }
+
   factory MyUser.fromJson(String source) =>
       MyUser.fromMap(json.decode(source) as Map<String, dynamic>);
 
@@ -85,23 +91,23 @@ class MyUser {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is MyUser &&
-      other.uid == uid &&
-      other.name == name &&
-      other.email == email &&
-      other.dateOfBirth == dateOfBirth &&
-      other.isAdvisee == isAdvisee &&
-      other.isAdvisor == isAdvisor;
+        other.uid == uid &&
+        other.name == name &&
+        other.email == email &&
+        other.dateOfBirth == dateOfBirth &&
+        other.isAdvisee == isAdvisee &&
+        other.isAdvisor == isAdvisor;
   }
 
   @override
   int get hashCode {
     return uid.hashCode ^
-      name.hashCode ^
-      email.hashCode ^
-      dateOfBirth.hashCode ^
-      isAdvisee.hashCode ^
-      isAdvisor.hashCode;
+        name.hashCode ^
+        email.hashCode ^
+        dateOfBirth.hashCode ^
+        isAdvisee.hashCode ^
+        isAdvisor.hashCode;
   }
 }

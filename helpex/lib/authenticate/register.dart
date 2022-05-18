@@ -3,6 +3,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
+import 'package:helpex_app/screens/Advisor/create_profile.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:date_field/date_field.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,9 +41,14 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('HelpEx',
+        title: Text(
+          'HelpEx',
           style: GoogleFonts.mulish(
-            textStyle: TextStyle(color: Color(0xff2D7567), fontWeight: FontWeight.bold, fontSize: 24,),
+            textStyle: TextStyle(
+              color: Color(0xff2D7567),
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -331,6 +337,17 @@ class _RegisterState extends State<Register> {
                                             dateOfBirth: dateOfBirth,
                                             isAdvisee: isAdvisee,
                                             isAdvisor: isAdvisor);
+
+                                        if (isAdvisor) {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CreateProfile(
+                                                          uid: user.uid
+                                                              .toString())));
+                                        } else {
+                                          print("Advisee");
+                                        }
                                       }
                                     }
                                   },

@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/social_media_links.dart';
 import 'package:helpex_app/models/uesr_experiences.dart';
+import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
 
 class CreateProfile extends StatefulWidget {
-  const CreateProfile({Key? key}) : super(key: key);
+  final String uid;
+
+  const CreateProfile({Key? key, required this.uid}) : super(key: key);
 
   @override
   State<CreateProfile> createState() => _CreateProfileState();
@@ -28,7 +32,6 @@ class _CreateProfileState extends State<CreateProfile> {
   Availability? availability;
   String? rates;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,7 @@ class _CreateProfileState extends State<CreateProfile> {
           },
         ),
         title: Text(
-          'Create Profile',
+          widget.uid,
           style: GoogleFonts.mulish(
             textStyle: TextStyle(
               color: Color(0xff2D7567),
