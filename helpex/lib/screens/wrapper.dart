@@ -20,7 +20,7 @@ class _WraperState extends State<Wraper> {
       return const Authenticate();
     } else {
       //to be removed later
-      print(user?.uid);
+      //print(user?.uid);
       return AdvisorHome();
     }
   }

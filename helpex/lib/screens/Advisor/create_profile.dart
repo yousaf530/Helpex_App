@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/social_media_links.dart';
 import 'package:helpex_app/models/uesr_experiences.dart';
-import 'package:helpex_app/models/user.dart';
+import 'package:helpex_app/services/create_advisor_data.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
 
@@ -22,15 +20,16 @@ class CreateProfile extends StatefulWidget {
 class _CreateProfileState extends State<CreateProfile> {
   Advisor advisor = Advisor();
   final _formKey = GlobalKey<FormState>();
-  FirebaseFirestore db = FirebaseFirestore.instance;
 
   //form states
-  String? description;
+  String description = "";
   List<String>? experties;
-  List<UserExperiences>? userExperience;
-  SocialMediaLinks? socialMediaLinks;
-  Availability? availability;
-  String? rates;
+  UserExperiences userExperience = UserExperiences();
+  SocialMediaLinks socialMediaLinks = SocialMediaLinks();
+  Availability availability = Availability();
+  String rates = "";
+  String ratesTime = "";
+  String? uid = "";
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +104,8 @@ class _CreateProfileState extends State<CreateProfile> {
                             color: Colors.black,
                           ),
                           TextFormField(
+                            validator: (value) =>
+                                value!.isEmpty ? 'Required' : null,
                             keyboardType: TextInputType.multiline,
                             minLines:
                                 1, //Normal textInputField will be displayed
@@ -122,6 +123,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                     BorderSide(color: Colors.white, width: 0.0),
                               ),
                             ),
+                            onChanged: (value) {
+                              //setState(() => user.desvription);
+                            },
                           ),
                         ]),
                   ),
@@ -146,8 +150,7 @@ class _CreateProfileState extends State<CreateProfile> {
                           ),
                           TextFormField(
                             decoration: InputDecoration(
-                              hintText:
-                                  "Write a short description about yourself",
+                              hintText: "Write Your Expertise",
                               hintStyle: GoogleFonts.mulish(
                                 textStyle: TextStyle(color: Colors.grey),
                               ),
@@ -181,6 +184,9 @@ class _CreateProfileState extends State<CreateProfile> {
                             color: Colors.black,
                           ),
                           TextFormField(
+                            validator: ((value) {
+                              value!.isEmpty ? 'Required' : null;
+                            }),
                             decoration: InputDecoration(
                               hintText: "Company",
                               hintStyle: GoogleFonts.mulish(
@@ -193,8 +199,14 @@ class _CreateProfileState extends State<CreateProfile> {
                                     BorderSide(color: Colors.white, width: 0.0),
                               ),
                             ),
+                            onChanged: (val) {
+                              setState(() => userExperience.companyName = val);
+                            },
                           ),
                           TextFormField(
+                            validator: ((value) {
+                              value!.isEmpty ? 'Required' : null;
+                            }),
                             decoration: InputDecoration(
                               hintText: "Job Title",
                               hintStyle: GoogleFonts.mulish(
@@ -208,6 +220,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                     BorderSide(color: Colors.white, width: 0.0),
                               ),
                             ),
+                            onChanged: (val) {
+                              setState(() => userExperience.companyName = val);
+                            },
                           ),
                           DateTimeFormField(
                             decoration: InputDecoration(
@@ -224,6 +239,9 @@ class _CreateProfileState extends State<CreateProfile> {
                             ),
                             mode: DateTimeFieldPickerMode.date,
                             autovalidateMode: AutovalidateMode.always,
+                            onDateSelected: (DateTime value) {
+                              userExperience.startDate = value.toString();
+                            },
                           ),
                           DateTimeFormField(
                             decoration: InputDecoration(
@@ -240,6 +258,9 @@ class _CreateProfileState extends State<CreateProfile> {
                             ),
                             mode: DateTimeFieldPickerMode.date,
                             autovalidateMode: AutovalidateMode.always,
+                            onDateSelected: (DateTime value) {
+                              userExperience.endDate = value.toString();
+                            },
                           ),
                         ]),
                   ),
@@ -263,6 +284,10 @@ class _CreateProfileState extends State<CreateProfile> {
                             color: Colors.black,
                           ),
                           TextFormField(
+                            validator: ((value) =>
+                                Uri.tryParse(value!)!.hasAbsolutePath
+                                    ? 'Not a valid URL'
+                                    : null),
                             decoration: InputDecoration(
                               hintText: "Facebook",
                               hintStyle: GoogleFonts.mulish(
@@ -275,8 +300,15 @@ class _CreateProfileState extends State<CreateProfile> {
                                     BorderSide(color: Colors.white, width: 0.0),
                               ),
                             ),
+                            onChanged: (val) {
+                              setState(() => socialMediaLinks.facebook = val);
+                            },
                           ),
                           TextFormField(
+                            validator: ((value) =>
+                                Uri.tryParse(value!)!.hasAbsolutePath
+                                    ? 'Not a valid URL'
+                                    : null),
                             decoration: InputDecoration(
                               hintText: "LinkedIn",
                               hintStyle: GoogleFonts.mulish(
@@ -289,6 +321,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                     BorderSide(color: Colors.white, width: 0.0),
                               ),
                             ),
+                            onChanged: (val) {
+                              setState(() => socialMediaLinks.linkedin = val);
+                            },
                           ),
                         ]),
                   ),
@@ -344,6 +379,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.mondayStart =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -371,6 +410,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.mondayEnd =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                 ],
@@ -409,6 +452,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.tuesdayStart =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -436,6 +483,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.tuesdayEnd =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                 ],
@@ -474,6 +525,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.wednesdayStart =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -501,6 +556,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.wednesdayEnd =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                 ],
@@ -539,6 +598,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.thursdayStart =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -566,6 +629,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.thursdayEnd =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                 ],
@@ -604,6 +671,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.fridayStart =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -631,6 +702,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.fridayEnd =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                 ],
@@ -669,6 +744,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.saturdayStart =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -696,6 +775,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.saturdayEnd =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                 ],
@@ -734,6 +817,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.sundayStart =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -761,6 +848,10 @@ class _CreateProfileState extends State<CreateProfile> {
                                       ),
                                       mode: DateTimeFieldPickerMode.time,
                                       autovalidateMode: AutovalidateMode.always,
+                                      onDateSelected: (DateTime value) {
+                                        availability.sundayEnd =
+                                            value.toString();
+                                      },
                                     ),
                                   ),
                                 ],
@@ -819,6 +910,8 @@ class _CreateProfileState extends State<CreateProfile> {
                             color: Colors.black,
                           ),
                           TextFormField(
+                            validator: (value) =>
+                                value!.isEmpty ? 'Required' : null,
                             decoration: InputDecoration(
                               hintText: "Price",
                               hintStyle: GoogleFonts.mulish(
@@ -831,21 +924,29 @@ class _CreateProfileState extends State<CreateProfile> {
                                     BorderSide(color: Colors.white, width: 0.0),
                               ),
                             ),
+                            onChanged: (val) {
+                              setState(() => rates = val);
+                            },
                           ),
                           TextFormField(
-                            decoration: InputDecoration(
-                              hintText: "Time",
-                              hintStyle: GoogleFonts.mulish(
-                                textStyle: TextStyle(color: Colors.grey),
+                              validator: (value) =>
+                                  value!.isEmpty ? 'Required' : null,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                hintText: "Time",
+                                hintStyle: GoogleFonts.mulish(
+                                  textStyle: TextStyle(color: Colors.grey),
+                                ),
+                                border: InputBorder.none,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(40),
+                                  borderSide: BorderSide(
+                                      color: Colors.white, width: 0.0),
+                                ),
                               ),
-                              border: InputBorder.none,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(40),
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 0.0),
-                              ),
-                            ),
-                          ),
+                              onChanged: (value) {
+                                ratesTime = value.toString();
+                              }),
                         ]),
                   ),
                   SizedBox(
@@ -870,6 +971,15 @@ class _CreateProfileState extends State<CreateProfile> {
                               color: Colors.white,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
+                                  AdvisorToFirestore toFirestore =
+                                      AdvisorToFirestore(
+                                          availability: availability,
+                                          description: description,
+                                          rates: rates,
+                                          socialMediaLinks: socialMediaLinks,
+                                          uid: widget.uid,
+                                          ratesTime: ratesTime,
+                                          userExperience: userExperience);
                                   //store data to class and firebase firestore
                                   //db.collection("Users").doc(User.uid);
                                 }

@@ -38,7 +38,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SizedBox(
-                    width: 200,
+                    width: 190,
                     child: Column(
                       children: [
                         AppCard(
@@ -80,7 +80,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                     ),
                   ),
                   SizedBox(
-                    width: 200,
+                    width: 190,
                     child: Column(
                       children: [
                         AppCard(
