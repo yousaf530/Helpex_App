@@ -4,6 +4,7 @@ import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/social_media_links.dart';
 import 'package:helpex_app/models/uesr_experiences.dart';
+import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:helpex_app/services/create_advisor_data.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
@@ -215,7 +216,7 @@ class _CreateProfileState extends State<CreateProfile> {
                               ),
                             ),
                             onChanged: (val) {
-                              setState(() => userExperience.companyName = val);
+                              setState(() => userExperience.jobTitle = val);
                             },
                           ),
                           DateTimeFormField(
@@ -975,9 +976,14 @@ class _CreateProfileState extends State<CreateProfile> {
                                           uid: widget.uid,
                                           ratesTime: ratesTime,
                                           userExperience: userExperience);
+                                  toFirestore.newAdvisorDataToFirebase();
+
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => AdvisorHome()));
+
                                   print(widget.uid);
-                                  //store data to class and firebase firestore
-                                  //db.collection("Users").doc(User.uid);
+                                } else {
+                                  print("Validation Error");
                                 }
                               },
                               icon: Icon(

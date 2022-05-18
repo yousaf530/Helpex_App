@@ -36,19 +36,19 @@ class AdvisorToFirestore {
 
   Future newAdvisorDataToFirebase() async {
     await db
-        .collection("Uers")
+        .collection("Users")
         .doc(uid)
-        .collection("Advisor")
+        .collection("Experience")
         .add(userExperience.toMap());
     await db
-        .collection("Uers")
+        .collection("Users")
         .doc(uid)
-        .collection("Advisor")
+        .collection("Social")
         .add(socialMediaLinks.toMap());
     await db
-        .collection("Uers")
+        .collection("Users")
         .doc(uid)
-        .collection("Advisor")
+        .collection("Availability")
         .add(availability.toMap());
     print("This is done! ");
   }

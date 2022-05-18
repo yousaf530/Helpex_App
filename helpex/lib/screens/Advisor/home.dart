@@ -38,6 +38,7 @@ class _AdvisorHomeState extends State<AdvisorHome> {
             child: TextButton.icon(
               onPressed: () async {
                 await _auth.signOut();
+                
               },
               icon: Icon(Icons.logout_outlined, color: Colors.white),
               label: Text('Sign Out',
