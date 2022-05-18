@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/screens/Advisor/advisor_calender.dart';
 import 'package:helpex_app/screens/Advisor/dashboard.dart';
 import 'package:helpex_app/screens/Advisor/notification.dart';
@@ -37,8 +38,14 @@ class _AdvisorHomeState extends State<AdvisorHome> {
             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
             child: TextButton.icon(
               onPressed: () async {
-                await _auth.signOut();
-                
+                await _auth.signOut().then(
+                    (value) => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SignIn(),
+                      ),
+                    ),
+                  );
+
               },
               icon: Icon(Icons.logout_outlined, color: Colors.white),
               label: Text('Sign Out',

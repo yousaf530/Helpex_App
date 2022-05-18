@@ -8,6 +8,7 @@ import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:helpex_app/services/create_advisor_data.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
+import 'package:intl/intl.dart';
 
 class CreateProfile extends StatefulWidget {
   final String uid;
@@ -235,7 +236,7 @@ class _CreateProfileState extends State<CreateProfile> {
                             mode: DateTimeFieldPickerMode.date,
                             autovalidateMode: AutovalidateMode.always,
                             onDateSelected: (DateTime value) {
-                              userExperience.startDate = value.toString();
+                              userExperience.startDate = DateFormat("yyyy-MM-dd").format(value);
                             },
                           ),
                           DateTimeFormField(
@@ -254,7 +255,7 @@ class _CreateProfileState extends State<CreateProfile> {
                             mode: DateTimeFieldPickerMode.date,
                             autovalidateMode: AutovalidateMode.always,
                             onDateSelected: (DateTime value) {
-                              userExperience.endDate = value.toString();
+                              userExperience.endDate = DateFormat("yyyy-MM-dd").format(value);
                             },
                           ),
                         ]),
@@ -376,7 +377,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.mondayStart =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -407,7 +408,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.mondayEnd =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -449,7 +450,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.tuesdayStart =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -480,7 +481,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.tuesdayEnd =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -522,7 +523,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.wednesdayStart =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -553,7 +554,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.wednesdayEnd =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -595,7 +596,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.thursdayStart =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -626,7 +627,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.thursdayEnd =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -668,7 +669,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.fridayStart =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -699,7 +700,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.fridayEnd =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -741,7 +742,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.saturdayStart =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -772,7 +773,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.saturdayEnd =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -814,7 +815,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.sundayStart =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),
@@ -845,7 +846,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                       autovalidateMode: AutovalidateMode.always,
                                       onDateSelected: (DateTime value) {
                                         availability.sundayEnd =
-                                            value.toString();
+                                            DateFormat.Hms().format(value);
                                       },
                                     ),
                                   ),

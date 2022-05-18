@@ -2,16 +2,18 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisor/create_profile.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:date_field/date_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class Register extends StatefulWidget {
-  final Function toggleView;
-  const Register({required this.toggleView, Key? key}) : super(key: key);
+  //final Function toggleView;
+  const Register({Key? key}) : super(key: key);
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -269,7 +271,9 @@ class _RegisterState extends State<Register> {
                               : null,
                           onDateSelected: (DateTime value) {
                             //print(value);
-                            dateOfBirth = value.toString();
+
+                            dateOfBirth =
+                                DateFormat("yyyy-MM-dd").format(value);
                           },
                         ),
                         SizedBox(
@@ -377,7 +381,12 @@ class _RegisterState extends State<Register> {
                                   textStyle: const TextStyle(fontSize: 15),
                                 ),
                                 onPressed: () {
-                                  widget.toggleView();
+                                  //widget.toggleView();
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => SignIn(),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   'Sign In',

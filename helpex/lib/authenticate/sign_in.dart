@@ -4,14 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:helpex_app/screens/Advisor/create_profile.dart';
+import 'package:helpex_app/authenticate/register.dart';
+import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:email_validator/email_validator.dart';
 
 class SignIn extends StatefulWidget {
-  final Function toggleView;
-  const SignIn({required this.toggleView, Key? key}) : super(key: key);
+  // final Function toggleView;
+  const SignIn({Key? key}) : super(key: key);
   @override
   _SignInState createState() => _SignInState();
 }
@@ -206,6 +207,11 @@ class _SignInState extends State<SignIn> {
                           await _auth.signOut();
                           print("Sign out!");
                         }
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AdvisorHome(),
+                            ),
+                          );
                       }
                     }
                   },
@@ -247,7 +253,11 @@ class _SignInState extends State<SignIn> {
                           textStyle: const TextStyle(fontSize: 15),
                         ),
                         onPressed: () {
-                          widget.toggleView();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => Register(),
+                            ),
+                          );
                         },
                         child: Text(
                           'Sign Up',
