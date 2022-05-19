@@ -11,6 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import '../screens/Advisee/advisee_home.dart';
+
 class Register extends StatefulWidget {
   //final Function toggleView;
   const Register({Key? key}) : super(key: key);
@@ -350,7 +352,12 @@ class _RegisterState extends State<Register> {
                                                           uid: user.uid
                                                               .toString())));
                                         } else {
-                                          print("Advisee");
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AdviseeHome(
+                                                          uid: user.uid
+                                                              .toString())));
                                         }
                                       }
                                     }

@@ -25,7 +25,7 @@ class _CreateProfileState extends State<CreateProfile> {
 
   //form states
   String description = "";
-  List<String>? experties;
+  String? experties;
   UserExperiences userExperience = UserExperiences();
   SocialMediaLinks socialMediaLinks = SocialMediaLinks();
   Availability availability = Availability();
@@ -120,7 +120,7 @@ class _CreateProfileState extends State<CreateProfile> {
                               ),
                             ),
                             onChanged: (value) {
-                              //setState(() => user.desvription);
+                              setState(() => description = value);
                             },
                           ),
                         ]),
@@ -157,6 +157,9 @@ class _CreateProfileState extends State<CreateProfile> {
                                     BorderSide(color: Colors.white, width: 0.0),
                               ),
                             ),
+                            onChanged: (value) {
+                              setState(() => experties = value);
+                            },
                           ),
                         ]),
                   ),

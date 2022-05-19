@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AdviseeHome extends StatefulWidget {
-  const AdviseeHome({Key? key}) : super(key: key);
+  final String uid;
+  
+  const AdviseeHome({required this.uid, Key? key}) : super(key: key);
 
   @override
   State<AdviseeHome> createState() => _AdviseeHomeState();

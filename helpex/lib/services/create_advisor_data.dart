@@ -10,7 +10,7 @@ class AdvisorToFirestore {
   String description = "";
   UserExperiences userExperience = UserExperiences();
   SocialMediaLinks socialMediaLinks = SocialMediaLinks();
-  Availability availability = Availability();
+  Availability? availability = Availability();
   String rates = "";
   String ratesTime = "";
 
@@ -35,6 +35,7 @@ class AdvisorToFirestore {
   }
 
   Future newAdvisorDataToFirebase() async {
+    await db.collection("Users").doc(uid).collection("Advisor").add(toMap());
     await db
         .collection("Users")
         .doc(uid)
@@ -49,7 +50,7 @@ class AdvisorToFirestore {
         .collection("Users")
         .doc(uid)
         .collection("Availability")
-        .add(availability.toMap());
+        .add(availability!.toMap());
     print("This is done! ");
   }
 }
