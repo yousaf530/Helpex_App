@@ -164,15 +164,11 @@ class _SignInState extends State<SignIn> {
                   labels: ['Advisor', 'Advisee'],
                   onToggle: (index) {
                     if (index == 0) {
-                      setState(() {
-                        isAdvisor = true;
-                        isAdvisee = false;
-                      });
+                      isAdvisor = true;
+                      isAdvisee = false;
                     } else if (index == 1) {
-                      setState(() {
-                        isAdvisor = false;
-                        isAdvisee = true;
-                      });
+                      isAdvisor = false;
+                      isAdvisee = true;
                     }
                   },
                 ),
@@ -196,8 +192,8 @@ class _SignInState extends State<SignIn> {
                             error = 'Could not sign in, Check Credentials');
                       } else {
                         var data;
-                        final res = await db.collection("Users").doc(result
-                            .uid);
+                        final res =
+                            await db.collection("Users").doc(result.uid);
                         var querySnapshots = await res.get();
                         data = querySnapshots.data();
 
