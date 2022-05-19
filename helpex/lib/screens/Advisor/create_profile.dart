@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/social_media_links.dart';
-import 'package:helpex_app/models/uesr_experiences.dart';
+import 'package:helpex_app/models/user_experiences.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:helpex_app/services/create_advisor_data.dart';
 import 'package:helpex_app/widgets/cards.dart';

@@ -8,16 +8,18 @@ class MyUser {
   String? name;
   String? email;
   String? dateOfBirth;
+  String? totalEarnings;
   bool? isAdvisee;
   bool? isAdvisor;
 
   MyUser({
-    this.uid,
+    this.uid = "",
     this.name = "",
-    this.email,
-    this.dateOfBirth,
-    this.isAdvisee,
-    this.isAdvisor,
+    this.email = "",
+    this.dateOfBirth = "",
+    this.totalEarnings = "",
+    this.isAdvisee = false,
+    this.isAdvisor = false,
   });
 
   static MyUser user = MyUser();
@@ -29,6 +31,7 @@ class MyUser {
     user.dateOfBirth = dateOfBirth;
     user.isAdvisee = isAdvisee;
     user.isAdvisor = isAdvisor;
+    user.totalEarnings = "0";
 
     FirebaseFirestore.instance.collection("Users").doc(uid).set(toMap());
   }
@@ -38,11 +41,12 @@ class MyUser {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'uid': uid,
       'name': name,
       'email': email,
       'dateOfBirth': dateOfBirth,
+      'totalEarnings': totalEarnings,
       'isAdvisee': isAdvisee,
       'isAdvisor': isAdvisor,
     };
@@ -52,13 +56,13 @@ class MyUser {
 
   factory MyUser.fromMap(Map<String, dynamic> map) {
     return MyUser(
-      uid: map['uid'] != null ? map['uid'] as String : null,
-      name: map['name'] != null ? map['name'] as String : null,
-      email: map['email'] != null ? map['email'] as String : null,
-      dateOfBirth:
-          map['dateOfBirth'] != null ? map['dateOfBirth'] as String : null,
-      isAdvisee: map['isAdvisee'] != null ? map['isAdvisee'] as bool : null,
-      isAdvisor: map['isAdvisor'] != null ? map['isAdvisor'] as bool : null,
+      uid: map['uid'],
+      name: map['name'],
+      email: map['email'],
+      dateOfBirth: map['dateOfBirth'],
+      totalEarnings: map['totalEarnings'],
+      isAdvisee: map['isAdvisee'],
+      isAdvisor: map['isAdvisor'],
     );
   }
 
@@ -68,14 +72,14 @@ class MyUser {
     );
   }
 
-  factory MyUser.fromJson(String source) =>
-      MyUser.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory MyUser.fromJson(String source) => MyUser.fromMap(json.decode(source));
 
   MyUser copyWith({
     String? uid,
     String? name,
     String? email,
     String? dateOfBirth,
+    String? totalEarnings,
     bool? isAdvisee,
     bool? isAdvisor,
   }) {
@@ -84,6 +88,7 @@ class MyUser {
       name: name ?? this.name,
       email: email ?? this.email,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      totalEarnings: totalEarnings ?? this.totalEarnings,
       isAdvisee: isAdvisee ?? this.isAdvisee,
       isAdvisor: isAdvisor ?? this.isAdvisor,
     );
@@ -91,7 +96,7 @@ class MyUser {
 
   @override
   String toString() {
-    return 'MyUser(uid: $uid, name: $name, email: $email, dateOfBirth: $dateOfBirth, isAdvisee: $isAdvisee, isAdvisor: $isAdvisor)';
+    return 'MyUser(uid: $uid, name: $name, email: $email, dateOfBirth: $dateOfBirth, totalEarnings: $totalEarnings, isAdvisee: $isAdvisee, isAdvisor: $isAdvisor)';
   }
 
   @override
@@ -103,6 +108,7 @@ class MyUser {
         other.name == name &&
         other.email == email &&
         other.dateOfBirth == dateOfBirth &&
+        other.totalEarnings == totalEarnings &&
         other.isAdvisee == isAdvisee &&
         other.isAdvisor == isAdvisor;
   }
@@ -113,6 +119,7 @@ class MyUser {
         name.hashCode ^
         email.hashCode ^
         dateOfBirth.hashCode ^
+        totalEarnings.hashCode ^
         isAdvisee.hashCode ^
         isAdvisor.hashCode;
   }

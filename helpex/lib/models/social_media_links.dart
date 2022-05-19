@@ -2,12 +2,14 @@
 import 'dart:convert';
 
 class SocialMediaLinks {
+  String? uid = "";
   String? facebook;
   String? linkedin;
   String? twitter;
   String? instagram;
   String? github;
   SocialMediaLinks({
+    this.uid,
     this.facebook,
     this.linkedin,
     this.twitter,
@@ -16,6 +18,7 @@ class SocialMediaLinks {
   });
 
   SocialMediaLinks copyWith({
+    String? uid,
     String? facebook,
     String? linkedin,
     String? twitter,
@@ -23,6 +26,7 @@ class SocialMediaLinks {
     String? github,
   }) {
     return SocialMediaLinks(
+      uid: uid ?? this.uid,
       facebook: facebook ?? this.facebook,
       linkedin: linkedin ?? this.linkedin,
       twitter: twitter ?? this.twitter,
@@ -32,7 +36,8 @@ class SocialMediaLinks {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
+      'uid': uid,
       'facebook': facebook,
       'linkedin': linkedin,
       'twitter': twitter,
@@ -43,42 +48,44 @@ class SocialMediaLinks {
 
   factory SocialMediaLinks.fromMap(Map<String, dynamic> map) {
     return SocialMediaLinks(
-      facebook: map['facebook'] != null ? map['facebook'] as String : null,
-      linkedin: map['linkedin'] != null ? map['linkedin'] as String : null,
-      twitter: map['twitter'] != null ? map['twitter'] as String : null,
-      instagram: map['instagram'] != null ? map['instagram'] as String : null,
-      github: map['github'] != null ? map['github'] as String : null,
+      uid: map['uid'],
+      facebook: map['facebook'],
+      linkedin: map['linkedin'],
+      twitter: map['twitter'],
+      instagram: map['instagram'],
+      github: map['github'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SocialMediaLinks.fromJson(String source) =>
-      SocialMediaLinks.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SocialMediaLinks.fromJson(String source) => SocialMediaLinks.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'SocialMediaLinks(facebook: $facebook, linkedin: $linkedin, twitter: $twitter, instagram: $instagram, github: $github)';
+    return 'SocialMediaLinks(uid: $uid, facebook: $facebook, linkedin: $linkedin, twitter: $twitter, instagram: $instagram, github: $github)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is SocialMediaLinks &&
-        other.facebook == facebook &&
-        other.linkedin == linkedin &&
-        other.twitter == twitter &&
-        other.instagram == instagram &&
-        other.github == github;
+      other.uid == uid &&
+      other.facebook == facebook &&
+      other.linkedin == linkedin &&
+      other.twitter == twitter &&
+      other.instagram == instagram &&
+      other.github == github;
   }
 
   @override
   int get hashCode {
-    return facebook.hashCode ^
-        linkedin.hashCode ^
-        twitter.hashCode ^
-        instagram.hashCode ^
-        github.hashCode;
+    return uid.hashCode ^
+      facebook.hashCode ^
+      linkedin.hashCode ^
+      twitter.hashCode ^
+      instagram.hashCode ^
+      github.hashCode;
   }
 }

@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:helpex_app/models/social_media_links.dart';
 
 class Advisor {
@@ -13,6 +13,7 @@ class Advisor {
   SocialMediaLinks? socials;
   List<String>? experties;
   String? ratesTime = "";
+  String? uid = "";
 
   Advisor({
     this.cost,
@@ -21,7 +22,8 @@ class Advisor {
     this.timeAvailable,
     this.socials,
     this.experties,
-    this.ratesTime
+    this.ratesTime,
+    this.uid,
   });
 
   static Advisor advisor = Advisor();
@@ -37,6 +39,8 @@ class Advisor {
     Map<String, String>? timeAvailable,
     SocialMediaLinks? socials,
     List<String>? experties,
+    String? ratesTime,
+    String? uid,
   }) {
     return Advisor(
       cost: cost ?? this.cost,
@@ -45,59 +49,61 @@ class Advisor {
       timeAvailable: timeAvailable ?? this.timeAvailable,
       socials: socials ?? this.socials,
       experties: experties ?? this.experties,
+      ratesTime: ratesTime ?? this.ratesTime,
+      uid: uid ?? this.uid,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'cost': cost,
       'ratings': ratings,
       'description': description,
       'timeAvailable': timeAvailable,
       'socials': socials?.toMap(),
       'experties': experties,
+      'ratesTime': ratesTime,
+      'uid': uid,
     };
   }
 
   factory Advisor.fromMap(Map<String, dynamic> map) {
     return Advisor(
-      cost: map['cost'] as String,
-      ratings: map['ratings'] as double,
-      description: map['description'] as String,
-      timeAvailable: map['timeAvailable'] != null
-          ? Map<String, String>.from(
-              (map['timeAvailable'] as Map<String, String>))
-          : null,
-      socials: map['socials'] != null
-          ? SocialMediaLinks.fromMap(map['socials'] as Map<String, dynamic>)
-          : null,
-      experties: map['experties'] != null
-          ? List<String>.from((map['experties'] as List<String>))
-          : null,
+      cost: map['cost'],
+      ratings: map['ratings']?.toDouble(),
+      description: map['description'],
+      timeAvailable: Map<String, String>.from(map['timeAvailable']),
+      socials: map['socials'] != null ? SocialMediaLinks.fromMap(map['socials']) : null,
+      experties: List<String>.from(map['experties']),
+      ratesTime: map['ratesTime'],
+      uid: map['uid'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory Advisor.fromJson(String source) =>
-      Advisor.fromMap(json.decode(source) as Map<String, dynamic>);
+      Advisor.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Advisor(cost: $cost, ratings: $ratings, description: $description, timeAvailable: $timeAvailable, socials: $socials, experties: $experties)';
+    return 'Advisor(cost: $cost, ratings: $ratings, description: $description, timeAvailable: $timeAvailable, socials: $socials, experties: $experties, ratesTime: $ratesTime, uid: $uid)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
+    final collectionEquals = const DeepCollectionEquality().equals;
 
     return other is Advisor &&
         other.cost == cost &&
         other.ratings == ratings &&
         other.description == description &&
-        mapEquals(other.timeAvailable, timeAvailable) &&
+        collectionEquals(other.timeAvailable, timeAvailable) &&
         other.socials == socials &&
-        listEquals(other.experties, experties);
+        collectionEquals(other.experties, experties) &&
+        other.ratesTime == ratesTime &&
+        other.uid == uid;
   }
 
   @override
@@ -107,6 +113,8 @@ class Advisor {
         description.hashCode ^
         timeAvailable.hashCode ^
         socials.hashCode ^
-        experties.hashCode;
+        experties.hashCode ^
+        ratesTime.hashCode ^
+        uid.hashCode;
   }
 }

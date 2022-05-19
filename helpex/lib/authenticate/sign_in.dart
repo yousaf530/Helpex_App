@@ -195,7 +195,23 @@ class _SignInState extends State<SignIn> {
                         setState(() =>
                             error = 'Could not sign in, Check Credentials');
                       } else {
-                        if (isAdvisor) {
+                        var data;
+                        final res = await db.collection("Users").doc(result
+                            .uid);
+                        var querySnapshots = await res.get();
+                        data = querySnapshots.data();
+
+                        MyUser currentUser = MyUser.getMyUser();
+                        currentUser.dateOfBirth = data["dateOfBirth"];
+                        currentUser.email = data["email"];
+                        currentUser.name = data["name"];
+                        currentUser.uid = data["uid"];
+                        currentUser.isAdvisee = data["isAdvisee"];
+                        currentUser.isAdvisor = data["isAdvisor"];
+                        currentUser.totalEarnings = data["totalEarnings"];
+                        print(currentUser.isAdvisor);
+                        print("Herheh");
+                        if (isAdvisor && currentUser.isAdvisor!) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => AdvisorHome(),
@@ -204,7 +220,7 @@ class _SignInState extends State<SignIn> {
                         } else {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => AdviseeHome(uid: result.uid),
+                              builder: (context) => AdviseeHome(),
                             ),
                           );
                         }

@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 class Availability {
+  String? uid = "";
   String? mondayStart;
   String? mondayEnd;
   String? tuesdayStart;
@@ -17,8 +18,8 @@ class Availability {
   String? sundayStart;
   String? sundayEnd;
 
-  
   Availability({
+    this.uid,
     this.mondayStart,
     this.mondayEnd,
     this.tuesdayStart,
@@ -36,6 +37,7 @@ class Availability {
   });
 
   Availability copyWith({
+    String? uid,
     String? mondayStart,
     String? mondayEnd,
     String? tuesdayStart,
@@ -52,6 +54,7 @@ class Availability {
     String? sundayEnd,
   }) {
     return Availability(
+      uid: uid ?? this.uid,
       mondayStart: mondayStart ?? this.mondayStart,
       mondayEnd: mondayEnd ?? this.mondayEnd,
       tuesdayStart: tuesdayStart ?? this.tuesdayStart,
@@ -70,7 +73,8 @@ class Availability {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
+      'uid': uid,
       'mondayStart': mondayStart,
       'mondayEnd': mondayEnd,
       'tuesdayStart': tuesdayStart,
@@ -90,30 +94,31 @@ class Availability {
 
   factory Availability.fromMap(Map<String, dynamic> map) {
     return Availability(
-      mondayStart: map['mondayStart'] != null ? map['mondayStart'] as String : null,
-      mondayEnd: map['mondayEnd'] != null ? map['mondayEnd'] as String : null,
-      tuesdayStart: map['tuesdayStart'] != null ? map['tuesdayStart'] as String : null,
-      tuesdayEnd: map['tuesdayEnd'] != null ? map['tuesdayEnd'] as String : null,
-      wednesdayStart: map['wednesdayStart'] != null ? map['wednesdayStart'] as String : null,
-      wednesdayEnd: map['wednesdayEnd'] != null ? map['wednesdayEnd'] as String : null,
-      thursdayStart: map['thursdayStart'] != null ? map['thursdayStart'] as String : null,
-      thursdayEnd: map['thursdayEnd'] != null ? map['thursdayEnd'] as String : null,
-      fridayStart: map['fridayStart'] != null ? map['fridayStart'] as String : null,
-      fridayEnd: map['fridayEnd'] != null ? map['fridayEnd'] as String : null,
-      saturdayStart: map['saturdayStart'] != null ? map['saturdayStart'] as String : null,
-      saturdayEnd: map['saturdayEnd'] != null ? map['saturdayEnd'] as String : null,
-      sundayStart: map['sundayStart'] != null ? map['sundayStart'] as String : null,
-      sundayEnd: map['sundayEnd'] != null ? map['sundayEnd'] as String : null,
+      uid: map['uid'],
+      mondayStart: map['mondayStart'],
+      mondayEnd: map['mondayEnd'],
+      tuesdayStart: map['tuesdayStart'],
+      tuesdayEnd: map['tuesdayEnd'],
+      wednesdayStart: map['wednesdayStart'],
+      wednesdayEnd: map['wednesdayEnd'],
+      thursdayStart: map['thursdayStart'],
+      thursdayEnd: map['thursdayEnd'],
+      fridayStart: map['fridayStart'],
+      fridayEnd: map['fridayEnd'],
+      saturdayStart: map['saturdayStart'],
+      saturdayEnd: map['saturdayEnd'],
+      sundayStart: map['sundayStart'],
+      sundayEnd: map['sundayEnd'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Availability.fromJson(String source) => Availability.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Availability.fromJson(String source) => Availability.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Availability(mondayStart: $mondayStart, mondayEnd: $mondayEnd, tuesdayStart: $tuesdayStart, tuesdayEnd: $tuesdayEnd, wednesdayStart: $wednesdayStart, wednesdayEnd: $wednesdayEnd, thursdayStart: $thursdayStart, thursdayEnd: $thursdayEnd, fridayStart: $fridayStart, fridayEnd: $fridayEnd, saturdayStart: $saturdayStart, saturdayEnd: $saturdayEnd, sundayStart: $sundayStart, sundayEnd: $sundayEnd)';
+    return 'Availability(uid: $uid, mondayStart: $mondayStart, mondayEnd: $mondayEnd, tuesdayStart: $tuesdayStart, tuesdayEnd: $tuesdayEnd, wednesdayStart: $wednesdayStart, wednesdayEnd: $wednesdayEnd, thursdayStart: $thursdayStart, thursdayEnd: $thursdayEnd, fridayStart: $fridayStart, fridayEnd: $fridayEnd, saturdayStart: $saturdayStart, saturdayEnd: $saturdayEnd, sundayStart: $sundayStart, sundayEnd: $sundayEnd)';
   }
 
   @override
@@ -121,6 +126,7 @@ class Availability {
     if (identical(this, other)) return true;
   
     return other is Availability &&
+      other.uid == uid &&
       other.mondayStart == mondayStart &&
       other.mondayEnd == mondayEnd &&
       other.tuesdayStart == tuesdayStart &&
@@ -139,7 +145,8 @@ class Availability {
 
   @override
   int get hashCode {
-    return mondayStart.hashCode ^
+    return uid.hashCode ^
+      mondayStart.hashCode ^
       mondayEnd.hashCode ^
       tuesdayStart.hashCode ^
       tuesdayEnd.hashCode ^

@@ -1,25 +1,47 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AdviseeHome extends StatefulWidget {
-  final String uid;
-  
-  const AdviseeHome({required this.uid, Key? key}) : super(key: key);
+  const AdviseeHome({Key? key}) : super(key: key);
 
   @override
   State<AdviseeHome> createState() => _AdviseeHomeState();
 }
 
 class _AdviseeHomeState extends State<AdviseeHome> {
+  late final Stream<QuerySnapshot>? advisors;
+  static FirebaseFirestore db = FirebaseFirestore.instance;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  static Stream<QuerySnapshot>? readAdvisors() {
+    try {
+      final result = db
+          .collection("Users")
+          .where("isAdvisor", isEqualTo: true)
+          .snapshots();
+      var temp = [];
+
+      
+      return result;
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Home',
+          "home",
           style: GoogleFonts.mulish(
             textStyle: TextStyle(
               color: Color(0xff2D7567),
@@ -50,13 +72,13 @@ class _AdviseeHomeState extends State<AdviseeHome> {
                           borderSide:
                               const BorderSide(color: Colors.white, width: 0.0),
                         ),
-                        suffixIcon: Icon(Icons.search_outlined,
+                        suffixIcon: Icon(
+                          Icons.search_outlined,
                           color: Color(0xff2D7567),
                         ),
                         hintText: 'Search',
                         hintStyle: GoogleFonts.mulish(
-                          textStyle: TextStyle(fontSize: 20)
-                        ),
+                            textStyle: TextStyle(fontSize: 20)),
                       ),
                     ),
                   ),
@@ -142,12 +164,11 @@ class _AdviseeHomeState extends State<AdviseeHome> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(40)),
                             textStyle: const TextStyle(fontSize: 20)),
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: Text('Book an Appointment',
                             style: GoogleFonts.mulish(
-                              textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                              textStyle: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600),
                             )),
                       ),
                       const SizedBox(
@@ -170,7 +191,9 @@ class _AdviseeHomeState extends State<AdviseeHome> {
                         child: Text('View Profile',
                             style: GoogleFonts.mulish(
                               textStyle: TextStyle(
-                                  color: Color(0xff2D7567), fontSize: 18, fontWeight: FontWeight.w600),
+                                  color: Color(0xff2D7567),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
                             )),
                       ),
                     ],

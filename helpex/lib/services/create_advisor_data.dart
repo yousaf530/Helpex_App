@@ -3,9 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/social_media_links.dart';
-import 'package:helpex_app/models/uesr_experiences.dart';
+import 'package:helpex_app/models/user_experiences.dart';
+import 'package:helpex_app/models/user.dart';
 
 class AdvisorToFirestore {
+  MyUser currentUser = MyUser.getMyUser();
   String uid = "";
   String description = "";
   UserExperiences userExperience = UserExperiences();
@@ -31,26 +33,19 @@ class AdvisorToFirestore {
       'description': description,
       'rates': rates,
       'ratesTime': ratesTime,
+      'uid': currentUser.uid,
+      'name': currentUser.name,
+      'email': currentUser.email
     };
   }
 
   Future newAdvisorDataToFirebase() async {
-    await db.collection("Users").doc(uid).collection("Advisor").add(toMap());
-    await db
-        .collection("Users")
-        .doc(uid)
-        .collection("Experience")
-        .add(userExperience.toMap());
-    await db
-        .collection("Users")
-        .doc(uid)
-        .collection("Social")
-        .add(socialMediaLinks.toMap());
-    await db
-        .collection("Users")
-        .doc(uid)
-        .collection("Availability")
-        .add(availability!.toMap());
-    print("This is done! ");
+    await db.collection("Advisor").add(toMap());
+    userExperience.uid = currentUser.uid;
+    await db.collection("Experience").add(userExperience.toMap());
+    socialMediaLinks.uid = currentUser.uid;
+    await db.collection("Social").add(socialMediaLinks.toMap());
+    availability?.uid = currentUser.uid;
+    await db.collection("Availability").add(availability!.toMap());
   }
 }
