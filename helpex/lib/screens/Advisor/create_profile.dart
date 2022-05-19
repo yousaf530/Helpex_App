@@ -20,7 +20,7 @@ class CreateProfile extends StatefulWidget {
 }
 
 class _CreateProfileState extends State<CreateProfile> {
-  Advisor advisor = Advisor();
+  Advisor advisor = Advisor.getAdvisor();
   final _formKey = GlobalKey<FormState>();
 
   //form states
@@ -857,36 +857,7 @@ class _CreateProfileState extends State<CreateProfile> {
                               ),
                             ],
                           ),
-                          const Divider(
-                            color: Colors.black,
-                          ),
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    'Time Duration',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 67,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    '30 mins',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                          
                         ]),
                   ),
                   const SizedBox(

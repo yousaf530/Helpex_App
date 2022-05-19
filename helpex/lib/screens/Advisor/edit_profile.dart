@@ -784,37 +784,7 @@ class _EditProfileState extends State<EditProfile> {
                               ],
                             ),
                           ],
-                        ),
-                        const Divider(
-                          color: Colors.black,
-                        ),
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  'Time Duration',
-                                  style: GoogleFonts.mulish(
-                                    textStyle: const TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 67,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  '30 mins',
-                                  style: GoogleFonts.mulish(
-                                    textStyle: const TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                        ),                   
                       ]),
                 ),
                 const SizedBox(

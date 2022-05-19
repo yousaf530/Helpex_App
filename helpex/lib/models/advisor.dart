@@ -12,6 +12,7 @@ class Advisor {
   Map<String, String>? timeAvailable;
   SocialMediaLinks? socials;
   List<String>? experties;
+  String? ratesTime = "";
 
   Advisor({
     this.cost,
@@ -20,7 +21,14 @@ class Advisor {
     this.timeAvailable,
     this.socials,
     this.experties,
+    this.ratesTime
   });
+
+  static Advisor advisor = Advisor();
+
+  factory Advisor.getAdvisor() {
+    return advisor;
+  }
 
   Advisor copyWith({
     String? cost,
@@ -56,9 +64,16 @@ class Advisor {
       cost: map['cost'] as String,
       ratings: map['ratings'] as double,
       description: map['description'] as String,
-      timeAvailable: map['timeAvailable'] != null ? Map<String, String>.from((map['timeAvailable'] as Map<String, String>)) : null,
-      socials: map['socials'] != null ? SocialMediaLinks.fromMap(map['socials'] as Map<String,dynamic>) : null,
-      experties: map['experties'] != null ? List<String>.from((map['experties'] as List<String>)) : null,
+      timeAvailable: map['timeAvailable'] != null
+          ? Map<String, String>.from(
+              (map['timeAvailable'] as Map<String, String>))
+          : null,
+      socials: map['socials'] != null
+          ? SocialMediaLinks.fromMap(map['socials'] as Map<String, dynamic>)
+          : null,
+      experties: map['experties'] != null
+          ? List<String>.from((map['experties'] as List<String>))
+          : null,
     );
   }
 
@@ -75,23 +90,23 @@ class Advisor {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Advisor &&
-      other.cost == cost &&
-      other.ratings == ratings &&
-      other.description == description &&
-      mapEquals(other.timeAvailable, timeAvailable) &&
-      other.socials == socials &&
-      listEquals(other.experties, experties);
+        other.cost == cost &&
+        other.ratings == ratings &&
+        other.description == description &&
+        mapEquals(other.timeAvailable, timeAvailable) &&
+        other.socials == socials &&
+        listEquals(other.experties, experties);
   }
 
   @override
   int get hashCode {
     return cost.hashCode ^
-      ratings.hashCode ^
-      description.hashCode ^
-      timeAvailable.hashCode ^
-      socials.hashCode ^
-      experties.hashCode;
+        ratings.hashCode ^
+        description.hashCode ^
+        timeAvailable.hashCode ^
+        socials.hashCode ^
+        experties.hashCode;
   }
 }

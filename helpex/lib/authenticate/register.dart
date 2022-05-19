@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/models/user.dart';
@@ -23,6 +24,8 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   MyUser user = MyUser();
   final AuthService _auth = AuthService();
+  //FirebaseAuth authF = FirebaseAuth.instance;
+  //User? userF = authF.currentUser;
   final _formKey = GlobalKey<FormState>();
   bool _passwordVisible = false;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -11,6 +12,7 @@ class AdvisorDashboard extends StatefulWidget {
 }
 
 class _AdvisorDashboardState extends State<AdvisorDashboard> {
+  final MyUser currentUser = MyUser.getMyUser();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -65,13 +67,14 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text('20',
+                                  child: Text(
+                                    '20',
                                     style: GoogleFonts.mulish(
-                                    textStyle: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                      textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w700),
+                                    ),
                                   ),
                                 ),
                               ]),
@@ -93,7 +96,6 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                   style: GoogleFonts.mulish(
                                     textStyle: const TextStyle(
                                         color: Color(0xff2D7567),
-
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -108,7 +110,8 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text('20,000',
+                                  child: Text(
+                                    '20,000',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(
                                           color: Colors.black,

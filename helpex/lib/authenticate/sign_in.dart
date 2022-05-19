@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:helpex_app/authenticate/register.dart';
+import 'package:helpex_app/models/user.dart';
+import 'package:helpex_app/screens/Advisee/advisee_home.dart';
+//import 'package:helpex_app/screens/Advisee/advisee_home.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:helpex_app/services/auth.dart';
@@ -22,6 +25,9 @@ class _SignInState extends State<SignIn> {
   bool _passwordVisible = false;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  MyUser currentUser = MyUser.getMyUser();
 
   //text field state
   String email = '';
@@ -158,11 +164,15 @@ class _SignInState extends State<SignIn> {
                   labels: ['Advisor', 'Advisee'],
                   onToggle: (index) {
                     if (index == 0) {
-                      isAdvisor = true;
-                      isAdvisee = false;
+                      setState(() {
+                        isAdvisor = true;
+                        isAdvisee = false;
+                      });
                     } else if (index == 1) {
-                      isAdvisor = false;
-                      isAdvisee = true;
+                      setState(() {
+                        isAdvisor = false;
+                        isAdvisee = true;
+                      });
                     }
                   },
                 ),
@@ -185,33 +195,19 @@ class _SignInState extends State<SignIn> {
                         setState(() =>
                             error = 'Could not sign in, Check Credentials');
                       } else {
-                        //"Check advisor advisee here";
-                        final docRef = FirebaseFirestore.instance
-                            .collection("Users")
-                            .doc(result.uid);
-                        docRef.get().then(
-                          (res) {
-                            queryData = res;
-                          },
-                          onError: (e) => print("Error completing: $e"),
-                        );
-                        if (queryData?.get("isAdvisor") == false &&
-                            isAdvisor == true) {
-                          error =
-                              "You re not an Advisor, Sign in as Advisee please!";
-                          await _auth.signOut();
-                          print("Sign out!");
-                        } else if (queryData?.get("isAdvisor") == true &&
-                            isAdvisor == false) {
-                          error = "You are an Advisor, Sign in accordingly";
-                          await _auth.signOut();
-                          print("Sign out!");
-                        }
-                        Navigator.of(context).push(
+                        if (isAdvisor) {
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => AdvisorHome(),
                             ),
                           );
+                        } else {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AdviseeHome(uid: result.uid),
+                            ),
+                          );
+                        }
                       }
                     }
                   },

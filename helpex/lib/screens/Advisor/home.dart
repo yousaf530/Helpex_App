@@ -18,7 +18,7 @@ class AdvisorHome extends StatefulWidget {
 
 class _AdvisorHomeState extends State<AdvisorHome> {
   int currentIndex = 0;
-  final MyUser currentUser = MyUser.getMyUser();
+  
 
   final screens = [
     AdvisorDashboard(),

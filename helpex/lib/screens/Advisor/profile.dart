@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:helpex_app/models/advisor.dart';
+import 'package:helpex_app/models/capitalize_string.dart';
+import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +13,9 @@ class AdvisorProfile extends StatefulWidget {
 }
 
 class _AdvisorProfileState extends State<AdvisorProfile> {
+  final MyUser currentUser = MyUser.getMyUser();
+  final Advisor advisor = Advisor.getAdvisor();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -34,7 +40,8 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                 height: 10,
               ),
               Text(
-                "Full Name",
+                "User Name",
+                //"${currentUser.name!.capitalize()}",
                 style: GoogleFonts.mulish(
                   textStyle: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
@@ -55,7 +62,8 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                     width: 8,
                   ),
                   Text(
-                    "Rs. 20,000",
+                    "Advisor Cost",
+                    //"${advisor.cost!}",
                     style: GoogleFonts.mulish(
                       textStyle: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
@@ -87,7 +95,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'About me',
+                        "About Me",
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(
                               color: Color(0xff2D7567),
@@ -99,6 +107,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         color: Colors.black,
                       ),
                       Text(
+                        //"${advisor.description!}",
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus nibh non, pulvinar iaculis scelerisque. Sapien fusce purus aliquet purus blandit in elementum.',
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(fontSize: 16),
@@ -123,7 +132,8 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         color: Colors.black,
                       ),
                       Text(
-                        'Hello 2',
+                        "Advisor Expertise",
+                        //"${advisor.experties}",
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(fontSize: 16),
                         ),
@@ -147,7 +157,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         color: Colors.black,
                       ),
                       Text(
-                        'Hello 2',
+                        "User Experiences",
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(fontSize: 16),
                         ),
@@ -159,7 +169,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Social Media',
+                        "Socials",
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(
                               color: Color(0xff2D7567),
@@ -171,7 +181,8 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         color: Colors.black,
                       ),
                       Text(
-                        'Hello 2',
+                        "Advisor Socials",
+                        //'${advisor.socials}',
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(fontSize: 16),
                         ),
@@ -198,61 +209,75 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children:[
+                            children: [
                               Row(
                                 children: [
-                                  Text('Monday:',
+                                  Text(
+                                    'Monday:',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(fontSize: 16),
-                                    ),),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text('Tuesday:',
+                                  Text(
+                                    'Tuesday:',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(fontSize: 16),
-                                    ),),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text('Wednesday:',
+                                  Text(
+                                    'Wednesday:',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(fontSize: 16),
-                                    ),),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text('Thursday:',
+                                  Text(
+                                    'Thursday:',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(fontSize: 16),
-                                    ),),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text('Friday:',
+                                  Text(
+                                    'Friday:',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(fontSize: 16),
-                                    ),),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text('Saturday',
+                                  Text(
+                                    'Saturday',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(fontSize: 16),
-                                    ),),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text('Sunday:',
+                                  Text(
+                                    'Sunday:',
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(fontSize: 16),
-                                    ),),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -262,61 +287,159 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                           ),
                           Column(
                             children: [
-                              Text('3:30',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),),
-                              Text('3:30',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),),
-                              Text('3:30',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),),
-                              Text('3:30',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),),
-                              Text('3:30',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),),
-                              Text('3:30',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),),
-                              Text('3:30',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                      const Divider(
-                        color: Colors.black,
-                      ),
-                      Row(
-                        children:[
-                          Column(
-                              children:[
-                                Text('Time Duration',
-                                  style: GoogleFonts.mulish(
-                                    textStyle: const TextStyle(fontSize: 16),
-                                  ),),
-                              ],
-                          ),
-                          const SizedBox(
-                            width: 67,
-                          ),
-                          Column(
-                            children:[
-                              Text('30 mins',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' - ',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' - ',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' - ',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' - ',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' - ',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' - ',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    ' - ',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Text(
+                                    '3:30',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -341,7 +464,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         color: Colors.black,
                       ),
                       Text(
-                        'Hello 2',
+                        "${advisor.cost}",
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(fontSize: 16),
                         ),
