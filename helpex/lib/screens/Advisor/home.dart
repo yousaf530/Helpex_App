@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
+import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisor/advisor_calender.dart';
 import 'package:helpex_app/screens/Advisor/dashboard.dart';
 import 'package:helpex_app/screens/Advisor/notification.dart';
@@ -17,6 +18,7 @@ class AdvisorHome extends StatefulWidget {
 
 class _AdvisorHomeState extends State<AdvisorHome> {
   int currentIndex = 0;
+  final MyUser currentUser = MyUser.getMyUser();
 
   final screens = [
     AdvisorDashboard(),
@@ -39,13 +41,12 @@ class _AdvisorHomeState extends State<AdvisorHome> {
             child: TextButton.icon(
               onPressed: () async {
                 await _auth.signOut().then(
-                    (value) => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => SignIn(),
+                      (value) => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ),
                       ),
-                    ),
-                  );
-
+                    );
               },
               icon: Icon(Icons.logout_outlined, color: Colors.white),
               label: Text('Sign Out',
@@ -79,7 +80,6 @@ class _AdvisorHomeState extends State<AdvisorHome> {
             icon: Icon(Icons.notifications),
             label: 'Notifications',
             backgroundColor: Colors.white,
-
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_outlined),

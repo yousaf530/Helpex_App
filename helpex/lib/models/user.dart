@@ -31,6 +31,10 @@ class MyUser {
     FirebaseFirestore.instance.collection("Users").doc(uid).set(toMap());
   }
 
+  factory MyUser.getMyUser() {
+    return MyUser();
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'uid': uid,
