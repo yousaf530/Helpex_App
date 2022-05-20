@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:helpex_app/authenticate/register.dart';
+import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisee/advisee_home.dart';
-//import 'package:helpex_app/screens/Advisee/advisee_home.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:helpex_app/services/auth.dart';
@@ -28,7 +28,6 @@ class _SignInState extends State<SignIn> {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   MyUser currentUser = MyUser.getMyUser();
-
   //text field state
   String email = '';
   String password = '';
@@ -204,16 +203,15 @@ class _SignInState extends State<SignIn> {
                         currentUser.uid = data["uid"];
                         currentUser.isAdvisee = data["isAdvisee"];
                         currentUser.isAdvisor = data["isAdvisor"];
-                        currentUser.totalEarnings = data["totalEarnings"];
 
                         if (isAdvisor && currentUser.isAdvisor!) {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => AdvisorHome(),
                             ),
                           );
                         } else if (isAdvisee && currentUser.isAdvisee!) {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => AdviseeHome(),
                             ),

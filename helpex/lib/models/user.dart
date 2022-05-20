@@ -8,7 +8,6 @@ class MyUser {
   String? name;
   String? email;
   String? dateOfBirth;
-  String? totalEarnings;
   bool? isAdvisee;
   bool? isAdvisor;
 
@@ -17,7 +16,6 @@ class MyUser {
     this.name = "",
     this.email = "",
     this.dateOfBirth = "",
-    this.totalEarnings = "",
     this.isAdvisee = false,
     this.isAdvisor = false,
   });
@@ -31,7 +29,6 @@ class MyUser {
     user.dateOfBirth = dateOfBirth;
     user.isAdvisee = isAdvisee;
     user.isAdvisor = isAdvisor;
-    user.totalEarnings = "0";
 
     FirebaseFirestore.instance.collection("Users").doc(uid).set(toMap());
   }
@@ -46,7 +43,6 @@ class MyUser {
       'name': name,
       'email': email,
       'dateOfBirth': dateOfBirth,
-      'totalEarnings': totalEarnings,
       'isAdvisee': isAdvisee,
       'isAdvisor': isAdvisor,
     };
@@ -60,8 +56,6 @@ class MyUser {
       name: map['name'],
       email: map['email'],
       dateOfBirth: map['dateOfBirth'],
-      totalEarnings: map['totalEarnings'],
-      isAdvisee: map['isAdvisee'],
       isAdvisor: map['isAdvisor'],
     );
   }
@@ -88,7 +82,6 @@ class MyUser {
       name: name ?? this.name,
       email: email ?? this.email,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-      totalEarnings: totalEarnings ?? this.totalEarnings,
       isAdvisee: isAdvisee ?? this.isAdvisee,
       isAdvisor: isAdvisor ?? this.isAdvisor,
     );
@@ -96,7 +89,7 @@ class MyUser {
 
   @override
   String toString() {
-    return 'MyUser(uid: $uid, name: $name, email: $email, dateOfBirth: $dateOfBirth, totalEarnings: $totalEarnings, isAdvisee: $isAdvisee, isAdvisor: $isAdvisor)';
+    return 'MyUser(uid: $uid, name: $name, email: $email, dateOfBirth: $dateOfBirth, isAdvisee: $isAdvisee, isAdvisor: $isAdvisor)';
   }
 
   @override
@@ -108,7 +101,6 @@ class MyUser {
         other.name == name &&
         other.email == email &&
         other.dateOfBirth == dateOfBirth &&
-        other.totalEarnings == totalEarnings &&
         other.isAdvisee == isAdvisee &&
         other.isAdvisor == isAdvisor;
   }
@@ -119,7 +111,6 @@ class MyUser {
         name.hashCode ^
         email.hashCode ^
         dateOfBirth.hashCode ^
-        totalEarnings.hashCode ^
         isAdvisee.hashCode ^
         isAdvisor.hashCode;
   }

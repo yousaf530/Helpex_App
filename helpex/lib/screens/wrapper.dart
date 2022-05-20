@@ -21,10 +21,10 @@ class _WraperState extends State<Wraper> {
     if (user?.uid == null) {
       return const Authenticate();
     } else {
-      if (currentUser.isAdvisee!) {
-        return AdviseeHome();
-      } else {
+      if (currentUser.isAdvisor!) {
         return AdvisorHome();
+      } else {
+        return AdviseeHome();
       }
     }
   }

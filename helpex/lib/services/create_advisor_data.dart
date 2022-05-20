@@ -10,23 +10,24 @@ class AdvisorToFirestore {
   MyUser currentUser = MyUser.getMyUser();
   String uid = "";
   String description = "";
-  UserExperiences userExperience = UserExperiences();
+  UserExperiences userExperience = UserExperiences(onGoing: false);
   SocialMediaLinks socialMediaLinks = SocialMediaLinks();
   Availability? availability = Availability();
   String rates = "";
   String ratesTime = "";
+  String expertise = "";
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  AdvisorToFirestore({
-    required this.uid,
-    required this.description,
-    required this.userExperience,
-    required this.socialMediaLinks,
-    required this.availability,
-    required this.rates,
-    required this.ratesTime,
-  });
+  AdvisorToFirestore(
+      {required this.uid,
+      required this.description,
+      required this.userExperience,
+      required this.socialMediaLinks,
+      required this.availability,
+      required this.rates,
+      required this.ratesTime,
+      required this.expertise});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -35,12 +36,13 @@ class AdvisorToFirestore {
       'ratesTime': ratesTime,
       'uid': currentUser.uid,
       'name': currentUser.name,
-      'email': currentUser.email
+      'email': currentUser.email,
+      'expertise': expertise
     };
   }
 
   Future newAdvisorDataToFirebase() async {
-    await db.collection("Advisor").add(toMap());
+    await db.collection("Advisor").doc(currentUser.uid).set(toMap());
     userExperience.uid = currentUser.uid;
     await db.collection("Experience").add(userExperience.toMap());
     socialMediaLinks.uid = currentUser.uid;

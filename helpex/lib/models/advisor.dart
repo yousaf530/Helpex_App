@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:helpex_app/models/social_media_links.dart';
 
 class Advisor {
+  String? name = "";
   String? cost = "";
   double? ratings = 0.0;
   String? description = "";
@@ -73,7 +74,9 @@ class Advisor {
       ratings: map['ratings']?.toDouble(),
       description: map['description'],
       timeAvailable: Map<String, String>.from(map['timeAvailable']),
-      socials: map['socials'] != null ? SocialMediaLinks.fromMap(map['socials']) : null,
+      socials: map['socials'] != null
+          ? SocialMediaLinks.fromMap(map['socials'])
+          : null,
       experties: List<String>.from(map['experties']),
       ratesTime: map['ratesTime'],
       uid: map['uid'],

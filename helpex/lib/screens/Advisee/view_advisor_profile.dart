@@ -178,12 +178,90 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                         const Divider(
                           color: Colors.black,
                         ),
-                        Text(
-                          'Hello 2',
-                          style: GoogleFonts.mulish(
-                            textStyle: const TextStyle(fontSize: 16),
-                          ),
-                        ),
+                        Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Job Title",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Company Name",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Start Date",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Text(
+                                        "End Date",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  //add values here
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Job Title",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Company Name",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Start Date",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        "End Date",
+                                        style: GoogleFonts.mulish(
+                                          textStyle: const TextStyle(
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                       ]),
                 ),
                 AppCard(
@@ -202,12 +280,42 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                         const Divider(
                           color: Colors.black,
                         ),
-                        Text(
-                          'Hello 2',
-                          style: GoogleFonts.mulish(
-                            textStyle: const TextStyle(fontSize: 16),
-                          ),
-                        ),
+                       Row(
+                                children: [
+                                  const Icon(
+                                    Icons.facebook_outlined,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                "Facebook",
+                                //'${advisor.socials}',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),
+                                
+                              ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.facebook_outlined,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                "Linkedin",
+                                //'${advisor.socials}',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),
+                                
+                              ),
+                                ],
+                              ),
                       ]),
                 ),
                 AppCard(

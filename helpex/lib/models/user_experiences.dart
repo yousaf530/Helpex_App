@@ -7,14 +7,14 @@ class UserExperiences {
   String? jobTitle = "";
   String? startDate = "";
   String? endDate = "";
-  bool? onGoing = false;
+  bool onGoing = false;
   UserExperiences({
     this.uid,
     this.companyName,
     this.jobTitle,
     this.startDate,
     this.endDate,
-    this.onGoing,
+    required this.onGoing,
   });
 
   UserExperiences copyWith({

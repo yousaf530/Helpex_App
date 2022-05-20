@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisor/advisor_calender.dart';
+import 'package:helpex_app/screens/Advisor/advisor_chat.dart';
 import 'package:helpex_app/screens/Advisor/dashboard.dart';
 import 'package:helpex_app/screens/Advisor/notification.dart';
 import 'package:helpex_app/screens/Advisor/profile.dart';
@@ -58,10 +59,23 @@ class _AdvisorHomeState extends State<AdvisorHome> {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AdvisorChatScreen(),
+                            ),
+                          );
+        },
+        backgroundColor: Color(0xff2D7567),
+        child: const Icon(Icons.chat),
+      ),
       body: IndexedStack(
         index: currentIndex,
         children: screens,
       ),
+    
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         selectedItemColor: Color(0xff2D7567),

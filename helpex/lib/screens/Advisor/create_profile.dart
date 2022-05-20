@@ -25,8 +25,8 @@ class _CreateProfileState extends State<CreateProfile> {
 
   //form states
   String description = "";
-  String? experties;
-  UserExperiences userExperience = UserExperiences();
+  String experties = "";
+  UserExperiences userExperience = UserExperiences(onGoing: false);
   SocialMediaLinks socialMediaLinks = SocialMediaLinks();
   Availability availability = Availability();
   String rates = "";
@@ -239,10 +239,12 @@ class _CreateProfileState extends State<CreateProfile> {
                             mode: DateTimeFieldPickerMode.date,
                             autovalidateMode: AutovalidateMode.always,
                             onDateSelected: (DateTime value) {
-                              userExperience.startDate = DateFormat("yyyy-MM-dd").format(value);
+                              userExperience.startDate =
+                                  DateFormat("yyyy-MM-dd").format(value);
                             },
                           ),
                           DateTimeFormField(
+                            enabled: !userExperience.onGoing,
                             decoration: InputDecoration(
                               hintText: "End Date",
                               hintStyle: GoogleFonts.mulish(
@@ -258,7 +260,17 @@ class _CreateProfileState extends State<CreateProfile> {
                             mode: DateTimeFieldPickerMode.date,
                             autovalidateMode: AutovalidateMode.always,
                             onDateSelected: (DateTime value) {
-                              userExperience.endDate = DateFormat("yyyy-MM-dd").format(value);
+                              userExperience.endDate =
+                                  DateFormat("yyyy-MM-dd").format(value);
+                            },
+                          ),
+                          CheckboxListTile(
+                            title: Text("On Going Job"),
+                            value: userExperience.onGoing,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                userExperience.onGoing = value!;
+                              });
                             },
                           ),
                         ]),
@@ -857,7 +869,6 @@ class _CreateProfileState extends State<CreateProfile> {
                               ),
                             ],
                           ),
-                          
                         ]),
                   ),
                   const SizedBox(
@@ -950,7 +961,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           socialMediaLinks: socialMediaLinks,
                                           uid: widget.uid,
                                           ratesTime: ratesTime,
-                                          userExperience: userExperience);
+                                          userExperience: userExperience,
+                                          expertise: experties);
                                   toFirestore.newAdvisorDataToFirebase();
 
                                   Navigator.of(context).push(MaterialPageRoute(
