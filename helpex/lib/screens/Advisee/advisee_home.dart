@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:helpex_app/authenticate/sign_in.dart';
+import 'package:helpex_app/services/auth.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -41,6 +43,7 @@ class _AdviseeHomeState extends State<AdviseeHome> {
     }
   }
 
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +60,28 @@ class _AdviseeHomeState extends State<AdviseeHome> {
           ),
         ),
         backgroundColor: Colors.transparent,
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
+            child: TextButton.icon(
+              onPressed: () async {
+                await _auth.signOut().then(
+                      (value) => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ),
+                      ),
+                    );
+              },
+              icon: Icon(Icons.logout_outlined, color: Color(0xff2D7567)),
+              label: Text('Sign Out',
+                  style: TextStyle(
+                    color: Color(0xff2D7567),
+                    fontSize: 16,
+                  )),
+            ),
+          )
+        ],
         elevation: 0,
       ),
       body: SingleChildScrollView(

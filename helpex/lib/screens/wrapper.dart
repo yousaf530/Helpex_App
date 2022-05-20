@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/authenticate/authenticate.dart';
+import 'package:helpex_app/screens/Advisee/advisee_home.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ class Wraper extends StatefulWidget {
 }
 
 class _WraperState extends State<Wraper> {
+  MyUser currentUser = MyUser.getMyUser();
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<MyUser?>(context);
@@ -19,9 +21,11 @@ class _WraperState extends State<Wraper> {
     if (user?.uid == null) {
       return const Authenticate();
     } else {
-      //to be removed later
-      //print(user?.uid);
-      return AdvisorHome();
+      if (currentUser.isAdvisee!) {
+        return AdviseeHome();
+      } else {
+        return AdvisorHome();
+      }
     }
   }
 }

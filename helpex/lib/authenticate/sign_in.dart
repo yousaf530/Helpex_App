@@ -205,20 +205,22 @@ class _SignInState extends State<SignIn> {
                         currentUser.isAdvisee = data["isAdvisee"];
                         currentUser.isAdvisor = data["isAdvisor"];
                         currentUser.totalEarnings = data["totalEarnings"];
-                        print(currentUser.isAdvisor);
-                        print("Herheh");
+
                         if (isAdvisor && currentUser.isAdvisor!) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => AdvisorHome(),
                             ),
                           );
-                        } else {
+                        } else if (isAdvisee && currentUser.isAdvisee!) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => AdviseeHome(),
                             ),
                           );
+                        } else {
+                          error = "Login as the correct user please";
+                          await _auth.signOut();
                         }
                       }
                     }
