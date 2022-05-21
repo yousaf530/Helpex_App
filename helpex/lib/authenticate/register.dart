@@ -4,7 +4,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/models/user.dart';
-import 'package:helpex_app/screens/Advisee/advisee_home.dart';
+import 'package:helpex_app/screens/Advisee/interests.dart';
 import 'package:helpex_app/screens/Advisor/create_profile.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:date_field/date_field.dart';
@@ -356,7 +356,7 @@ class _RegisterState extends State<Register> {
                                           Navigator.of(context).pushReplacement(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AdviseeHome()));
+                                                      AdviseeInterests()));
                                         }
                                       }
                                     }

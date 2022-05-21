@@ -28,6 +28,7 @@ class _CreateProfileState extends State<CreateProfile> {
   final _formKey = GlobalKey<FormState>();
   String imageUrl = "";
   bool isLoading = false;
+  String selectImage = "Not Selected!";
 
   Future getImage() async {
     try {
@@ -64,6 +65,7 @@ class _CreateProfileState extends State<CreateProfile> {
     try {
       TaskSnapshot snapshot = await uploadTask;
       imageUrl = await snapshot.ref.getDownloadURL();
+      selectImage = "Done";
       setState(() {
         isLoading = false;
       });
@@ -117,8 +119,8 @@ class _CreateProfileState extends State<CreateProfile> {
                     //backgroundImage: (),
                     backgroundColor: Colors.grey[400],
                     radius: 62.5,
-                    child: const Text(
-                      'poop',
+                    child: Text(
+                      "${selectImage}",
                       style: TextStyle(color: Colors.white),
                     ), //Text
                   ),

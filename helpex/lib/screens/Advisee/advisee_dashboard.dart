@@ -51,7 +51,6 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -190,13 +189,10 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                     height: 10,
                                   ),
                                   CircleAvatar(
-                                    //backgroundImage: (),
+                                    backgroundImage: NetworkImage(
+                                        "${data.docs[index]["profilePicUrl"]}"),
                                     backgroundColor: Colors.grey[400],
                                     radius: 62.5,
-                                    child: const Text(
-                                      'poop',
-                                      style: TextStyle(color: Colors.white),
-                                    ), //Text
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -237,16 +233,16 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                     height: 10,
                                   ),
                                   RatingBarIndicator(
-                                      rating: 4,
-                                      itemCount: 5,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 4.0),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star_rounded,
-                                        color: Colors.amber,
-                                        size: 5,
-                                      ),
+                                    rating: 4,
+                                    itemCount: 5,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star_rounded,
+                                      color: Colors.amber,
+                                      size: 5,
                                     ),
+                                  ),
                                   const SizedBox(
                                     height: 10,
                                   ),
@@ -260,13 +256,13 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                         textStyle:
                                             const TextStyle(fontSize: 20)),
                                     onPressed: () {
-
-                                         Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                     AdviseeChatHome(otherUserID:data.docs[index]["uid"] ,)));
-
-
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdviseeChatHome(
+                                                    otherUserID:
+                                                        data.docs[index]["uid"],
+                                                  )));
                                     },
                                     child: Text('Chat',
                                         style: GoogleFonts.mulish(
@@ -293,10 +289,12 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                             const TextStyle(fontSize: 20)),
                                     onPressed: () {
                                       Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                     ViewAdvisorProfile(advisorUid:data.docs[index]["uid"] ,)));
-
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ViewAdvisorProfile(
+                                                    advisorUid: data.docs[index]
+                                                        ["uid"],
+                                                  )));
                                     },
                                     child: Text('View Profile',
                                         style: GoogleFonts.mulish(

@@ -30,7 +30,8 @@ class AdvisorToFirestore {
       required this.rates,
       required this.ratesTime,
       required this.expertise,
-      this.profilePicUrl = "",
+      this.profilePicUrl =
+          "https://firebasestorage.googleapis.com/v0/b/helpexfyp.appspot.com/o/Avatar.jpg?alt=media&token=7e102140-9a95-4702-b917-9b7317ed9d31",
       this.totalEarnings = ""});
 
   Map<String, dynamic> toMap() {

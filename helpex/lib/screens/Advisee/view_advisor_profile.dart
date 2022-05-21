@@ -148,7 +148,7 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                       const SizedBox(
                         height: 10,
                       ),
-                       CircleAvatar(
+                      CircleAvatar(
                         backgroundImage:
                             NetworkImage("${profile["profilePicUrl"]}"),
                         backgroundColor: Colors.grey[400],
