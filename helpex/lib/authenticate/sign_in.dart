@@ -80,6 +80,8 @@ class _SignInState extends State<SignIn> {
                                 setState(() => email = val);
                               },
                               decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 18.0, horizontal: 8.0),
                                 border: InputBorder.none,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
@@ -108,6 +110,8 @@ class _SignInState extends State<SignIn> {
                                 setState(() => password = val);
                               },
                               decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 18.0, horizontal: 8.0),
                                 border: InputBorder.none,
                                 //fillColor: const Color(),
                                 enabledBorder: OutlineInputBorder(
@@ -234,19 +238,8 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "Or",
-                  style: GoogleFonts.mulish(textStyle: TextStyle(fontSize: 20)),
-                ),
                 SizedBox(
                   height: 10,
-                ),
-                SignInButton(
-                  Buttons.Google,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40)),
-                  text: "Sign in with Google",
-                  onPressed: () {},
                 ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,

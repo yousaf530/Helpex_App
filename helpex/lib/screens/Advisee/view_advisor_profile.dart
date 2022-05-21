@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:helpex_app/models/advisor.dart';
+import 'package:helpex_app/models/reviews.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/chat/adviseeChat.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class ViewAdvisorProfile extends StatefulWidget {
   final String advisorUid;
@@ -16,7 +19,11 @@ class ViewAdvisorProfile extends StatefulWidget {
 }
 
 class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
+  MyUser currentUser = MyUser.getMyUser();
   bool isData = false;
+  String reviewNote = "";
+  double reviewRating = 0;
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
   late final profile;
   late final experience;
   late final socials;
@@ -93,6 +100,19 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
     } on FirebaseException catch (e) {
       return null;
     }
+  }
+
+  addReview(String reviewNote, double reviewRating) async {
+    UserReviews review = UserReviews(
+        reviewerUid: currentUser.uid!,
+        advisorUid: widget.advisorUid,
+        rating: reviewRating,
+        comment: reviewNote,
+        reviewerName: currentUser.name!,
+        date: DateFormat("dd-MM-yyyy").format(DateTime.now()) +
+            "  " +
+            DateFormat("hh:mm a").format(DateTime.now()));
+    await db.collection("Reviews").add(review.toMap());
   }
 
   getData() async {
@@ -174,7 +194,6 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                       const SizedBox(
                         height: 15,
                       ),
-                      
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Colors.white,
@@ -183,18 +202,143 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                                 borderRadius: BorderRadius.circular(40)),
                             textStyle: const TextStyle(fontSize: 20)),
                         onPressed: () {
-
-                                         Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                     AdviseeChatHome(otherUserID:profile["uid"] ,)));
-
-
-                                    },
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AdviseeChatHome(
+                                    otherUserID: profile["uid"],
+                                  )));
+                        },
                         child: Text('Start a Chat',
                             style: GoogleFonts.mulish(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   color: Color(0xff2D7567),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xff2D7567),
+                            fixedSize: const Size(220, 40),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40)),
+                            textStyle: const TextStyle(fontSize: 20)),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    content: SingleChildScrollView(
+                                      child: Container(
+                                        //width: double.infinity,
+                                        height: 300,
+                                        child: Center(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Leave a review',
+                                                style: GoogleFonts.mulish(
+                                                  textStyle: const TextStyle(
+                                                      color: Color(0xff2D7567),
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              const Divider(
+                                                color: Colors.black,
+                                              ),
+                                              Container(
+                                                height: 220,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                  color: Colors.grey,
+                                                )),
+                                                child: TextFormField(
+                                                  keyboardType:
+                                                      TextInputType.multiline,
+                                                  minLines:
+                                                      1, //Normal textInputField will be displayed
+                                                  maxLines: 7,
+                                                  decoration: InputDecoration(
+                                                    hintText: "Write a review",
+                                                    hintStyle:
+                                                        GoogleFonts.mulish(
+                                                      textStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                    ),
+                                                    border: InputBorder.none,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40),
+                                                      borderSide: BorderSide(
+                                                          color: Colors.white,
+                                                          width: 0.0),
+                                                    ),
+                                                  ),
+                                                  onChanged: (value) {
+                                                    reviewNote = value;
+                                                  },
+                                                ),
+                                              ),
+                                              RatingBar.builder(
+                                                initialRating: 0,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    const Icon(
+                                                  Icons.star_rounded,
+                                                  color: Colors.amber,
+                                                  size: 5,
+                                                ),
+                                                onRatingUpdate: (rating) {
+                                                  reviewRating = rating;
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Color(0xff2D7567),
+                                            fixedSize: const Size(220, 40),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(40)),
+                                            textStyle:
+                                                const TextStyle(fontSize: 20)),
+                                        onPressed: () {
+                                          addReview(reviewNote, reviewRating);
+                                          Navigator.pop(context, false);
+                                        },
+                                        child: Text('Submit Review',
+                                            style: GoogleFonts.mulish(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600),
+                                            )),
+                                      ),
+                                    ],
+                                  ));
+                        },
+                        child: Text('Leave a Review',
+                            style: GoogleFonts.mulish(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600),
                             )),

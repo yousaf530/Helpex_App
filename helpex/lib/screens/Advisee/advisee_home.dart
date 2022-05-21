@@ -86,8 +86,8 @@ class _AdviseeHomeState extends State<AdviseeHome> {
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
+            icon: Icon(Icons.home),
+            label: 'Home',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
