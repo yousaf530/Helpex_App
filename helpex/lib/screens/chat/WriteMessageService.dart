@@ -1,14 +1,12 @@
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-
-class WriteMessageService{
-
+class WriteMessageService {
   static FirebaseFirestore db = FirebaseFirestore.instance;
-  static FirebaseStorage firebaseStorage=FirebaseStorage.instanceFor(bucket: "gs://helpexfyp.appspot.com/");
+  static FirebaseStorage firebaseStorage =
+      FirebaseStorage.instanceFor(bucket: "gs://helpexfyp.appspot.com");
 
   static UploadTask uploadFile(String image, String fileName) {
     Reference reference = firebaseStorage.ref().child(fileName);
@@ -16,27 +14,32 @@ class WriteMessageService{
     return uploadTask;
   }
 
-  static Stream<QuerySnapshot> getChatStream(String recieverID,String currentUserId,int l) {
+  static Stream<QuerySnapshot> getChatStream(
+      String recieverID, String currentUserId, int l) {
     return db
-        .collection("messages").where("recieverID",isEqualTo: recieverID).where("senderID",isEqualTo: currentUserId).orderBy("timestamp",descending: true)
+        .collection("messages")
+        .where("groupid", isEqualTo: currentUserId + recieverID)
+        .orderBy("timestamp", descending: true)
         .snapshots();
   }
 
-
-  static Future<String?> sendMessage(String content, int type, String senderID, String recieverID,String name) async {
-
+  static Future<String?> sendMessage(String content, int type, String senderID,
+      String recieverID, String name) async {
     try {
-      DateTime dateToday =DateTime.now();
+      DateTime dateToday = DateTime.now();
       String date = dateToday.toString();
       final temp1 = <String, dynamic>{
+        "groupid": senderID + recieverID,
         "content": content,
         "type": type,
-        "senderID":senderID,
-        "recieverID":recieverID,
-        "timestamp":DateTime.now().millisecondsSinceEpoch.toString(),
-        "name":name
+        "senderID": senderID,
+        "recieverID": recieverID,
+        "timestamp": DateTime.now().millisecondsSinceEpoch.toString(),
+        "name": name
       };
       await db.collection("messages").add(temp1);
+
+
 
       return "1";
     } on FirebaseException catch (e) {
@@ -58,6 +61,26 @@ class WriteMessageService{
     //   );
     // });
   }
-  
 
+  static Future<String?> sendMessageAdvisor(String content, int type,
+      String senderID, String recieverID, String name) async {
+    try {
+      DateTime dateToday = DateTime.now();
+      String date = dateToday.toString();
+      final temp1 = <String, dynamic>{
+        "groupid": recieverID + senderID,
+        "content": content,
+        "type": type,
+        "senderID": senderID,
+        "recieverID": recieverID,
+        "timestamp": DateTime.now().millisecondsSinceEpoch.toString(),
+        "name": name
+      };
+      await db.collection("messages").add(temp1);
+
+      return "1";
+    } on FirebaseException catch (e) {
+      return e.message;
+    }
+  }
 }
