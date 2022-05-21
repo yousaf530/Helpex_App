@@ -1,14 +1,18 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/social_media_links.dart';
 import 'package:helpex_app/models/user_experiences.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
+import 'package:helpex_app/screens/chat/WriteMessageService.dart';
 import 'package:helpex_app/services/create_advisor_data.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
 import 'package:intl/intl.dart';
+import 'package:images_picker/images_picker.dart';
 
 class CreateProfile extends StatefulWidget {
   final String uid;
@@ -22,6 +26,54 @@ class CreateProfile extends StatefulWidget {
 class _CreateProfileState extends State<CreateProfile> {
   Advisor advisor = Advisor.getAdvisor();
   final _formKey = GlobalKey<FormState>();
+  String imageUrl = "";
+  bool isLoading = false;
+
+  Future getImage() async {
+    try {
+      List<Media>? res = await ImagesPicker.pick(
+        count: 1,
+        pickType: PickType.all,
+        language: Language.System,
+        maxTime: 30,
+        // maxSize: 500,
+        cropOpt: CropOption(
+          // aspectRatio: CropAspectRatio.wh16x9,
+          cropType: CropType.circle,
+        ),
+      );
+
+      if (res != null) {
+        uploadFile(res[0].path);
+        print(res[0].path);
+
+        setState(() {
+          isLoading = true;
+        });
+      }
+    } on PlatformException catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  Future uploadFile(String path) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    UploadTask uploadTask = WriteMessageService.uploadFile(path, fileName);
+    try {
+      TaskSnapshot snapshot = await uploadTask;
+      imageUrl = await snapshot.ref.getDownloadURL();
+      setState(() {
+        isLoading = false;
+      });
+    } on FirebaseException catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print(e.message ?? e.toString());
+    }
+  }
 
   //form states
   String description = "";
@@ -74,7 +126,7 @@ class _CreateProfileState extends State<CreateProfile> {
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
                     ),
-                    onPressed: () {},
+                    onPressed: getImage,
                     child: Text(
                       'Upload Picture',
                       style: GoogleFonts.mulish(),
@@ -962,7 +1014,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           uid: widget.uid,
                                           ratesTime: ratesTime,
                                           userExperience: userExperience,
-                                          expertise: experties);
+                                          expertise: experties,
+                                          profilePicUrl: imageUrl);
                                   toFirestore.newAdvisorDataToFirebase();
 
                                   Navigator.of(context).push(MaterialPageRoute(

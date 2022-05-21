@@ -17,6 +17,7 @@ class AdvisorToFirestore {
   String ratesTime = "";
   String expertise = "";
   String totalEarnings = "";
+  String profilePicUrl = "";
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -29,6 +30,7 @@ class AdvisorToFirestore {
       required this.rates,
       required this.ratesTime,
       required this.expertise,
+      this.profilePicUrl = "",
       this.totalEarnings = ""});
 
   Map<String, dynamic> toMap() {
@@ -40,7 +42,8 @@ class AdvisorToFirestore {
       'name': currentUser.name,
       'email': currentUser.email,
       'expertise': expertise,
-      'totalEarnings': totalEarnings
+      'totalEarnings': totalEarnings,
+      'profilePicUrl': profilePicUrl
     };
   }
 

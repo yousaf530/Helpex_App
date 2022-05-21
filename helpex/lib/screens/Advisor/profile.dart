@@ -117,13 +117,10 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                         height: 10,
                       ),
                       CircleAvatar(
-                        //backgroundImage: (),
+                        backgroundImage:
+                            NetworkImage("${profile["profilePicUrl"]}"),
                         backgroundColor: Colors.grey[400],
                         radius: 62.5,
-                        child: const Text(
-                          'poop',
-                          style: TextStyle(color: Colors.white),
-                        ), //Text
                       ),
                       const SizedBox(
                         height: 10,
