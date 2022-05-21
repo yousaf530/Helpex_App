@@ -6,14 +6,14 @@ class UserExperiences {
   String? companyName = "";
   String? jobTitle = "";
   String? startDate = "";
-  String? endDate = "";
+  String endDate = "-";
   bool onGoing = false;
   UserExperiences({
     this.uid,
     this.companyName,
     this.jobTitle,
     this.startDate,
-    this.endDate,
+    this.endDate = "-",
     required this.onGoing,
   });
 
@@ -22,7 +22,7 @@ class UserExperiences {
     String? companyName,
     String? jobTitle,
     String? startDate,
-    String? endDate,
+    String? endDate = "-",
     bool? onGoing,
   }) {
     return UserExperiences(

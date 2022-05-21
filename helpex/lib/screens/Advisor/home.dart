@@ -19,7 +19,7 @@ class AdvisorHome extends StatefulWidget {
 
 class _AdvisorHomeState extends State<AdvisorHome> {
   int currentIndex = 0;
-  
+  String _title = "";
 
   final screens = [
     AdvisorDashboard(),
@@ -28,13 +28,18 @@ class _AdvisorHomeState extends State<AdvisorHome> {
     AdvisorProfile()
   ];
 
+  @override
+  initState() {
+    _title = 'Dashboard';
+  }
+
   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Advisor Profile'),
+        title: Text(_title),
         backgroundColor: Color(0xff2D7567),
         actions: <Widget>[
           Padding(
@@ -42,7 +47,7 @@ class _AdvisorHomeState extends State<AdvisorHome> {
             child: TextButton.icon(
               onPressed: () async {
                 await _auth.signOut().then(
-                      (value) => Navigator.of(context).push(
+                      (value) => Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => SignIn(),
                         ),
@@ -63,10 +68,10 @@ class _AdvisorHomeState extends State<AdvisorHome> {
         onPressed: () {
           // Add your onPressed code here!
           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AdvisorChatScreen(),
-                            ),
-                          );
+            MaterialPageRoute(
+              builder: (context) => AdvisorChatScreen(),
+            ),
+          );
         },
         backgroundColor: Color(0xff2D7567),
         child: const Icon(Icons.chat),
@@ -75,14 +80,37 @@ class _AdvisorHomeState extends State<AdvisorHome> {
         index: currentIndex,
         children: screens,
       ),
-    
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         selectedItemColor: Color(0xff2D7567),
         unselectedItemColor: Colors.grey[600],
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
+        onTap: (index) => setState(() {
+          currentIndex = index;
+          switch (index) {
+            case 0:
+              {
+                _title = 'Dashboard';
+              }
+              break;
+            case 1:
+              {
+                _title = 'Notifications';
+              }
+              break;
+              case 2:
+              {
+                _title = 'Appointments';
+              }
+              break;
+              case 3:
+              {
+                _title = 'Profile';
+              }
+              break;
+          }
+        }),
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(

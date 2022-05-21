@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
+import 'package:helpex_app/screens/Advisee/view_advisor_profile.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -266,7 +267,7 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                             const TextStyle(fontSize: 20)),
                                     onPressed: () {
 
-                                         Navigator.of(context).pushReplacement(
+                                         Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                      AdviseeChatHome(otherUserID:data.docs[index]["uid"] ,)));
@@ -297,8 +298,11 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                         textStyle:
                                             const TextStyle(fontSize: 20)),
                                     onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/view_advisor_pro');
+                                      Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                     ViewAdvisorProfile(advisorUid:data.docs[index]["uid"] ,)));
+
                                     },
                                     child: Text('View Profile',
                                         style: GoogleFonts.mulish(

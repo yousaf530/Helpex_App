@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, must_call_super
 
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/screens/Advisee/advisee_dashboard.dart';
-import 'package:helpex_app/screens/Advisor/notification.dart';
+import 'package:helpex_app/screens/Advisee/all_chats.dart';
 import 'package:helpex_app/services/auth.dart';
 
 class AdviseeHome extends StatefulWidget {
@@ -15,19 +15,25 @@ class AdviseeHome extends StatefulWidget {
 
 class _AdviseeHomeState extends State<AdviseeHome> {
   int currentIndex = 0;
+  String _title = "";
 
   final screens = [
     AdviseeDashboard(),
-    Notifications(),
+    AllChats(),
   ];
 
   final AuthService _auth = AuthService();
 
   @override
+  initState() {
+    _title = 'Dashboard';
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Advisee Profile'),
+        title: Text(_title),
         backgroundColor: Color(0xff2D7567),
         actions: <Widget>[
           Padding(
@@ -35,7 +41,7 @@ class _AdviseeHomeState extends State<AdviseeHome> {
             child: TextButton.icon(
               onPressed: () async {
                 await _auth.signOut().then(
-                      (value) => Navigator.of(context).push(
+                      (value) => Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => SignIn(),
                         ),
@@ -62,7 +68,21 @@ class _AdviseeHomeState extends State<AdviseeHome> {
         unselectedItemColor: Colors.grey[600],
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
+        onTap: (index) => setState(() {
+          currentIndex = index;
+          switch (index) {
+            case 0:
+              {
+                _title = 'Dashboard';
+              }
+              break;
+            case 1:
+              {
+                _title = 'Chats';
+              }
+              break;
+          }
+        }),
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(

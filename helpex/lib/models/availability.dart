@@ -2,38 +2,38 @@
 import 'dart:convert';
 
 class Availability {
-  String? uid = "";
-  String? mondayStart;
-  String? mondayEnd;
-  String? tuesdayStart;
-  String? tuesdayEnd;
-  String? wednesdayStart;
-  String? wednesdayEnd;
-  String? thursdayStart;
-  String? thursdayEnd;
-  String? fridayStart;
-  String? fridayEnd;
-  String? saturdayStart;
-  String? saturdayEnd;
-  String? sundayStart;
-  String? sundayEnd;
+  String uid = "";
+  String mondayStart = "-";
+  String mondayEnd = "-";
+  String tuesdayStart = "-";
+  String tuesdayEnd = "-";
+  String wednesdayStart = "-";
+  String wednesdayEnd = "-";
+  String thursdayStart = "-";
+  String thursdayEnd = "-";
+  String fridayStart = "-";
+  String fridayEnd = "-";
+  String saturdayStart = "-";
+  String saturdayEnd = "-";
+  String sundayStart = "-";
+  String sundayEnd = "-";
 
   Availability({
-    this.uid,
-    this.mondayStart,
-    this.mondayEnd,
-    this.tuesdayStart,
-    this.tuesdayEnd,
-    this.wednesdayStart,
-    this.wednesdayEnd,
-    this.thursdayStart,
-    this.thursdayEnd,
-    this.fridayStart,
-    this.fridayEnd,
-    this.saturdayStart,
-    this.saturdayEnd,
-    this.sundayStart,
-    this.sundayEnd,
+    this.uid = "",
+    this.mondayStart = "-",
+    this.mondayEnd  = "-",
+    this.tuesdayStart = "-",
+    this.tuesdayEnd = "-",
+    this.wednesdayStart = "-",
+    this.wednesdayEnd = "-",
+    this.thursdayStart = "-",
+    this.thursdayEnd = "-",
+    this.fridayStart = "-",
+    this.fridayEnd = "-",
+    this.saturdayStart = "-",
+    this.saturdayEnd = "-",
+    this.sundayStart = "-",
+    this.sundayEnd = "-",
   });
 
   Availability copyWith({

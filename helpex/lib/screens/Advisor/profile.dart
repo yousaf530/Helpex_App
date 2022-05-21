@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/advisor.dart';
-//import 'package:helpex_app/models/capitalize_string.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +17,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
   late final profile;
   late final experience;
   late final socials;
+  late final availability;
   MyUser currentUser = MyUser.getMyUser();
   final Advisor advisor = Advisor.getAdvisor();
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -73,10 +73,29 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
     }
   }
 
+   readAvailability() async {
+     try {
+       var data;
+       final result = db
+           .collection("Availability")
+           .where("uid", isEqualTo: currentUser.uid);
+       print(currentUser.uid);
+       var querySnapshots = await result.get();
+       for (var snapshot in querySnapshots.docs) {
+         data = snapshot.data();
+       }
+
+       return data;
+     } on FirebaseException catch (e) {
+       return null;
+     }
+   }
+
   getData() async {
     profile = await readProfile();
     experience = await readExperience();
     socials = await readSocials();
+    availability = await readAvailability();
     setState(() {
       isData = true;
     });
@@ -470,7 +489,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       Row(
                                         children: [
                                           Text(
-                                            '3:30',
+                                            availability["mondayStart"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -484,7 +503,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                             ),
                                           ),
                                           Text(
-                                            '3:30',
+                                            availability["mondayEnd"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -495,7 +514,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       Row(
                                         children: [
                                           Text(
-                                            '3:30',
+                                            availability["tuesdayStart"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -509,7 +528,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                             ),
                                           ),
                                           Text(
-                                            '3:30',
+                                            availability["tuesdayEnd"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -520,7 +539,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       Row(
                                         children: [
                                           Text(
-                                            '3:30',
+                                            availability["wednesdayStart"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -534,7 +553,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                             ),
                                           ),
                                           Text(
-                                            '3:30',
+                                            availability["wednesdayEnd"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -545,7 +564,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       Row(
                                         children: [
                                           Text(
-                                            '3:30',
+                                            availability["thursdayStart"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -559,7 +578,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                             ),
                                           ),
                                           Text(
-                                            '3:30',
+                                            availability["thursdayEnd"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -570,7 +589,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       Row(
                                         children: [
                                           Text(
-                                            '3:30',
+                                            availability["fridayStart"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -584,7 +603,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                             ),
                                           ),
                                           Text(
-                                            '3:30',
+                                            availability["fridayEnd"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -595,7 +614,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       Row(
                                         children: [
                                           Text(
-                                            '3:30',
+                                            availability["saturdayStart"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -609,7 +628,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                             ),
                                           ),
                                           Text(
-                                            '3:30',
+                                            availability["saturdayEnd"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -620,7 +639,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       Row(
                                         children: [
                                           Text(
-                                            '3:30',
+                                            availability["sundayStart"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
@@ -634,7 +653,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                             ),
                                           ),
                                           Text(
-                                            '3:30',
+                                            availability["sundayEnd"],
                                             style: GoogleFonts.mulish(
                                               textStyle:
                                                   const TextStyle(fontSize: 16),
