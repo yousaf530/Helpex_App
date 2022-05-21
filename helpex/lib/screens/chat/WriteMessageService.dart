@@ -39,8 +39,6 @@ class WriteMessageService {
       };
       await db.collection("messages").add(temp1);
 
-
-
       return "1";
     } on FirebaseException catch (e) {
       return e.message;

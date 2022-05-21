@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/screens/wrapper.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:helpex_app/state/userModel.dart';
@@ -12,9 +11,10 @@ import 'models/user.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           //primarySwatch: Colors.blue,
           fontFamily: 'mulish',

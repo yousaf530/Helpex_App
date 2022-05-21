@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unused_import, must_call_super
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,6 +23,7 @@ class _AdvisorChatScreenState extends State<AdvisorChatScreen> {
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     currid = currentUser.uid!;
     chats = readChats(currid);
@@ -35,12 +38,8 @@ class _AdvisorChatScreenState extends State<AdvisorChatScreen> {
           .where("isAdvisee", isEqualTo: true)
           .snapshots();
 
-
-
-
-
       return result;
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       return null;
     }
   }
@@ -48,7 +47,8 @@ class _AdvisorChatScreenState extends State<AdvisorChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Chats")),
+        appBar:
+            AppBar(title: Text("Chats"), backgroundColor: Color(0xff2D7567)),
         body: StreamBuilder<QuerySnapshot>(
             stream: chats,
             builder:
@@ -138,36 +138,40 @@ class _AdvisorChatScreenState extends State<AdvisorChatScreen> {
                   itemCount: data.size,
                   // Text(data.docs[index]['name'])
                   itemBuilder: (context, index) {
-                    return Card(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.green,
-                              radius: 25.0,
-                              child: Text(data.docs[index]["name"][0],
-                                  style: TextStyle(fontSize: 30.0)),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 4.0),
+                      child: Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Color(0xff2D7567),
+                                radius: 25.0,
+                                child: Text(data.docs[index]["name"][0],
+                                    style: TextStyle(fontSize: 30.0)),
+                              ),
+                              title: Text(
+                                data.docs[index]['name'],
+                                style: TextStyle(fontSize: 24),
+                              ),
+                              // subtitle: Text(
+                              //   data.docs[index]['email'],
+                              //   style: TextStyle(fontSize: 30),
+                              // ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AdvisorChatHome(
+                                        otherUserID: data.docs[index]["uid"],
+                                      ),
+                                    ));
+                              },
                             ),
-                            title: Text(
-                              data.docs[index]['name'],
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            subtitle: Text(
-                              data.docs[index]['email'],
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AdvisorChatHome(
-                                      otherUserID: data.docs[index]["uid"],
-                                    ),
-                                  ));
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   });

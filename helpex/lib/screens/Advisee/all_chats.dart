@@ -6,14 +6,14 @@ import 'package:shimmer/shimmer.dart';
 import '../../models/user.dart';
 
 class AllChats extends StatefulWidget {
-  const AllChats({ Key? key }) : super(key: key);
+  const AllChats({Key? key}) : super(key: key);
 
   @override
   State<AllChats> createState() => _AllChatsState();
 }
 
 class _AllChatsState extends State<AllChats> {
- final MyUser currentUser = MyUser.getMyUser();
+  final MyUser currentUser = MyUser.getMyUser();
   String currid = "";
 
   late final Stream<QuerySnapshot>? chats;
@@ -34,10 +34,6 @@ class _AllChatsState extends State<AllChats> {
           .where("isAdvisor", isEqualTo: true)
           .snapshots();
 
-
-
-
-
       return result;
     } on FirebaseException catch (e) {
       return null;
@@ -47,7 +43,6 @@ class _AllChatsState extends State<AllChats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        
         body: StreamBuilder<QuerySnapshot>(
             stream: chats,
             builder:
@@ -137,36 +132,44 @@ class _AllChatsState extends State<AllChats> {
                   itemCount: data.size,
                   // Text(data.docs[index]['name'])
                   itemBuilder: (context, index) {
-                    return Card(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.green,
-                              radius: 25.0,
-                              child: Text(data.docs[index]["name"][0],
-                                  style: TextStyle(fontSize: 30.0)),
-                            ),
-                            title: Text(
-                              data.docs[index]['name'],
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            subtitle: Text(
-                              data.docs[index]['email'],
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AdviseeChatHome(
-                                      otherUserID: data.docs[index]["uid"],
-                                    ),
-                                  ));
-                            },
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 4.0),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 2),
+                        child: Card(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                leading: CircleAvatar(
+                                  backgroundColor: Color(0xff2D7567),
+                                  radius: 25.0,
+                                  child: Text(data.docs[index]["name"][0],
+                                      style: TextStyle(fontSize: 24.0)),
+                                ),
+                                title: Text(
+                                  data.docs[index]['name'],
+                                  style: TextStyle(fontSize: 24),
+                                ),
+                                // subtitle: Text(
+                                //   data.docs[index]['email'],
+                                //   style: TextStyle(fontSize: 30),
+                                // ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AdviseeChatHome(
+                                          otherUserID: data.docs[index]["uid"],
+                                        ),
+                                      ));
+                                },
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     );
                   });

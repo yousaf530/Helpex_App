@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
-import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisor/advisor_calender.dart';
 import 'package:helpex_app/screens/Advisor/advisor_chat.dart';
 import 'package:helpex_app/screens/Advisor/dashboard.dart';
@@ -39,7 +38,10 @@ class _AdvisorHomeState extends State<AdvisorHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: Text(
+          _title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Color(0xff2D7567),
         actions: <Widget>[
           Padding(
@@ -99,12 +101,12 @@ class _AdvisorHomeState extends State<AdvisorHome> {
                 _title = 'Notifications';
               }
               break;
-              case 2:
+            case 2:
               {
                 _title = 'Appointments';
               }
               break;
-              case 3:
+            case 3:
               {
                 _title = 'Profile';
               }
@@ -125,7 +127,7 @@ class _AdvisorHomeState extends State<AdvisorHome> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_outlined),
-            label: 'Calender',
+            label: 'Appointments',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(

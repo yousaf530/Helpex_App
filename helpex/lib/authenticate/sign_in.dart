@@ -223,7 +223,7 @@ class _SignInState extends State<SignIn> {
                         } else {
                           setState(() {
                             error = "Login as the correct user please";
-                          }); 
+                          });
                           await _auth.signOut();
                         }
                       }

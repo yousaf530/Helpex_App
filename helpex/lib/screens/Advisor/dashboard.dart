@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/cards.dart';
@@ -12,6 +14,16 @@ class AdvisorDashboard extends StatefulWidget {
 }
 
 class _AdvisorDashboardState extends State<AdvisorDashboard> {
+  Map<DateTime, List<dynamic>> _events = {};
+  List<dynamic> _selectedEvents = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _events = {};
+    _selectedEvents = [];
+  }
+
   final MyUser currentUser = MyUser.getMyUser();
   @override
   Widget build(BuildContext context) {
@@ -24,15 +36,15 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                "Dashboard",
-                style: GoogleFonts.mulish(
-                  textStyle: const TextStyle(
-                      color: Color(0xff2D7567),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              // Text(
+              //   "Dashboard",
+              //   style: GoogleFonts.mulish(
+              //     textStyle: const TextStyle(
+              //         color: Color(0xff2D7567),
+              //         fontSize: 24,
+              //         fontWeight: FontWeight.bold),
+              //   ),
+              // ),
               const SizedBox(
                 height: 10,
               ),
@@ -61,8 +73,8 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                   color: Colors.black,
                                 ),
                                 Icon(
-                                  Icons.calendar_today_outlined,
-                                  color: Color(0xff4BDB6A),
+                                  Icons.calendar_month_outlined,
+                                  color: Color(0xff2D7567),
                                   size: 50,
                                 ),
                                 Padding(
@@ -105,7 +117,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                 ),
                                 Icon(
                                   Icons.attach_money,
-                                  color: Color(0xff4BDB6A),
+                                  color: Color(0xff2D7567),
                                   size: 50,
                                 ),
                                 Padding(
@@ -191,6 +203,28 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                         firstDay: DateTime.utc(2010, 10, 16),
                         lastDay: DateTime.utc(2030, 3, 14),
                         focusedDay: DateTime.now(),
+                        calendarBuilders: CalendarBuilders(
+                          selectedBuilder: (context, date, events) => Container(
+                              margin: const EdgeInsets.all(4.0),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              child: Text(
+                                date.day.toString(),
+                                style: TextStyle(color: Colors.white),
+                              )),
+                          todayBuilder: (context, date, events) => Container(
+                              margin: const EdgeInsets.all(4.0),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              child: Text(
+                                date.day.toString(),
+                                style: TextStyle(color: Colors.white),
+                              )),
+                        ),
                       ),
                     ]),
               ),

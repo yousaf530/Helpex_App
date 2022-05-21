@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +23,7 @@ class _NotificationsState extends State<Notifications> {
                 height: 10,
               ),
               Text(
-                "Appointments",
+                "Notifications",
                 style: GoogleFonts.mulish(
                   textStyle: TextStyle(
                       color: Color(0xff2D7567),

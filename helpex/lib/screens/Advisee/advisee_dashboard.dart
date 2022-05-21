@@ -1,6 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/screens/Advisee/view_advisor_profile.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:helpex_app/widgets/cards.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../chat/adviseeChat.dart';
-import '../chat/alertChat.dart';
 
 class AdviseeDashboard extends StatefulWidget {
   const AdviseeDashboard({Key? key}) : super(key: key);
@@ -62,6 +62,8 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                 borderRadius: BorderRadius.circular(40),
                 child: TextFormField(
                   decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 18.0, horizontal: 18.0),
                     border: InputBorder.none,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
@@ -80,7 +82,7 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 8,
             ),
 
             isData == false

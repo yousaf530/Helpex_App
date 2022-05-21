@@ -116,7 +116,7 @@ class _AlertChatState extends State<AdviseeChat> {
     try {
       print("han agbea");
       TaskSnapshot snapshot = await uploadTask;
-     // print(snapshot.ref.getDownloadURL());
+      // print(snapshot.ref.getDownloadURL());
       imageUrl = await (await snapshot).ref.getDownloadURL();
       print("nhi ya");
       setState(() {
@@ -184,7 +184,7 @@ class _AlertChatState extends State<AdviseeChat> {
                                   height: 200,
                                   child: Center(
                                     child: CircularProgressIndicator(
-                                      color: Colors.green,
+                                      color: Color(0xff2D7567),
                                       value:
                                           loadingProgress.expectedTotalBytes !=
                                                   null
@@ -258,7 +258,7 @@ class _AlertChatState extends State<AdviseeChat> {
               Row(
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Color(0xff2D7567),
                     radius: 25.0,
                     child: Text(
                       "${document.get("name")[0]}",
@@ -275,7 +275,7 @@ class _AlertChatState extends State<AdviseeChat> {
                           padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                           width: 200,
                           decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Color(0xff2D7567),
                               borderRadius: BorderRadius.circular(8)),
                           margin: EdgeInsets.only(left: 10),
                         )
@@ -299,7 +299,7 @@ class _AlertChatState extends State<AdviseeChat> {
                                     height: 200,
                                     child: Center(
                                       child: CircularProgressIndicator(
-                                        color: Colors.green,
+                                        color: Color(0xff2D7567),
                                         value: loadingProgress
                                                     .expectedTotalBytes !=
                                                 null
@@ -354,7 +354,7 @@ class _AlertChatState extends State<AdviseeChat> {
               Container(
                 child: Text("by: " + document.get("name"),
                     style: TextStyle(
-                        color: Colors.green,
+                        color: Color(0xff2D7567),
                         fontSize: 12,
                         fontStyle: FontStyle.italic)),
                 margin: EdgeInsets.only(left: 50, top: 5, bottom: 5),
@@ -405,7 +405,7 @@ class _AlertChatState extends State<AdviseeChat> {
         } else {
           return Center(
             child: CircularProgressIndicator(
-              color: Colors.green,
+              color: Color(0xff2D7567),
             ),
           );
         }
@@ -424,7 +424,7 @@ class _AlertChatState extends State<AdviseeChat> {
               child: IconButton(
                 icon: Icon(Icons.image),
                 onPressed: getImage,
-                color: Colors.green,
+                color: Color(0xff2D7567),
               ),
             ),
             color: Colors.white,
@@ -435,7 +435,7 @@ class _AlertChatState extends State<AdviseeChat> {
               child: IconButton(
                 icon: Icon(Icons.camera),
                 onPressed: getImageCamera,
-                color: Colors.green,
+                color: Color(0xff2D7567),
               ),
             ),
             color: Colors.white,
@@ -447,7 +447,7 @@ class _AlertChatState extends State<AdviseeChat> {
                 onSubmitted: (value) {
                   onSendMessage(textEditingController.text, 1);
                 },
-                style: TextStyle(color: Colors.green, fontSize: 15),
+                style: TextStyle(color: Color(0xff2D7567), fontSize: 15),
                 controller: textEditingController,
                 decoration: InputDecoration.collapsed(
                   hintText: 'Type your message...',
@@ -465,7 +465,7 @@ class _AlertChatState extends State<AdviseeChat> {
               child: IconButton(
                 icon: Icon(Icons.send),
                 onPressed: () => onSendMessage(textEditingController.text, 1),
-                color: Colors.green,
+                color: Color(0xff2D7567),
               ),
             ),
             color: Colors.white,
@@ -486,7 +486,7 @@ class _AlertChatState extends State<AdviseeChat> {
           ? Container(
               child: Center(
                 child: CircularProgressIndicator(
-                  color: Colors.green,
+                  color: Color(0xff2D7567),
                 ),
               ),
               color: Colors.white.withOpacity(0.8),
