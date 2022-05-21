@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/cards.dart';
@@ -73,23 +74,23 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
     }
   }
 
-   readAvailability() async {
-     try {
-       var data;
-       final result = db
-           .collection("Availability")
-           .where("uid", isEqualTo: currentUser.uid);
-       print(currentUser.uid);
-       var querySnapshots = await result.get();
-       for (var snapshot in querySnapshots.docs) {
-         data = snapshot.data();
-       }
+  readAvailability() async {
+    try {
+      var data;
+      final result = db
+          .collection("Availability")
+          .where("uid", isEqualTo: currentUser.uid);
+      print(currentUser.uid);
+      var querySnapshots = await result.get();
+      for (var snapshot in querySnapshots.docs) {
+        data = snapshot.data();
+      }
 
-       return data;
-     } on FirebaseException catch (e) {
-       return null;
-     }
-   }
+      return data;
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
 
   getData() async {
     profile = await readProfile();
@@ -707,10 +708,43 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                               const Divider(
                                 color: Colors.black,
                               ),
-                              Text(
-                                'Hello 2',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Advisee Name',
+                                      style: GoogleFonts.mulish(
+                                        textStyle: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Review',
+                                      style: GoogleFonts.mulish(
+                                        textStyle:
+                                            const TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                    RatingBar.builder(
+                                      initialRating: 0,
+                                      minRating: 1,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemCount: 5,
+                                      itemPadding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
+                                      itemBuilder: (context, _) => const Icon(
+                                        Icons.star_rounded,
+                                        color: Colors.amber,
+                                        size: 1,
+                                      ),
+                                      onRatingUpdate: (rating) {
+                                        //reviewRating = rating;
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ),
                             ]),

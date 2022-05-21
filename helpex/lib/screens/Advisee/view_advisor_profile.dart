@@ -23,7 +23,6 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
   bool isData = false;
   String reviewNote = "";
   double reviewRating = 0;
-  DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
   late final profile;
   late final experience;
   late final socials;
@@ -875,10 +874,37 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                               const Divider(
                                 color: Colors.black,
                               ),
-                              Text(
-                                'Hello 2',
-                                style: GoogleFonts.mulish(
-                                  textStyle: const TextStyle(fontSize: 16),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Advisee Name',
+                                      style: GoogleFonts.mulish(
+                                        textStyle: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Review',
+                                      style: GoogleFonts.mulish(
+                                        textStyle:
+                                            const TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                    RatingBarIndicator(
+                                      rating: 4,
+                                      itemCount: 5,
+                                      itemPadding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
+                                      itemBuilder: (context, _) => const Icon(
+                                        Icons.star_rounded,
+                                        color: Colors.amber,
+                                        size: 5,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ]),

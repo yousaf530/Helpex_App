@@ -236,23 +236,17 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  RatingBar.builder(
-                                    initialRating: 3,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemCount: 5,
-                                    itemPadding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    itemBuilder: (context, _) => const Icon(
-                                      Icons.star_rounded,
-                                      color: Colors.amber,
-                                      size: 10,
+                                  RatingBarIndicator(
+                                      rating: 4,
+                                      itemCount: 5,
+                                      itemPadding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
+                                      itemBuilder: (context, _) => const Icon(
+                                        Icons.star_rounded,
+                                        color: Colors.amber,
+                                        size: 5,
+                                      ),
                                     ),
-                                    onRatingUpdate: (rating) {
-                                      print(rating);
-                                    },
-                                  ),
                                   const SizedBox(
                                     height: 10,
                                   ),
