@@ -16,7 +16,7 @@ class AdvisorToFirestore {
   String rates = "";
   String ratesTime = "";
   String expertise = "";
-  String totalEarnings = "";
+  double totalEarnings;
   String profilePicUrl = "";
   double totalReviews;
   double rating;
@@ -36,7 +36,7 @@ class AdvisorToFirestore {
       this.rating = 0,
       this.profilePicUrl =
           "https://firebasestorage.googleapis.com/v0/b/helpexfyp.appspot.com/o/Avatar.jpg?alt=media&token=7e102140-9a95-4702-b917-9b7317ed9d31",
-      this.totalEarnings = ""});
+      this.totalEarnings = 0});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -50,7 +50,7 @@ class AdvisorToFirestore {
       'totalEarnings': totalEarnings,
       'profilePicUrl': profilePicUrl,
       'rating': rating,
-      'totalReviews': totalReviews
+      'totalReviews': totalReviews,
     };
   }
 

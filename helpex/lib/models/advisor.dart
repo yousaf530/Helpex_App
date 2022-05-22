@@ -14,7 +14,7 @@ class Advisor {
   List<String>? experties;
   String? ratesTime = "";
   String? uid = "";
-  double? totalEarnings;
+  double totalEarnings;
   String profilePic = "";
 
   Advisor({
@@ -27,7 +27,7 @@ class Advisor {
     this.experties,
     this.ratesTime,
     this.uid,
-    this.totalEarnings,
+    this.totalEarnings = 0,
     this.profilePic = "",
   });
 
