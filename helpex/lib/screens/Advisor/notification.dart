@@ -2,8 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:helpex_app/widgets/appointments_cards.dart';
+import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/notification_card.dart';
 import 'package:intl/intl.dart';
 
@@ -15,6 +14,7 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
+  MyUser currentUser = MyUser.getMyUser();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,6 +32,7 @@ class _NotificationsState extends State<Notifications> {
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("Appointments")
+                    .where("advisorUid", isEqualTo: currentUser.uid)
                     .where("date",
                         isEqualTo:
                             DateFormat("dd-MM-yyy").format(DateTime.now()))
@@ -41,16 +42,33 @@ class _NotificationsState extends State<Notifications> {
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
-                  // if (snapshot.hasError) {
-                  //   return Center(
-                  //     child: Text(
-                  //       "Something went wrong",
-                  //       style: const TextStyle(fontSize: 20),
-                  //     ),
-                  //   );
-                  // }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        "Something went wrong",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    );
+                  }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return SizedBox(child: CircularProgressIndicator());
+                  }
+
+                  if (snapshot.data!.docs.isEmpty) {
+                    return Column(
+                      children: [
+                        SizedBox(height: 20),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "No New Notifications",
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
                   }
                   final data = snapshot.requireData;
 

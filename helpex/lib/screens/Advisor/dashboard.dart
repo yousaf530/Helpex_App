@@ -202,6 +202,8 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                               StreamBuilder<QuerySnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection("Appointments")
+                                    .where("advisorUid",
+                                        isEqualTo: currentUser.uid)
                                     .where("date",
                                         isEqualTo: DateFormat("dd-MM-yyy")
                                             .format(DateTime.now()))
@@ -219,6 +221,14 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                     return SizedBox(
                                         child: CircularProgressIndicator());
                                   }
+                                  if (snapshot.data!.docs.isEmpty) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SizedBox(
+                                          child: Text("No Appointments today")),
+                                    );
+                                  }
+
                                   final data = snapshot.requireData;
 
                                   return ListView.builder(
@@ -266,6 +276,8 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                 StreamBuilder<QuerySnapshot>(
                                   stream: FirebaseFirestore.instance
                                       .collection("Appointments")
+                                      .where("advisorUid",
+                                          isEqualTo: currentUser.uid)
                                       .where("date",
                                           isGreaterThan: DateFormat("dd-MM-yyy")
                                               .format(DateTime.now()))
@@ -282,6 +294,15 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                         ConnectionState.waiting) {
                                       return SizedBox(
                                           child: CircularProgressIndicator());
+                                    }
+
+                                    if (snapshot.data!.docs.isEmpty) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SizedBox(
+                                            child: Text(
+                                                "No Upcoming Appointments")),
+                                      );
                                     }
                                     final data = snapshot.requireData;
 

@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpex_app/models/user.dart';
 
 import '../../widgets/cards.dart';
 
@@ -15,6 +16,7 @@ class AdvisorCalender extends StatefulWidget {
 
 class _AdvisorCalenderState extends State<AdvisorCalender> {
   late final Stream<QuerySnapshot>? allappointments;
+  MyUser currentUser = MyUser.getMyUser();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class _AdvisorCalenderState extends State<AdvisorCalender> {
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("Appointments")
+                    .where("advisorUid", isEqualTo: currentUser.uid)
                     .orderBy("date", descending: true)
                     .snapshots(),
                 builder: (BuildContext context,
@@ -46,6 +49,24 @@ class _AdvisorCalenderState extends State<AdvisorCalender> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return SizedBox(child: CircularProgressIndicator());
                   }
+
+                  if (snapshot.data!.docs.isEmpty) {
+                    return Column(
+                      children: [
+                        SizedBox(height: 20),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "No Appointments Yet",
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+
                   final data = snapshot.requireData;
 
                   return ListView.builder(
