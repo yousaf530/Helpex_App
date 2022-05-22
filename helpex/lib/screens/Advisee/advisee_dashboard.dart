@@ -235,7 +235,7 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                   height: 10,
                                 ),
                                 RatingBarIndicator(
-                                  rating: 4,
+                                  rating: double.parse(data.docs[index]["rating"].toString()) ,
                                   itemCount: 5,
                                   itemPadding: const EdgeInsets.symmetric(
                                       horizontal: 4.0),

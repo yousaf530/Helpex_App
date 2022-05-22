@@ -26,6 +26,10 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
   bool isData = false;
   String reviewNote = "";
   double reviewRating = 0;
+  double currRating = 0;
+  double currReviews = 0;
+  double sum = 0;
+  double newRating = 0;
   late final profile;
   late final experience;
   late final socials;
@@ -110,7 +114,22 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
         date: DateFormat("dd-MM-yyyy").format(DateTime.now()) +
             "  " +
             DateFormat("hh:mm a").format(DateTime.now()));
+    addReviewToAdvisor(reviewRating);
     await db.collection("Reviews").add(review.toMap());
+  }
+
+  addReviewToAdvisor(double rating) async {
+    currRating = double.parse(profile["rating"].toString());
+    currReviews = double.parse(profile["totalReviews"].toString());
+    sum = currRating * currReviews;
+    sum += rating;
+    currReviews++;
+    newRating = sum / currReviews;
+
+    await db
+        .collection("Advisor")
+        .doc(widget.advisorUid)
+        .update({"rating": newRating, "totalReviews": currReviews});
   }
 
   getData() async {

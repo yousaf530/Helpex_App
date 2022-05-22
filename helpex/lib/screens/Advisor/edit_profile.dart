@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/user.dart';
+import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:helpex_app/screens/chat/WriteMessageService.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
@@ -290,7 +291,11 @@ class _EditProfileState extends State<EditProfile> {
                             textStyle: const TextStyle(fontSize: 20)),
                         onPressed: () {
                           updateProfile();
-                          Navigator.pushNamed(context, '/edit_pro');
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => AdvisorHome(),
+                            ),
+                          );
                         },
                         child: Text('Save', style: GoogleFonts.mulish()),
                       ),

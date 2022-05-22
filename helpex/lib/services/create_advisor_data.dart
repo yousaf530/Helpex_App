@@ -18,6 +18,8 @@ class AdvisorToFirestore {
   String expertise = "";
   String totalEarnings = "";
   String profilePicUrl = "";
+  double totalReviews;
+  double rating;
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -30,6 +32,8 @@ class AdvisorToFirestore {
       required this.rates,
       required this.ratesTime,
       required this.expertise,
+      this.totalReviews = 0,
+      this.rating = 0,
       this.profilePicUrl =
           "https://firebasestorage.googleapis.com/v0/b/helpexfyp.appspot.com/o/Avatar.jpg?alt=media&token=7e102140-9a95-4702-b917-9b7317ed9d31",
       this.totalEarnings = ""});
@@ -44,7 +48,9 @@ class AdvisorToFirestore {
       'email': currentUser.email,
       'expertise': expertise,
       'totalEarnings': totalEarnings,
-      'profilePicUrl': profilePicUrl
+      'profilePicUrl': profilePicUrl,
+      'rating': rating,
+      'totalReviews': totalReviews
     };
   }
 
