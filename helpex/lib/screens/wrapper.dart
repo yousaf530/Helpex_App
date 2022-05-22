@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/authenticate/authenticate.dart';

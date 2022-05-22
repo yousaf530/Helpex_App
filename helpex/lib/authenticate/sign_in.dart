@@ -3,9 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:helpex_app/authenticate/register.dart';
-import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisee/advisee_home.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
@@ -26,6 +24,7 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   FirebaseFirestore db = FirebaseFirestore.instance;
+  bool isloading = false;
 
   MyUser currentUser = MyUser.getMyUser();
   //text field state
@@ -178,62 +177,81 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Color(0xff2D7567),
-                      //padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                      fixedSize: const Size(325, 56),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40)),
-                      textStyle: const TextStyle(fontSize: 20)),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      dynamic result =
-                          await _auth.signInWithEmailAndPass(email, password);
-                      if (result == null) {
-                        setState(() =>
-                            error = 'Could not sign in, Check Credentials');
-                      } else {
-                        var data;
-                        final res =
-                            await db.collection("Users").doc(result.uid);
-                        var querySnapshots = await res.get();
-                        data = querySnapshots.data();
-
-                        MyUser currentUser = MyUser.getMyUser();
-                        currentUser.dateOfBirth = data["dateOfBirth"];
-                        currentUser.email = data["email"];
-                        currentUser.name = data["name"];
-                        currentUser.uid = data["uid"];
-                        currentUser.isAdvisee = data["isAdvisee"];
-                        currentUser.isAdvisor = data["isAdvisor"];
-
-                        if (isAdvisor && currentUser.isAdvisor!) {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => AdvisorHome(),
-                            ),
-                          );
-                        } else if (isAdvisee && currentUser.isAdvisee!) {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => AdviseeHome(),
-                            ),
-                          );
-                        } else {
+                isloading == true
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: Color(0xff2D7567),
+                        strokeWidth: 2,
+                      ))
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xff2D7567),
+                            //padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                            fixedSize: const Size(325, 56),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40)),
+                            textStyle: const TextStyle(fontSize: 20)),
+                        onPressed: () async {
                           setState(() {
-                            error = "Login as the correct user please";
+                            isloading = true;
                           });
-                          await _auth.signOut();
-                        }
-                      }
-                    }
-                  },
-                  child: Text(
-                    'Log In',
-                    style: GoogleFonts.mulish(),
-                  ),
-                ),
+
+                          if (_formKey.currentState!.validate()) {
+                            dynamic result = await _auth.signInWithEmailAndPass(
+                                email, password);
+                            if (result == null) {
+                              setState(() => error =
+                                  'Could not sign in, Check Credentials');
+                            } else {
+                              var data;
+                              final res =
+                                  await db.collection("Users").doc(result.uid);
+                              var querySnapshots = await res.get();
+                              data = querySnapshots.data();
+
+                              MyUser currentUser = MyUser.getMyUser();
+                              currentUser.dateOfBirth = data["dateOfBirth"];
+                              currentUser.email = data["email"];
+                              currentUser.name = data["name"];
+                              currentUser.uid = data["uid"];
+                              currentUser.isAdvisee = data["isAdvisee"];
+                              currentUser.isAdvisor = data["isAdvisor"];
+                              setState(() {
+                                isloading = false;
+                              });
+
+                              if (isAdvisor && currentUser.isAdvisor!) {
+                                setState(() {
+                                  isloading = false;
+                                });
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => AdvisorHome(),
+                                  ),
+                                );
+                              } else if (isAdvisee && currentUser.isAdvisee!) {
+                                setState(() {
+                                  isloading = false;
+                                });
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => AdviseeHome(),
+                                  ),
+                                );
+                              } else {
+                                setState(() {
+                                  error = "Login as the correct user please";
+                                });
+                                await _auth.signOut();
+                              }
+                            }
+                          }
+                        },
+                        child: Text(
+                          'Log In',
+                          style: GoogleFonts.mulish(),
+                        ),
+                      ),
                 SizedBox(
                   height: 10,
                 ),
