@@ -20,6 +20,7 @@ class AdvisorToFirestore {
   String profilePicUrl = "";
   double totalReviews;
   double rating;
+  List<String> expertiesList;
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -36,7 +37,8 @@ class AdvisorToFirestore {
       this.rating = 0,
       this.profilePicUrl =
           "https://firebasestorage.googleapis.com/v0/b/helpexfyp.appspot.com/o/Avatar.jpg?alt=media&token=7e102140-9a95-4702-b917-9b7317ed9d31",
-      this.totalEarnings = 0});
+      this.totalEarnings = 0,
+      required this.expertiesList});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -51,6 +53,7 @@ class AdvisorToFirestore {
       'profilePicUrl': profilePicUrl,
       'rating': rating,
       'totalReviews': totalReviews,
+      'expertiesList': expertiesList
     };
   }
 

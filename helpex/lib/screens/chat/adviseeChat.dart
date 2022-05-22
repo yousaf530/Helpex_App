@@ -12,7 +12,7 @@ class AdviseeChatHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chating... "),
+        title: Text("Chatting... "),
         backgroundColor: Color(0xff2D7567),
       ),
       body: AdviseeChat(otherUserID: otherUserID),

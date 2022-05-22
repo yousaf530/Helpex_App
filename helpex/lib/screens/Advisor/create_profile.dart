@@ -1017,7 +1017,8 @@ class _CreateProfileState extends State<CreateProfile> {
                                           ratesTime: ratesTime,
                                           userExperience: userExperience,
                                           expertise: experties,
-                                          profilePicUrl: imageUrl);
+                                          profilePicUrl: imageUrl,
+                                          expertiesList: experties.toLowerCase().replaceAll(',', '').split(' '));
                                   toFirestore.newAdvisorDataToFirebase();
 
                                   Navigator.of(context).push(MaterialPageRoute(

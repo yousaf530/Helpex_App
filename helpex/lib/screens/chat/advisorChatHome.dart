@@ -55,7 +55,7 @@ class _AdvisorChatHomeState extends State<AdvisorChatHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Chating... "),
+          title: Text("Chatting... "),
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),

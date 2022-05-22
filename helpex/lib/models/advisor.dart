@@ -16,6 +16,7 @@ class Advisor {
   String? uid = "";
   double totalEarnings;
   String profilePic = "";
+  List<String>? expertiesList;
 
   Advisor({
     this.name,
