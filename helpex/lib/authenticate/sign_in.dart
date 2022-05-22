@@ -71,6 +71,7 @@ class _SignInState extends State<SignIn> {
                             shadowColor: Colors.grey[100],
                             borderRadius: BorderRadius.circular(40),
                             child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
                               validator: (val) =>
                                   !(EmailValidator.validate(val!))
                                       ? 'Not a valid email.'
@@ -101,6 +102,7 @@ class _SignInState extends State<SignIn> {
                             shadowColor: Colors.grey[100],
                             borderRadius: BorderRadius.circular(40),
                             child: TextFormField(
+                              keyboardType: TextInputType.visiblePassword,
                               obscureText: !_passwordVisible,
                               validator: ((val) => val!.length < 6
                                   ? 'Min password length is 6'

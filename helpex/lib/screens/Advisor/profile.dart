@@ -25,6 +25,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
 
   @override
   void initState() {
+    super.initState();
     getData();
   }
 
@@ -123,7 +124,6 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                       ),
                       Text(
                         profile["name"],
-                        //"${currentUser.name!.capitalize()}",
                         style: GoogleFonts.mulish(
                           textStyle: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
@@ -715,8 +715,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                   Text(
                                     'Review',
                                     style: GoogleFonts.mulish(
-                                      textStyle:
-                                          const TextStyle(fontSize: 16),
+                                      textStyle: const TextStyle(fontSize: 16),
                                     ),
                                   ),
                                   RatingBar.builder(
