@@ -187,7 +187,8 @@ class _EditProfileState extends State<EditProfile> {
       "expertise": expertiseController.text,
       "profilePicUrl": imageUrl,
       "rates": ratesCostController.text,
-      "ratesTime": ratesTimeController.text
+      "ratesTime": ratesTimeController.text,
+      "expertiesList": expertiseController.text.toLowerCase().replaceAll(',', '').split(' ')
     });
 
     String experienceId = "";
