@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/widgets/cards.dart';
@@ -14,10 +15,52 @@ class AdvisorDashboard extends StatefulWidget {
 }
 
 class _AdvisorDashboardState extends State<AdvisorDashboard> {
+  bool isData = false;
+  int totalAppointments = 0;
+  double totalEarnings = 0;
+
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  readAppointments() async {
+    try {
+      var data;
+      final result = db
+          .collection("Appointments")
+          .where("advisorUid", isEqualTo: currentUser.uid);
+      var querySnapshots = await result.get();
+      for (var snapshot in querySnapshots.docs) {
+        totalAppointments++;
+        data = snapshot.data();
+        totalEarnings += data!["cost"];
+      }
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+
+  readAdvisor() async {
+    try {
+      final result = await db.collection("Advisor").doc(currentUser.uid).get();
+      var data = result.data();
+      totalEarnings = data!["totalEarnings"];
+      return data;
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+
+  getData() async {
+    await readAppointments();
+    //await readAdvisor();
+    setState(() {
+      isData = true;
+    });
   }
 
   final MyUser currentUser = MyUser.getMyUser();
@@ -32,15 +75,6 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
               const SizedBox(
                 height: 10,
               ),
-              // Text(
-              //   "Dashboard",
-              //   style: GoogleFonts.mulish(
-              //     textStyle: const TextStyle(
-              //         color: Color(0xff2D7567),
-              //         fontSize: 24,
-              //         fontWeight: FontWeight.bold),
-              //   ),
-              // ),
               const SizedBox(
                 height: 10,
               ),
@@ -76,7 +110,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    '20',
+                                    "$totalAppointments",
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(
                                           color: Colors.black,
@@ -119,7 +153,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    '20,000',
+                                    "$totalEarnings",
                                     style: GoogleFonts.mulish(
                                       textStyle: const TextStyle(
                                           color: Colors.black,
@@ -227,7 +261,6 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
               const SizedBox(
                 height: 10,
               ),
-              
             ],
           ),
         ),

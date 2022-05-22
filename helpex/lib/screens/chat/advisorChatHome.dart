@@ -29,10 +29,23 @@ class _AdvisorChatHomeState extends State<AdvisorChatHome> {
   Apointments createAppointment = Apointments();
 
   void addAppointment() async {
-    final res = await db.collection("Users").doc(widget.otherUserID);
-    var querySnapshots = await res.get();
-    var data = querySnapshots.data();
-    createAppointment.adviseeName = data!["name"];
+    final res1 = await db.collection("Users").doc(widget.otherUserID);
+    var querySnapshots = await res1.get();
+
+    final res2 = await db.collection("Advisor").doc(currentUser.uid);
+    var querySnapshot = await res2.get();
+
+    var data1 = querySnapshots.data();
+    var data2 = querySnapshot.data();
+
+    double earnings = data2!["totalEarnings"];
+    earnings = earnings + createAppointment.cost;
+
+    await db
+        .collection("Advisor")
+        .doc(currentUser.uid)
+        .update({"totalEarnings": earnings});
+    createAppointment.adviseeName = data1!["name"];
     await db.collection("Appointments").add(createAppointment.toMap());
     WriteMessageService.sendMessageAdvisor(createAppointment.toString(), 1,
         currentUser.uid!, widget.otherUserID, currentUser.name!);
@@ -102,7 +115,8 @@ class _AdvisorChatHomeState extends State<AdvisorChatHome> {
                                                 ),
                                                 onChanged: (value) {
                                                   createAppointment.cost =
-                                                      value;
+                                                      double.tryParse(value)!
+                                                          .toDouble();
                                                 },
                                               ),
                                               TextFormField(

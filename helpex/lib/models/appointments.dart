@@ -6,7 +6,7 @@ class Apointments {
   String adviseeUid;
   String advisorName;
   String advisorUid;
-  String cost;
+  double cost;
   String date;
   String meetingSlot;
   String meetingLink;
@@ -17,7 +17,7 @@ class Apointments {
     this.adviseeUid = "",
     this.advisorName = "",
     this.advisorUid = "",
-    this.cost = "",
+    this.cost = 0,
     this.date = "",
     this.meetingSlot = "",
     this.meetingLink = "",
@@ -25,29 +25,7 @@ class Apointments {
     this.isDone = false,
   });
 
-  Apointments copyWith({
-    String? adviseeName,
-    String? adviseeUid,
-    String? advisorName,
-    String? advisorUid,
-    String? cost,
-    String? date,
-    String? meetingSlot,
-    double? meetingTimeInMins,
-    bool? isDone,
-  }) {
-    return Apointments(
-      adviseeName: adviseeName ?? this.adviseeName,
-      adviseeUid: adviseeUid ?? this.adviseeUid,
-      advisorName: advisorName ?? this.advisorName,
-      advisorUid: advisorUid ?? this.advisorUid,
-      cost: cost ?? this.cost,
-      date: date ?? this.date,
-      meetingSlot: meetingSlot ?? this.meetingSlot,
-      meetingTimeInMins: meetingTimeInMins ?? this.meetingTimeInMins,
-      isDone: isDone ?? this.isDone,
-    );
-  }
+  
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -70,7 +48,7 @@ class Apointments {
       adviseeUid: map['adviseeUid'] as String,
       advisorName: map['advisorName'] as String,
       advisorUid: map['advisorUid'] as String,
-      cost: map['cost'] as String,
+      cost: map['cost'] as double,
       date: map['date'] as String,
       meetingSlot: map['meetingSlot'] as String,
       meetingTimeInMins: map['meetingTimeInMins'] as double,
