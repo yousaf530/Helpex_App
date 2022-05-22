@@ -38,7 +38,7 @@ class _AdvisorChatHomeState extends State<AdvisorChatHome> {
     var data1 = querySnapshots.data();
     var data2 = querySnapshot.data();
 
-    double earnings = data2!["totalEarnings"];
+    double earnings = data2!["totalEarnings"].toDouble();
     earnings = earnings + createAppointment.cost;
 
     await db
