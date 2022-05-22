@@ -3,8 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:helpex_app/models/user.dart';
+import 'package:helpex_app/widgets/appointments_cards.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class AdvisorDashboard extends StatefulWidget {
@@ -15,6 +17,7 @@ class AdvisorDashboard extends StatefulWidget {
 }
 
 class _AdvisorDashboardState extends State<AdvisorDashboard> {
+  late final Stream<QuerySnapshot>? appointments;
   bool isData = false;
   int totalAppointments = 0;
   double totalEarnings = 0;
@@ -122,7 +125,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                               style: GoogleFonts.mulish(
                                                 textStyle: const TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 18,
+                                                    fontSize: 15,
                                                     fontWeight:
                                                         FontWeight.w700),
                                               ),
@@ -148,7 +151,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                             style: GoogleFonts.mulish(
                                               textStyle: const TextStyle(
                                                   color: Color(0xff2D7567),
-                                                  fontSize: 14,
+                                                  fontSize: 15,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
@@ -182,22 +185,63 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                         ),
                         AppCard(
                           child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Todays Bookings',
-                                  style: GoogleFonts.mulish(
-                                    textStyle: const TextStyle(
-                                        color: Color(0xff2D7567),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Todays Bookings',
+                                style: GoogleFonts.mulish(
+                                  textStyle: const TextStyle(
+                                      color: Color(0xff2D7567),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                const Divider(
-                                  color: Colors.black,
-                                ),
-                                const Text('Hello 2'),
-                              ]),
+                              ),
+                              const Divider(
+                                color: Colors.black,
+                              ),
+                              StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection("Appointments")
+                                    .where("date",
+                                        isEqualTo: DateFormat("dd-MM-yyy")
+                                            .format(DateTime.now()))
+                                    .snapshots(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.hasError) {
+                                    return Text(
+                                      "Something went wrong",
+                                      style: const TextStyle(fontSize: 20),
+                                    );
+                                  }
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return SizedBox(child: Text("ABC"));
+                                  }
+                                  final data = snapshot.requireData;
+
+                                  return ListView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: data.size,
+                                      itemBuilder: (context, index) {
+                                        return AppointmentCard(
+                                            name:
+                                                "${data.docs[index]["adviseeName"]}",
+                                            meeturl:
+                                                "${data.docs[index]["meetingLink"]}",
+                                            meetDate:
+                                                "${data.docs[index]["date"]}",
+                                            meetTime:
+                                                "${data.docs[index]["meetingTimeInMins"]}",
+                                            meetSlot:
+                                                "${data.docs[index]["meetingSlot"]}");
+                                      });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 10,
@@ -211,14 +255,54 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                   style: GoogleFonts.mulish(
                                     textStyle: const TextStyle(
                                         color: Color(0xff2D7567),
-                                        fontSize: 14,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 const Divider(
                                   color: Colors.black,
                                 ),
-                                const Text('Hello 2'),
+                                StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection("Appointments")
+                                      .where("date",
+                                          isGreaterThan: DateFormat("dd-MM-yyy")
+                                              .format(DateTime.now()))
+                                      .snapshots(),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    if (snapshot.hasError) {
+                                      return Text(
+                                        "Something went wrong",
+                                        style: const TextStyle(fontSize: 20),
+                                      );
+                                    }
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return SizedBox(child: Text("ABC"));
+                                    }
+                                    final data = snapshot.requireData;
+
+                                    return ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemCount: data.size,
+                                        itemBuilder: (context, index) {
+                                          return AppointmentCard(
+                                              name:
+                                                  "${data.docs[index]["adviseeName"]}",
+                                              meeturl:
+                                                  "${data.docs[index]["meetingLink"]}",
+                                              meetDate:
+                                                  "${data.docs[index]["date"]}",
+                                              meetTime:
+                                                  "${data.docs[index]["meetingTimeInMins"]}",
+                                              meetSlot:
+                                                  "${data.docs[index]["meetingSlot"]}");
+                                        });
+                                  },
+                                )
                               ]),
                         ),
                         const SizedBox(
@@ -233,7 +317,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                   style: GoogleFonts.mulish(
                                     textStyle: const TextStyle(
                                         color: Color(0xff2D7567),
-                                        fontSize: 14,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),

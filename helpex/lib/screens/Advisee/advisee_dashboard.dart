@@ -172,145 +172,147 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                   ),
                                 ],
                               ),
-                            ));
+                            ),);
                       }
 
                       final data = snapshot.requireData;
                       return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: data.size,
-                          // Text(data.docs[index]['name'])
-                          itemBuilder: (context, index) {
-                            return AppCard(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data.size,
+                        // Text(data.docs[index]['name'])
+                        itemBuilder: (context, index) {
+                          return AppCard(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      "${data.docs[index]["profilePicUrl"]}"),
+                                  backgroundColor: Colors.grey[400],
+                                  radius: 62.5,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  data.docs[index]["name"],
+                                  style: GoogleFonts.mulish(
+                                    textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        "${data.docs[index]["profilePicUrl"]}"),
-                                    backgroundColor: Colors.grey[400],
-                                    radius: 62.5,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    data.docs[index]["name"],
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Icons.money_outlined,
+                                      color: Color(0xff2D7567),
+                                      size: 30.0,
                                     ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      "Rs." + data.docs[index]["rates"],
+                                      style: GoogleFonts.mulish(
+                                        textStyle: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                RatingBarIndicator(
+                                  rating: 4,
+                                  itemCount: 5,
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
+                                  itemBuilder: (context, _) => const Icon(
+                                    Icons.star_rounded,
+                                    color: Colors.amber,
+                                    size: 5,
                                   ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.money_outlined,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Color(0xff2D7567),
+                                      fixedSize: const Size(220, 40),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(40)),
+                                      textStyle: const TextStyle(fontSize: 20)),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AdviseeChatHome(
+                                                  otherUserID: data.docs[index]
+                                                      ["uid"],
+                                                )));
+                                  },
+                                  child: Text('Chat',
+                                      style: GoogleFonts.mulish(
+                                        textStyle: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      )),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.white,
+                                      fixedSize: const Size(220, 40),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(40)),
+                                      side: BorderSide(
+                                        width: 2.0,
                                         color: Color(0xff2D7567),
-                                        size: 30.0,
                                       ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        "Rs." + data.docs[index]["rates"],
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  RatingBarIndicator(
-                                    rating: 4,
-                                    itemCount: 5,
-                                    itemPadding: const EdgeInsets.symmetric(
-                                        horizontal: 4.0),
-                                    itemBuilder: (context, _) => const Icon(
-                                      Icons.star_rounded,
-                                      color: Colors.amber,
-                                      size: 5,
+                                      textStyle: const TextStyle(fontSize: 20)),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ViewAdvisorProfile(
+                                                  advisorUid: data.docs[index]
+                                                      ["uid"],
+                                                )));
+                                  },
+                                  child: Text(
+                                    'View Profile',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: TextStyle(
+                                          color: Color(0xff2D7567),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Color(0xff2D7567),
-                                        fixedSize: const Size(220, 40),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(40)),
-                                        textStyle:
-                                            const TextStyle(fontSize: 20)),
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AdviseeChatHome(
-                                                    otherUserID:
-                                                        data.docs[index]["uid"],
-                                                  )));
-                                    },
-                                    child: Text('Chat',
-                                        style: GoogleFonts.mulish(
-                                          textStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600),
-                                        )),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.white,
-                                        fixedSize: const Size(220, 40),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(40)),
-                                        side: BorderSide(
-                                          width: 2.0,
-                                          color: Color(0xff2D7567),
-                                        ),
-                                        textStyle:
-                                            const TextStyle(fontSize: 20)),
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewAdvisorProfile(
-                                                    advisorUid: data.docs[index]
-                                                        ["uid"],
-                                                  )));
-                                    },
-                                    child: Text('View Profile',
-                                        style: GoogleFonts.mulish(
-                                          textStyle: TextStyle(
-                                              color: Color(0xff2D7567),
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600),
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            );
-                          });
-                    })
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  )
 
             //hello
           ],
