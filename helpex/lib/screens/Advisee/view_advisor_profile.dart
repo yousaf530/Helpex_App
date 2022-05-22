@@ -30,6 +30,7 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
   double currReviews = 0;
   double sum = 0;
   double newRating = 0;
+  bool hasMeeting = false;
   late final profile;
   late final experience;
   late final socials;
@@ -132,11 +133,27 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
         .update({"rating": newRating, "totalReviews": currReviews});
   }
 
+  getAppointments() async {
+    //var data;
+    final result = db
+        .collection("Appointments")
+        .where("adviseeUid", isEqualTo: currentUser.uid)
+        .where("advisorUid", isEqualTo: widget.advisorUid);
+    var querySnapshots = await result.get();
+    for (var snapshot in querySnapshots.docs) {
+      if (snapshot.data().isNotEmpty) {
+        hasMeeting = true;
+        return;
+      }
+    }
+  }
+
   getData() async {
     profile = await readProfile();
     experience = await readExperience();
     socials = await readSocials();
     availability = await readAvailability();
+    await getAppointments();
     setState(() {
       isData = true;
     });
@@ -232,129 +249,136 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                       const SizedBox(
                         height: 15,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Color(0xff2D7567),
-                            fixedSize: const Size(220, 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
-                            textStyle: const TextStyle(fontSize: 20)),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    content: SingleChildScrollView(
-                                      child: Container(
-                                        height: 300,
-                                        child: Center(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Leave a review',
-                                                style: GoogleFonts.mulish(
-                                                  textStyle: const TextStyle(
-                                                      color: Color(0xff2D7567),
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              const Divider(
-                                                color: Colors.black,
-                                              ),
-                                              Container(
-                                                height: 220,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                  color: Colors.grey,
-                                                )),
-                                                child: TextFormField(
-                                                  keyboardType:
-                                                      TextInputType.multiline,
-                                                  minLines:
-                                                      1, //Normal textInputField will be displayed
-                                                  maxLines: 7,
-                                                  decoration: InputDecoration(
-                                                    hintText: "Write a review",
-                                                    hintStyle:
-                                                        GoogleFonts.mulish(
-                                                      textStyle: TextStyle(
-                                                          color: Colors.grey),
-                                                    ),
-                                                    border: InputBorder.none,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              40),
-                                                      borderSide: BorderSide(
-                                                          color: Colors.white,
-                                                          width: 0.0),
-                                                    ),
+                      Visibility(
+                        visible: hasMeeting,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xff2D7567),
+                              fixedSize: const Size(220, 40),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40)),
+                              textStyle: const TextStyle(fontSize: 20)),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      content: SingleChildScrollView(
+                                        child: Container(
+                                          height: 300,
+                                          child: Center(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Leave a review',
+                                                  style: GoogleFonts.mulish(
+                                                    textStyle: const TextStyle(
+                                                        color:
+                                                            Color(0xff2D7567),
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                  onChanged: (value) {
-                                                    reviewNote = value;
+                                                ),
+                                                const Divider(
+                                                  color: Colors.black,
+                                                ),
+                                                Container(
+                                                  height: 220,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                    color: Colors.grey,
+                                                  )),
+                                                  child: TextFormField(
+                                                    keyboardType:
+                                                        TextInputType.multiline,
+                                                    minLines:
+                                                        1, //Normal textInputField will be displayed
+                                                    maxLines: 7,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Write a review",
+                                                      hintStyle:
+                                                          GoogleFonts.mulish(
+                                                        textStyle: TextStyle(
+                                                            color: Colors.grey),
+                                                      ),
+                                                      border: InputBorder.none,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40),
+                                                        borderSide: BorderSide(
+                                                            color: Colors.white,
+                                                            width: 0.0),
+                                                      ),
+                                                    ),
+                                                    onChanged: (value) {
+                                                      reviewNote = value;
+                                                    },
+                                                  ),
+                                                ),
+                                                RatingBar.builder(
+                                                  initialRating: 0,
+                                                  minRating: 1,
+                                                  direction: Axis.horizontal,
+                                                  allowHalfRating: true,
+                                                  itemCount: 5,
+                                                  itemPadding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 4.0),
+                                                  itemBuilder: (context, _) =>
+                                                      const Icon(
+                                                    Icons.star_rounded,
+                                                    color: Colors.amber,
+                                                    size: 5,
+                                                  ),
+                                                  onRatingUpdate: (rating) {
+                                                    reviewRating = rating;
                                                   },
                                                 ),
-                                              ),
-                                              RatingBar.builder(
-                                                initialRating: 0,
-                                                minRating: 1,
-                                                direction: Axis.horizontal,
-                                                allowHalfRating: true,
-                                                itemCount: 5,
-                                                itemPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 4.0),
-                                                itemBuilder: (context, _) =>
-                                                    const Icon(
-                                                  Icons.star_rounded,
-                                                  color: Colors.amber,
-                                                  size: 5,
-                                                ),
-                                                onRatingUpdate: (rating) {
-                                                  reviewRating = rating;
-                                                },
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    actions: [
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            primary: Color(0xff2D7567),
-                                            fixedSize: const Size(220, 40),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(40)),
-                                            textStyle:
-                                                const TextStyle(fontSize: 20)),
-                                        onPressed: () {
-                                          addReview(reviewNote, reviewRating);
-                                          Navigator.pop(context, false);
-                                        },
-                                        child: Text('Submit Review',
-                                            style: GoogleFonts.mulish(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600),
-                                            )),
-                                      ),
-                                    ],
-                                  ));
-                        },
-                        child: Text('Leave a Review',
-                            style: GoogleFonts.mulish(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            )),
+                                      actions: [
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Color(0xff2D7567),
+                                              fixedSize: const Size(220, 40),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          40)),
+                                              textStyle: const TextStyle(
+                                                  fontSize: 20)),
+                                          onPressed: () {
+                                            addReview(reviewNote, reviewRating);
+                                            Navigator.pop(context, false);
+                                          },
+                                          child: Text('Submit Review',
+                                              style: GoogleFonts.mulish(
+                                                textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              )),
+                                        ),
+                                      ],
+                                    ));
+                          },
+                          child: Text('Leave a Review',
+                              style: GoogleFonts.mulish(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600),
+                              )),
+                        ),
                       ),
                       const SizedBox(
                         height: 15,
