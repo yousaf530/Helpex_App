@@ -106,6 +106,8 @@ class _SignInState extends State<SignIn> {
                                   ? 'Min password length is 6'
                                   : null),
                               onChanged: (val) {
+                                isloading = false;
+
                                 setState(() => password = val);
                               },
                               decoration: InputDecoration(
@@ -192,9 +194,11 @@ class _SignInState extends State<SignIn> {
                                 borderRadius: BorderRadius.circular(40)),
                             textStyle: const TextStyle(fontSize: 20)),
                         onPressed: () async {
-                          setState(() {
-                            isloading = true;
-                          });
+                          setState(
+                            () {
+                              isloading = true;
+                            },
+                          );
 
                           if (_formKey.currentState!.validate()) {
                             dynamic result = await _auth.signInWithEmailAndPass(
@@ -202,6 +206,7 @@ class _SignInState extends State<SignIn> {
                             if (result == null) {
                               setState(() => error =
                                   'Could not sign in, Check Credentials');
+                              isloading = false;
                             } else {
                               var data;
                               final res =
@@ -240,6 +245,7 @@ class _SignInState extends State<SignIn> {
                                 );
                               } else {
                                 setState(() {
+                                  isloading = false;
                                   error = "Login as the correct user please";
                                 });
                                 await _auth.signOut();

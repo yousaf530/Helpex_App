@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
-import 'package:helpex_app/screens/Advisor/advisor_calender.dart';
+import 'package:helpex_app/screens/Advisor/appointments_tab.dart';
 import 'package:helpex_app/screens/Advisor/advisor_chat.dart';
 import 'package:helpex_app/screens/Advisor/dashboard.dart';
 import 'package:helpex_app/screens/Advisor/notification.dart';

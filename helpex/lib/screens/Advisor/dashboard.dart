@@ -216,7 +216,8 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                   }
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return SizedBox(child: Text("ABC"));
+                                    return SizedBox(
+                                        child: CircularProgressIndicator());
                                   }
                                   final data = snapshot.requireData;
 
@@ -279,7 +280,8 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                     }
                                     if (snapshot.connectionState ==
                                         ConnectionState.waiting) {
-                                      return SizedBox(child: Text("ABC"));
+                                      return SizedBox(
+                                          child: CircularProgressIndicator());
                                     }
                                     final data = snapshot.requireData;
 
@@ -349,7 +351,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
                                             margin: const EdgeInsets.all(4.0),
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
-                                                color: Colors.orange,
+                                                color: Color(0xff2D7567),
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         10.0)),

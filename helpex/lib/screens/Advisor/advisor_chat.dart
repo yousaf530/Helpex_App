@@ -150,11 +150,11 @@ class _AdvisorChatScreenState extends State<AdvisorChatScreen> {
                                 backgroundColor: Color(0xff2D7567),
                                 radius: 25.0,
                                 child: Text(data.docs[index]["name"][0],
-                                    style: TextStyle(fontSize: 30.0)),
+                                    style: TextStyle(fontSize: 24.0)),
                               ),
                               title: Text(
                                 data.docs[index]['name'],
-                                style: TextStyle(fontSize: 24),
+                                style: TextStyle(fontSize: 18),
                               ),
                               // subtitle: Text(
                               //   data.docs[index]['email'],
