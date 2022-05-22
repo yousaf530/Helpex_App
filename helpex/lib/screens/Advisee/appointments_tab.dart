@@ -7,14 +7,14 @@ import 'package:helpex_app/models/user.dart';
 
 import '../../widgets/cards.dart';
 
-class AdvisorCalender extends StatefulWidget {
-  const AdvisorCalender({Key? key}) : super(key: key);
+class AdviseeAppointments extends StatefulWidget {
+  const AdviseeAppointments({Key? key}) : super(key: key);
 
   @override
-  State<AdvisorCalender> createState() => _AdvisorCalenderState();
+  State<AdviseeAppointments> createState() => _AdviseeAppointmentsState();
 }
 
-class _AdvisorCalenderState extends State<AdvisorCalender> {
+class _AdviseeAppointmentsState extends State<AdviseeAppointments> {
   late final Stream<QuerySnapshot>? allappointments;
   MyUser currentUser = MyUser.getMyUser();
 
@@ -35,17 +35,17 @@ class _AdvisorCalenderState extends State<AdvisorCalender> {
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("Appointments")
-                    .where("advisorUid", isEqualTo: currentUser.uid)
+                    .where("adviseeUid", isEqualTo: currentUser.uid)
                     .orderBy("date")
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    return Text(
-                      "Something went wrong",
-                      style: const TextStyle(fontSize: 20),
-                    );
-                  }
+                  // if (snapshot.hasError) {
+                  //   return Text(
+                  //     "Something went wrong",
+                  //     style: const TextStyle(fontSize: 20),
+                  //   );
+                  // }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return SizedBox(child: CircularProgressIndicator());
                   }
@@ -76,7 +76,7 @@ class _AdvisorCalenderState extends State<AdvisorCalender> {
                       itemCount: data.size,
                       itemBuilder: (context, index) {
                         return AllAppointmentsCard(
-                            name: "${data.docs[index]["adviseeName"]}",
+                            name: "${data.docs[index]["advisorName"]}",
                             meeturl: "${data.docs[index]["meetingLink"]}",
                             meetDate: "${data.docs[index]["date"]}",
                             meetTime:
@@ -118,7 +118,7 @@ class AllAppointmentsCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Advisee Name',
+                Text('Advisor Name',
                     textAlign: TextAlign.left,
                     style: GoogleFonts.mulish(
                       textStyle:

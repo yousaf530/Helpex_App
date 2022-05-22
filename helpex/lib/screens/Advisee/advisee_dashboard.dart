@@ -39,7 +39,10 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
 
   static Future<Stream<QuerySnapshot<Object?>>?> readAdvisors() async {
     try {
-      final result = await db.collection("Advisor").snapshots();
+      final result = await db
+          .collection("Advisor")
+          .orderBy("rating", descending: true)
+          .snapshots();
 
       return result;
     } on FirebaseException catch (e) {
@@ -99,80 +102,81 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return SizedBox(
-                            width: 200.0,
-                            height: 100.0,
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Shimmer.fromColors(
-                                      baseColor: Colors.grey,
-                                      highlightColor: Colors.grey,
-                                      enabled: true,
-                                      child: ListView.builder(
-                                        itemBuilder: (_, __) => Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 10.0),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Container(
-                                                width: 48.0,
-                                                height: 48.0,
-                                                color: Colors.white,
+                          width: 200.0,
+                          height: 100.0,
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 16.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Shimmer.fromColors(
+                                    baseColor: Colors.grey,
+                                    highlightColor: Colors.grey,
+                                    enabled: true,
+                                    child: ListView.builder(
+                                      itemBuilder: (_, __) => Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 10.0),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              width: 48.0,
+                                              height: 48.0,
+                                              color: Colors.white,
+                                            ),
+                                            const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 8.0),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Container(
+                                                    width: double.infinity,
+                                                    height: 8.0,
+                                                    color: Colors.white,
+                                                  ),
+                                                  const Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 2.0),
+                                                  ),
+                                                  Container(
+                                                    width: double.infinity,
+                                                    height: 8.0,
+                                                    color: Colors.white,
+                                                  ),
+                                                  const Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 2.0),
+                                                  ),
+                                                  Container(
+                                                    width: 40.0,
+                                                    height: 8.0,
+                                                    color: Colors.white,
+                                                  ),
+                                                ],
                                               ),
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0),
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      width: double.infinity,
-                                                      height: 8.0,
-                                                      color: Colors.white,
-                                                    ),
-                                                    const Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 2.0),
-                                                    ),
-                                                    Container(
-                                                      width: double.infinity,
-                                                      height: 8.0,
-                                                      color: Colors.white,
-                                                    ),
-                                                    const Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 2.0),
-                                                    ),
-                                                    Container(
-                                                      width: 40.0,
-                                                      height: 8.0,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                            )
+                                          ],
                                         ),
-                                        itemCount: 6,
                                       ),
+                                      itemCount: 6,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),);
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       }
 
                       final data = snapshot.requireData;
@@ -235,7 +239,8 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                   height: 10,
                                 ),
                                 RatingBarIndicator(
-                                  rating: double.parse(data.docs[index]["rating"].toString()) ,
+                                  rating: double.parse(
+                                      data.docs[index]["rating"].toString()),
                                   itemCount: 5,
                                   itemPadding: const EdgeInsets.symmetric(
                                       horizontal: 4.0),

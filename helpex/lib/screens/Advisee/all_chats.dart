@@ -151,7 +151,7 @@ class _AllChatsState extends State<AllChats> {
                                 ),
                                 title: Text(
                                   data.docs[index]['name'],
-                                  style: TextStyle(fontSize: 24),
+                                  style: TextStyle(fontSize: 18),
                                 ),
                                 // subtitle: Text(
                                 //   data.docs[index]['email'],

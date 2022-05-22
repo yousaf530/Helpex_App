@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/screens/Advisee/advisee_dashboard.dart';
 import 'package:helpex_app/screens/Advisee/all_chats.dart';
+import 'package:helpex_app/screens/Advisee/appointments_tab.dart';
+import 'package:helpex_app/screens/Advisee/notification.dart';
 import 'package:helpex_app/services/auth.dart';
 
 class AdviseeHome extends StatefulWidget {
@@ -19,7 +21,9 @@ class _AdviseeHomeState extends State<AdviseeHome> {
 
   final screens = [
     AdviseeDashboard(),
+    AdviseeNotifications(),
     AllChats(),
+    AdviseeAppointments()
   ];
 
   final AuthService _auth = AuthService();
@@ -78,7 +82,17 @@ class _AdviseeHomeState extends State<AdviseeHome> {
               break;
             case 1:
               {
+                _title = 'Notifications';
+              }
+              break;
+            case 2:
+              {
                 _title = 'Chats';
+              }
+              break;
+            case 3:
+              {
+                _title = 'Appointments';
               }
               break;
           }
@@ -91,8 +105,18 @@ class _AdviseeHomeState extends State<AdviseeHome> {
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifications',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.chat),
             label: 'Chats',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month_outlined),
+            label: 'Appointments',
             backgroundColor: Colors.white,
           ),
         ],
