@@ -19,6 +19,8 @@ class AdviseeDashboard extends StatefulWidget {
 }
 
 class _AdviseeDashboardState extends State<AdviseeDashboard> {
+  String name = "";
+
   late final Stream<QuerySnapshot>? advisors;
   static FirebaseFirestore db = FirebaseFirestore.instance;
   bool isData = false;
@@ -81,6 +83,11 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                     hintStyle:
                         GoogleFonts.mulish(textStyle: TextStyle(fontSize: 20)),
                   ),
+                  onChanged: (val) {
+                    setState(() {
+                      name = val;
+                    });
+                  },
                 ),
               ),
             ),
@@ -91,7 +98,12 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
             isData == false
                 ? Center(child: CircularProgressIndicator())
                 : StreamBuilder<QuerySnapshot>(
-                    stream: advisors,
+                    stream: (name != "" && name != null)
+                        ? FirebaseFirestore.instance
+                            .collection("Advisor")
+                            .where("expertiesList", arrayContains: name)
+                            .snapshots()
+                        : advisors,
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError) {
