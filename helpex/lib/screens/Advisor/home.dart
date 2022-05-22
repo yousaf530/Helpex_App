@@ -29,6 +29,7 @@ class _AdvisorHomeState extends State<AdvisorHome> {
 
   @override
   initState() {
+    super.initState();
     _title = 'Dashboard';
   }
 

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisee/advisee_home.dart';
 
 class Interests {
@@ -16,6 +18,18 @@ class AdviseeInterests extends StatefulWidget {
 }
 
 class AdviseeInterestsState extends State<AdviseeInterests> {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  MyUser currentUser = MyUser.getMyUser();
+
+  void addInterests() async {
+    await db
+        .collection("Advisee")
+        .doc(currentUser.uid)
+        .set({"Interests": _filters});
+  }
+
+  List interests = [];
+
   final List<Interests> _cast = <Interests>[
     const Interests('Web Development'),
     const Interests('Python'),
@@ -126,6 +140,7 @@ class AdviseeInterestsState extends State<AdviseeInterests> {
                           borderRadius: BorderRadius.circular(40)),
                       textStyle: const TextStyle(fontSize: 20)),
                   onPressed: () {
+                    addInterests();
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => AdviseeHome()));
                   },

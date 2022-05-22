@@ -1,4 +1,3 @@
-import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,96 +22,7 @@ class _AdvisorCalenderState extends State<AdvisorCalender> {
               const SizedBox(
                 height: 10,
               ),
-              AppCard(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Advisee Name",
-                          hintStyle: GoogleFonts.mulish(
-                            textStyle: TextStyle(color: Colors.black54),
-                          ),
-                          border: InputBorder.none,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                                color: Colors.grey, width: 0.0),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      DateTimeFormField(
-                        decoration: InputDecoration(
-                          hintText: "Meeting Date",
-                          hintStyle: GoogleFonts.mulish(
-                            textStyle: TextStyle(color: Colors.black54),
-                          ),
-                          border: InputBorder.none,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                                color: Colors.white, width: 0.0),
-                          ),
-                        ),
-                        mode: DateTimeFieldPickerMode.date,
-                        autovalidateMode: AutovalidateMode.always,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      DateTimeFormField(
-                        decoration: InputDecoration(
-                          hintText: "Meeting Time",
-                          hintStyle: GoogleFonts.mulish(
-                            textStyle: TextStyle(color: Colors.black54),
-                          ),
-                          border: InputBorder.none,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                                color: Colors.white, width: 0.0),
-                          ),
-                        ),
-                        mode: DateTimeFieldPickerMode.time,
-                        autovalidateMode: AutovalidateMode.always,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Total Time for Meeting",
-                          hintStyle: GoogleFonts.mulish(
-                            textStyle: TextStyle(color: Colors.black54),
-                          ),
-                          border: InputBorder.none,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                                color: Colors.grey, width: 0.0),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: const Color(0xff2D7567),
-                            //padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                            fixedSize: const Size(220, 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
-                            textStyle: const TextStyle(fontSize: 20)),
-                        onPressed: () {
-                        },
-                        child: Text('Create Appointment', style: GoogleFonts.mulish()),
-                      ),
-                    ]),
-              ),
+            
               Text(
                 "Appointments",
                 style: GoogleFonts.mulish(

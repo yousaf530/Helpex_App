@@ -14,14 +14,10 @@ class AdvisorDashboard extends StatefulWidget {
 }
 
 class _AdvisorDashboardState extends State<AdvisorDashboard> {
-  Map<DateTime, List<dynamic>> _events = {};
-  List<dynamic> _selectedEvents = [];
 
   @override
   void initState() {
     super.initState();
-    _events = {};
-    _selectedEvents = [];
   }
 
   final MyUser currentUser = MyUser.getMyUser();
@@ -231,25 +227,7 @@ class _AdvisorDashboardState extends State<AdvisorDashboard> {
               const SizedBox(
                 height: 10,
               ),
-              AppCard(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Monthly Earnings',
-                        style: GoogleFonts.mulish(
-                          textStyle: const TextStyle(
-                              color: Color(0xff2D7567),
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      const Divider(
-                        color: Colors.black,
-                      ),
-                      const Text('Hello 2'),
-                    ]),
-              ),
+              
             ],
           ),
         ),

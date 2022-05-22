@@ -16,7 +16,7 @@ class Advisor {
   List<String>? experties;
   String? ratesTime = "";
   String? uid = "";
-  String? totalEarnings = "";
+  double? totalEarnings;
   String profilePic = "";
 
   Advisor({
@@ -62,7 +62,9 @@ class Advisor {
       ratings: map['ratings']?.toDouble(),
       description: map['description'],
       timeAvailable: Map<String, String>.from(map['timeAvailable']),
-      socials: map['socials'] != null ? SocialMediaLinks.fromMap(map['socials']) : null,
+      socials: map['socials'] != null
+          ? SocialMediaLinks.fromMap(map['socials'])
+          : null,
       experties: List<String>.from(map['experties']),
       ratesTime: map['ratesTime'],
       uid: map['uid'],
@@ -84,61 +86,33 @@ class Advisor {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Advisor &&
-      other.name == name &&
-      other.cost == cost &&
-      other.ratings == ratings &&
-      other.description == description &&
-      mapEquals(other.timeAvailable, timeAvailable) &&
-      other.socials == socials &&
-      listEquals(other.experties, experties) &&
-      other.ratesTime == ratesTime &&
-      other.uid == uid &&
-      other.totalEarnings == totalEarnings &&
-      other.profilePic == profilePic;
+        other.name == name &&
+        other.cost == cost &&
+        other.ratings == ratings &&
+        other.description == description &&
+        mapEquals(other.timeAvailable, timeAvailable) &&
+        other.socials == socials &&
+        listEquals(other.experties, experties) &&
+        other.ratesTime == ratesTime &&
+        other.uid == uid &&
+        other.totalEarnings == totalEarnings &&
+        other.profilePic == profilePic;
   }
 
   @override
   int get hashCode {
     return name.hashCode ^
-      cost.hashCode ^
-      ratings.hashCode ^
-      description.hashCode ^
-      timeAvailable.hashCode ^
-      socials.hashCode ^
-      experties.hashCode ^
-      ratesTime.hashCode ^
-      uid.hashCode ^
-      totalEarnings.hashCode ^
-      profilePic.hashCode;
-  }
-
-  Advisor copyWith({
-    String? name,
-    String? cost,
-    double? ratings,
-    String? description,
-    Map<String, String>? timeAvailable,
-    SocialMediaLinks? socials,
-    List<String>? experties,
-    String? ratesTime,
-    String? uid,
-    String? totalEarnings,
-    String? profilePic,
-  }) {
-    return Advisor(
-      name: name ?? this.name,
-      cost: cost ?? this.cost,
-      ratings: ratings ?? this.ratings,
-      description: description ?? this.description,
-      timeAvailable: timeAvailable ?? this.timeAvailable,
-      socials: socials ?? this.socials,
-      experties: experties ?? this.experties,
-      ratesTime: ratesTime ?? this.ratesTime,
-      uid: uid ?? this.uid,
-      totalEarnings: totalEarnings ?? this.totalEarnings,
-      profilePic: profilePic ?? this.profilePic,
-    );
+        cost.hashCode ^
+        ratings.hashCode ^
+        description.hashCode ^
+        timeAvailable.hashCode ^
+        socials.hashCode ^
+        experties.hashCode ^
+        ratesTime.hashCode ^
+        uid.hashCode ^
+        totalEarnings.hashCode ^
+        profilePic.hashCode;
   }
 }

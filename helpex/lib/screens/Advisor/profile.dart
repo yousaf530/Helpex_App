@@ -31,7 +31,6 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
   readProfile() async {
     try {
       final result = await db.collection("Advisor").doc(currentUser.uid).get();
-      print(currentUser.uid);
       var data = result.data();
 
       return data;
@@ -45,7 +44,6 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
       var data;
       final result =
           db.collection("Experience").where("uid", isEqualTo: currentUser.uid);
-      print(currentUser.uid);
       var querySnapshots = await result.get();
       for (var snapshot in querySnapshots.docs) {
         data = snapshot.data();
@@ -62,7 +60,6 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
       var data;
       final result =
           db.collection("Social").where("uid", isEqualTo: currentUser.uid);
-      print(currentUser.uid);
       var querySnapshots = await result.get();
       for (var snapshot in querySnapshots.docs) {
         data = snapshot.data();
@@ -80,7 +77,6 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
       final result = db
           .collection("Availability")
           .where("uid", isEqualTo: currentUser.uid);
-      print(currentUser.uid);
       var querySnapshots = await result.get();
       for (var snapshot in querySnapshots.docs) {
         data = snapshot.data();
@@ -705,44 +701,42 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                               const Divider(
                                 color: Colors.black,
                               ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Advisee Name',
-                                      style: GoogleFonts.mulish(
-                                        textStyle: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Advisee Name',
+                                    style: GoogleFonts.mulish(
+                                      textStyle: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    Text(
-                                      'Review',
-                                      style: GoogleFonts.mulish(
-                                        textStyle:
-                                            const TextStyle(fontSize: 16),
-                                      ),
+                                  ),
+                                  Text(
+                                    'Review',
+                                    style: GoogleFonts.mulish(
+                                      textStyle:
+                                          const TextStyle(fontSize: 16),
                                     ),
-                                    RatingBar.builder(
-                                      initialRating: 0,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 4.0),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star_rounded,
-                                        color: Colors.amber,
-                                        size: 1,
-                                      ),
-                                      onRatingUpdate: (rating) {
-                                        //reviewRating = rating;
-                                      },
+                                  ),
+                                  RatingBar.builder(
+                                    initialRating: 0,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star_rounded,
+                                      color: Colors.amber,
+                                      size: 1,
                                     ),
-                                  ],
-                                ),
+                                    onRatingUpdate: (rating) {
+                                      //reviewRating = rating;
+                                    },
+                                  ),
+                                ],
                               ),
                             ]),
                       ),

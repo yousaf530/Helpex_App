@@ -1,16 +1,13 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:images_picker/images_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
-import '../../models/user.dart';
+import 'package:helpex_app/models/user.dart';
 import 'WriteMessageService.dart';
 import 'fullPhoto.dart';
 
@@ -388,7 +385,7 @@ class _AlertChatState extends State<AdvisorChat> {
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData) {
           listMessage = snapshot.data!.docs;
-          if (listMessage.length > 0) {
+          if (listMessage.isNotEmpty) {
             return ListView.builder(
               padding: EdgeInsets.all(10),
               itemBuilder: (context, index) =>

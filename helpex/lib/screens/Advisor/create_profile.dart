@@ -46,7 +46,6 @@ class _CreateProfileState extends State<CreateProfile> {
 
       if (res != null) {
         uploadFile(res[0].path);
-        print(res[0].path);
 
         setState(() {
           isLoading = true;

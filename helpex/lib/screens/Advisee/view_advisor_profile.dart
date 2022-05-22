@@ -39,7 +39,6 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
     try {
       final result =
           await db.collection("Advisor").doc(widget.advisorUid).get();
-      print(widget.advisorUid);
       var data = result.data();
 
       return data;
@@ -54,7 +53,6 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
       final result = db
           .collection("Experience")
           .where("uid", isEqualTo: widget.advisorUid);
-      print(widget.advisorUid);
       var querySnapshots = await result.get();
       for (var snapshot in querySnapshots.docs) {
         data = snapshot.data();
@@ -71,7 +69,6 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
       var data;
       final result =
           db.collection("Social").where("uid", isEqualTo: widget.advisorUid);
-      print(widget.advisorUid);
       var querySnapshots = await result.get();
       for (var snapshot in querySnapshots.docs) {
         data = snapshot.data();
@@ -89,7 +86,6 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
       final result = db
           .collection("Availability")
           .where("uid", isEqualTo: widget.advisorUid);
-      print(widget.advisorUid);
       var querySnapshots = await result.get();
       for (var snapshot in querySnapshots.docs) {
         data = snapshot.data();
@@ -227,7 +223,6 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                               builder: (context) => AlertDialog(
                                     content: SingleChildScrollView(
                                       child: Container(
-                                        //width: double.infinity,
                                         height: 300,
                                         child: Center(
                                           child: Column(
