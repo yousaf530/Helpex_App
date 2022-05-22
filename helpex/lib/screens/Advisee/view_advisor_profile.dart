@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/reviews.dart';
 import 'package:helpex_app/models/user.dart';
+import 'package:helpex_app/screens/Advisor/profile.dart';
 import 'package:helpex_app/screens/chat/adviseeChat.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -407,77 +410,101 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Job Title",
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          "Job Title",
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        "Company Name",
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          "Company",
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        "Start Date",
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          "Start Date",
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        "End Date",
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          "End Date",
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(
-                                    width: 20,
+                                    width: 30,
                                   ),
                                   //add values here
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        experience["jobTitle"],
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                            fontSize: 18,
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          experience["jobTitle"],
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                              fontSize: 14,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      Text(
-                                        experience["companyName"],
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                            fontSize: 18,
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          experience["companyName"],
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                              fontSize: 14,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      Text(
-                                        experience["startDate"],
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                            fontSize: 18,
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          experience["startDate"],
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                              fontSize: 14,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      Text(
-                                        experience["endDate"],
-                                        style: GoogleFonts.mulish(
-                                          textStyle: const TextStyle(
-                                            fontSize: 18,
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          experience["endDate"],
+                                          style: GoogleFonts.mulish(
+                                            textStyle: const TextStyle(
+                                              fontSize: 14,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -503,39 +530,47 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                               const Divider(
                                 color: Colors.black,
                               ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.facebook_outlined,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    socials["facebook"],
-                                    //'${advisor.socials}',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.link_outlined,
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      socials["facebook"],
+                                      //'${advisor.socials}',
+                                      style: GoogleFonts.mulish(
+                                        textStyle:
+                                            const TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.facebook_outlined,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    socials["linkedin"],
-                                    //'${advisor.socials}',
-                                    style: GoogleFonts.mulish(
-                                      textStyle: const TextStyle(fontSize: 16),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.link_outlined,
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      socials["linkedin"],
+                                      //'${advisor.socials}',
+                                      style: GoogleFonts.mulish(
+                                        textStyle:
+                                            const TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ]),
                       ),
@@ -863,41 +898,73 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              const Divider(
-                                color: Colors.black,
-                              ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Advisee Name',
-                                      style: GoogleFonts.mulish(
-                                        textStyle: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Text(
-                                      'Review',
-                                      style: GoogleFonts.mulish(
-                                        textStyle:
-                                            const TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                    RatingBarIndicator(
-                                      rating: 4,
-                                      itemCount: 5,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 4.0),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star_rounded,
-                                        color: Colors.amber,
-                                        size: 5,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                              StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection("Reviews")
+                                    .where("advisorUid",
+                                        isEqualTo: widget.advisorUid)
+                                    .orderBy("date", descending: true)
+                                    .snapshots(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.hasError) {
+                                    return Text(
+                                      "Something went wrong",
+                                      style: const TextStyle(fontSize: 20),
+                                    );
+                                  }
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return SizedBox(
+                                        child: CircularProgressIndicator());
+                                  }
+
+                                  if (snapshot.data!.docs.isEmpty) {
+                                    return Column(
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      children: [
+                                        Column(
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            const Divider(
+                                              color: Colors.black,
+                                            ),
+                                            Center(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  "No Reviews",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  }
+
+                                  final data = snapshot.requireData;
+
+                                  return ListView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: data.size,
+                                      itemBuilder: (context, index) {
+                                        return ReviewsCard(
+                                          comment:
+                                              "${data.docs[index]["comment"]}",
+                                          name:
+                                              "${data.docs[index]["reviewerName"]}",
+                                          rating: data.docs[index]["rating"],
+                                          reviewDate:
+                                              "${data.docs[index]["date"]}",
+                                        );
+                                      });
+                                },
                               ),
                             ]),
                       ),

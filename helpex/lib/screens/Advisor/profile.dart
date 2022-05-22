@@ -356,7 +356,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Socials",
+                                  'Social Media',
                                   style: GoogleFonts.mulish(
                                     textStyle: const TextStyle(
                                         color: Color(0xff2D7567),
@@ -367,41 +367,47 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                 const Divider(
                                   color: Colors.black,
                                 ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.facebook_outlined,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      socials["facebook"],
-                                      //'${advisor.socials}',
-                                      style: GoogleFonts.mulish(
-                                        textStyle:
-                                            const TextStyle(fontSize: 16),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.link_outlined,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        socials["facebook"],
+                                        //'${advisor.socials}',
+                                        style: GoogleFonts.mulish(
+                                          textStyle:
+                                              const TextStyle(fontSize: 16),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.facebook_outlined,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      socials["linkedin"],
-                                      //'${advisor.socials}',
-                                      style: GoogleFonts.mulish(
-                                        textStyle:
-                                            const TextStyle(fontSize: 16),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.link_outlined,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        socials["linkedin"],
+                                        //'${advisor.socials}',
+                                        style: GoogleFonts.mulish(
+                                          textStyle:
+                                              const TextStyle(fontSize: 16),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ]),
                         ),
@@ -754,16 +760,24 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                       return Column(
                                         // ignore: prefer_const_literals_to_create_immutables
                                         children: [
-                                          SizedBox(height: 20),
-                                          Center(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                "No Reviews",
-                                                style: TextStyle(fontSize: 24),
+                                          Column(
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              const Divider(
+                                                color: Colors.black,
                                               ),
-                                            ),
+                                              Center(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    "No Reviews",
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       );
