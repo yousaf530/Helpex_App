@@ -40,12 +40,12 @@ class _AdviseeAppointmentsState extends State<AdviseeAppointments> {
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
-                  // if (snapshot.hasError) {
-                  //   return Text(
-                  //     "Something went wrong",
-                  //     style: const TextStyle(fontSize: 20),
-                  //   );
-                  // }
+                  if (snapshot.hasError) {
+                    return Text(
+                      "Something went wrong",
+                      style: const TextStyle(fontSize: 20),
+                    );
+                  }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return SizedBox(child: CircularProgressIndicator());
                   }
@@ -76,12 +76,15 @@ class _AdviseeAppointmentsState extends State<AdviseeAppointments> {
                       itemCount: data.size,
                       itemBuilder: (context, index) {
                         return AllAppointmentsCard(
-                            name: "${data.docs[index]["advisorName"]}",
-                            meeturl: "${data.docs[index]["meetingLink"]}",
-                            meetDate: "${data.docs[index]["date"]}",
-                            meetTime:
-                                "${data.docs[index]["meetingTimeInMins"]}",
-                            meetSlot: "${data.docs[index]["meetingSlot"]}");
+                          name: "${data.docs[index]["advisorName"]}",
+                          meeturl: "${data.docs[index]["meetingLink"]}",
+                          meetDate: "${data.docs[index]["date"]}",
+                          meetTime: "${data.docs[index]["meetingTimeInMins"]}",
+                          meetSlot: "${data.docs[index]["meetingSlot"]}",
+                          isPaid: data.docs[index]["isPaid"],
+                          advisorUid: "${data.docs[index]["advisorUid"]}",
+                          docId: data.docs[index].id,
+                        );
                       });
                 },
               )
@@ -93,120 +96,274 @@ class _AdviseeAppointmentsState extends State<AdviseeAppointments> {
   }
 }
 
-class AllAppointmentsCard extends StatelessWidget {
-  const AllAppointmentsCard({
-    Key? key,
-    required this.name,
-    required this.meeturl,
-    required this.meetDate,
-    required this.meetTime,
-    required this.meetSlot,
-  }) : super(key: key);
+class AllAppointmentsCard extends StatefulWidget {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  updateAppointments() async {
+    isPaid = true;
+    await db.collection("Appointments").doc(docId).update({"isPaid": isPaid});
+  }
+
+  AllAppointmentsCard(
+      {Key? key,
+      required this.name,
+      required this.meeturl,
+      required this.meetDate,
+      required this.meetTime,
+      required this.meetSlot,
+      required this.advisorUid,
+      required this.docId,
+      required this.isPaid})
+      : super(key: key);
 
   final String name;
   final String meeturl;
   final String meetDate;
   final String meetTime;
   final String meetSlot;
+  bool isPaid;
+  final String advisorUid;
+  final String docId;
+  @override
+  State<AllAppointmentsCard> createState() => _AllAppointmentsCardState();
+}
+
+class _AllAppointmentsCardState extends State<AllAppointmentsCard> {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      child: Row(
+      child: Column(
         children: [
-          SizedBox(
-            width: 120,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Advisor Name',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                    )),
-                SizedBox(
-                  height: 10,
+          Row(
+            children: [
+              SizedBox(
+                width: 120,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Advisor Name',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text('Meeting Date',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text('Meeting Time',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text('Duration',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Link',
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.mulish(
+                        textStyle: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ],
                 ),
-                Text('Meeting Date',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                    )),
-                SizedBox(
-                  height: 10,
+              ),
+              SizedBox(
+                width: 180,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.name,
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(fontSize: 14),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(widget.meetDate,
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(fontSize: 14),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(widget.meetSlot,
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(fontSize: 14),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(widget.meetTime + " minutes",
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.mulish(
+                          textStyle: TextStyle(fontSize: 14),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      widget.meeturl,
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.mulish(
+                        color: Colors.blue,
+                        textStyle: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  ],
                 ),
-                Text('Meeting Time',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Duration',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Link',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                    )),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
           ),
           SizedBox(
-            width: 180,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle: TextStyle(fontSize: 14),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(meetDate,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle: TextStyle(fontSize: 14),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(meetSlot,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle: TextStyle(fontSize: 14),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(meetTime + " minutes",
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle: TextStyle(fontSize: 14),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(meeturl,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      color: Colors.blue,
-                      textStyle: TextStyle(fontSize: 14),
-                    )),
-              ],
+            height: 10,
+          ),
+          Visibility(
+            visible: !widget.isPaid,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Color(0xff2D7567),
+                  fixedSize: const Size(140, 20),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40)),
+                  textStyle: const TextStyle(fontSize: 12)),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Select Payment Method',
+                            style: GoogleFonts.mulish(
+                                color: Color(0xff2D7567),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                fixedSize: const Size(310, 56),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                textStyle: const TextStyle(fontSize: 20)),
+                            onPressed: () {},
+                            child: Text(
+                              'Credit/Debit Card',
+                              style: GoogleFonts.mulish(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                fixedSize: const Size(300, 46),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                textStyle: const TextStyle(fontSize: 20)),
+                            onPressed: () {},
+                            child: Text(
+                              'Easypaisa',
+                              style: GoogleFonts.mulish(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                fixedSize: const Size(300, 46),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                textStyle: const TextStyle(fontSize: 20)),
+                            onPressed: () {},
+                            child: Text(
+                              'Jazzcash',
+                              style: GoogleFonts.mulish(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xff2D7567),
+                                fixedSize: const Size(300, 56),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                textStyle: const TextStyle(fontSize: 20)),
+                            onPressed: () {
+                              widget.updateAppointments();
+                                  Navigator.pop(context, false);
+                            },
+                            child: Text(
+                              'Pay',
+                              style: GoogleFonts.mulish(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Text('Pay Now',
+                  style: GoogleFonts.mulish(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  )),
             ),
           ),
         ],

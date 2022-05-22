@@ -12,20 +12,19 @@ class Apointments {
   String meetingLink;
   double meetingTimeInMins = 0;
   bool isDone = false;
-  Apointments({
-    this.adviseeName = "",
-    this.adviseeUid = "",
-    this.advisorName = "",
-    this.advisorUid = "",
-    this.cost = 0,
-    this.date = "",
-    this.meetingSlot = "",
-    this.meetingLink = "",
-    this.meetingTimeInMins = 0,
-    this.isDone = false,
-  });
-
-  
+  bool isPaid = false;
+  Apointments(
+      {this.adviseeName = "",
+      this.adviseeUid = "",
+      this.advisorName = "",
+      this.advisorUid = "",
+      this.cost = 0,
+      this.date = "",
+      this.meetingSlot = "",
+      this.meetingLink = "",
+      this.meetingTimeInMins = 0,
+      this.isDone = false,
+      this.isPaid = false});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -39,6 +38,7 @@ class Apointments {
       'meetingLink': meetingLink,
       'meetingTimeInMins': meetingTimeInMins,
       'isDone': isDone,
+      'isPaid': isPaid
     };
   }
 
