@@ -75,13 +75,20 @@ class _AdvisorCalenderState extends State<AdvisorCalender> {
                       shrinkWrap: true,
                       itemCount: data.size,
                       itemBuilder: (context, index) {
+                        String paidMsg;
+                        if (data.docs[index]["isPaid"]) {
+                          paidMsg = "Done";
+                        } else {
+                          paidMsg = "Pending";
+                        }
                         return AllAppointmentsCard(
-                            name: "${data.docs[index]["adviseeName"]}",
-                            meeturl: "${data.docs[index]["meetingLink"]}",
-                            meetDate: "${data.docs[index]["date"]}",
-                            meetTime:
-                                "${data.docs[index]["meetingTimeInMins"]}",
-                            meetSlot: "${data.docs[index]["meetingSlot"]}");
+                          name: "${data.docs[index]["adviseeName"]}",
+                          meeturl: "${data.docs[index]["meetingLink"]}",
+                          meetDate: "${data.docs[index]["date"]}",
+                          meetTime: "${data.docs[index]["meetingTimeInMins"]}",
+                          meetSlot: "${data.docs[index]["meetingSlot"]}",
+                          paidMsg: paidMsg,
+                        );
                       });
                 },
               )
@@ -101,6 +108,7 @@ class AllAppointmentsCard extends StatelessWidget {
     required this.meetDate,
     required this.meetTime,
     required this.meetSlot,
+    required this.paidMsg,
   }) : super(key: key);
 
   final String name;
@@ -108,6 +116,8 @@ class AllAppointmentsCard extends StatelessWidget {
   final String meetDate;
   final String meetTime;
   final String meetSlot;
+  final String paidMsg;
+
   @override
   Widget build(BuildContext context) {
     return AppCard(
@@ -154,12 +164,25 @@ class AllAppointmentsCard extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Text('Link',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      textStyle:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-                    )),
+                Text(
+                  'Link',
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.mulish(
+                    textStyle:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Paymment',
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.mulish(
+                    textStyle:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  ),
+                ),
               ],
             ),
           ),
@@ -200,12 +223,24 @@ class AllAppointmentsCard extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Text(meeturl,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.mulish(
-                      color: Colors.blue,
-                      textStyle: TextStyle(fontSize: 14),
-                    )),
+                Text(
+                  meeturl,
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.mulish(
+                    color: Colors.blue,
+                    textStyle: TextStyle(fontSize: 14),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  paidMsg,
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.mulish(
+                    textStyle: TextStyle(fontSize: 14),
+                  ),
+                ),
               ],
             ),
           ),
