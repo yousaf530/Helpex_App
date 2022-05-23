@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/user.dart';
+import 'package:helpex_app/screens/Advisor/edit_profile.dart';
 import 'package:helpex_app/widgets/cards.dart';
 
 class AdvisorProfile extends StatefulWidget {
@@ -169,7 +170,11 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
                                   borderRadius: BorderRadius.circular(40)),
                               textStyle: const TextStyle(fontSize: 20)),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/edit_pro');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditProfile(),
+                                ));
                           },
                           child: Text('Edit', style: GoogleFonts.mulish()),
                         ),

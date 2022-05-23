@@ -112,7 +112,6 @@ class _EditProfileState extends State<EditProfile> {
     try {
       final result = await db.collection("Advisor").doc(currentUser.uid).get();
       var data = result.data();
-      print("${data!["description"]}");
       return data;
     } on FirebaseException catch (e) {
       return null;
@@ -188,7 +187,8 @@ class _EditProfileState extends State<EditProfile> {
       "profilePicUrl": imageUrl,
       "rates": ratesCostController.text,
       "ratesTime": ratesTimeController.text,
-      "expertiesList": expertiseController.text.toLowerCase().replaceAll(',', '').split(' ')
+      "expertiesList":
+          expertiseController.text.toLowerCase().replaceAll(',', '').split(' ')
     });
 
     String experienceId = "";
@@ -201,7 +201,7 @@ class _EditProfileState extends State<EditProfile> {
     }
 
     final result2 =
-        db.collection("Experience").where("uid", isEqualTo: currentUser.uid);
+        db.collection("Social").where("uid", isEqualTo: currentUser.uid);
     var querySnapshots2 = await result2.get();
     for (var snapshot in querySnapshots2.docs) {
       socialId = snapshot.id;
@@ -214,7 +214,7 @@ class _EditProfileState extends State<EditProfile> {
 
     await db.collection("Social").doc(socialId).update({
       "facebook": socialFacebookController.text,
-      "linkedin": socialLinkedinController
+      "linkedin": socialLinkedinController.text
     });
 
     //isLoading
@@ -1099,6 +1099,30 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                               ),
                             ]),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.grey,
+                            //padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                            fixedSize: const Size(229, 40),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40)),
+                            textStyle: const TextStyle(fontSize: 20)),
+                        onPressed: () {
+                          updateProfile();
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => AdvisorHome(),
+                            ),
+                          );
+                        },
+                        child: Text('Save', style: GoogleFonts.mulish()),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                     ],
                   ),

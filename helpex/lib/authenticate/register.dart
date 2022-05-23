@@ -269,9 +269,6 @@ class _RegisterState extends State<Register> {
                           ),
                           mode: DateTimeFieldPickerMode.date,
                           autovalidateMode: AutovalidateMode.always,
-                          validator: (e) => (e?.day ?? 0) == 1
-                              ? 'Please not the first day'
-                              : null,
                           onDateSelected: (DateTime value) {
                             //print(value);
 

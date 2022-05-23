@@ -1021,7 +1021,7 @@ class _CreateProfileState extends State<CreateProfile> {
                                           expertiesList: experties.toLowerCase().replaceAll(',', '').split(' '));
                                   toFirestore.newAdvisorDataToFirebase();
 
-                                  Navigator.of(context).push(MaterialPageRoute(
+                                  Navigator.of(context).pushReplacement(MaterialPageRoute(
                                       builder: (context) => AdvisorHome()));
 
                                   print(widget.uid);
