@@ -72,6 +72,7 @@ class _AdvisorProfileState extends State<AdvisorProfile> {
 
       return data;
     } on FirebaseException catch (e) {
+      print(e);
       return null;
     }
   }

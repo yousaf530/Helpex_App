@@ -2,12 +2,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpex_app/authenticate/sign_in.dart';
 import 'package:helpex_app/models/advisor.dart';
 import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/social_media_links.dart';
 import 'package:helpex_app/models/user_experiences.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:helpex_app/screens/chat/WriteMessageService.dart';
+import 'package:helpex_app/services/auth.dart';
 import 'package:helpex_app/services/create_advisor_data.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
@@ -87,6 +89,10 @@ class _CreateProfileState extends State<CreateProfile> {
   String ratesTime = "";
   String? uid = "";
 
+
+  final AuthService _auth = AuthService();
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1005,7 +1011,7 @@ class _CreateProfileState extends State<CreateProfile> {
                           backgroundColor: Color(0xff2D7567),
                           child: IconButton(
                               color: Colors.white,
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   AdvisorToFirestore toFirestore =
                                       AdvisorToFirestore(
@@ -1021,8 +1027,13 @@ class _CreateProfileState extends State<CreateProfile> {
                                           expertiesList: experties.toLowerCase().replaceAll(',', '').split(' '));
                                   toFirestore.newAdvisorDataToFirebase();
 
-                                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                      builder: (context) => AdvisorHome()));
+                                  await _auth.signOut().then(
+                      (value) => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ),
+                      ),
+                    );
 
                                   print(widget.uid);
                                 } else {
