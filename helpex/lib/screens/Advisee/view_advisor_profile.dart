@@ -51,7 +51,7 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
 
       return data;
     } on FirebaseException catch (e) {
-      return null;
+      return e.toString();
     }
   }
 
@@ -68,7 +68,7 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
 
       return data;
     } on FirebaseException catch (e) {
-      return null;
+      return e.toString();
     }
   }
 
@@ -84,7 +84,7 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
 
       return data;
     } on FirebaseException catch (e) {
-      return null;
+      return e.toString();
     }
   }
 
@@ -101,7 +101,7 @@ class _ViewAdvisorProfileState extends State<ViewAdvisorProfile> {
 
       return data;
     } on FirebaseException catch (e) {
-      return null;
+      return e.toString();
     }
   }
 

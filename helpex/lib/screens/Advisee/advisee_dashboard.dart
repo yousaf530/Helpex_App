@@ -26,7 +26,6 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
   bool isData = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     storeAdvisors();
@@ -94,7 +93,6 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
             const SizedBox(
               height: 8,
             ),
-
             isData == false
                 ? Center(child: CircularProgressIndicator())
                 : StreamBuilder<QuerySnapshot>(
@@ -197,7 +195,6 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: data.size,
-                        // Text(data.docs[index]['name'])
                         itemBuilder: (context, index) {
                           return AppCard(
                             child: Column(
@@ -275,12 +272,12 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                       textStyle: const TextStyle(fontSize: 20)),
                                   onPressed: () {
                                     Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                AdviseeChatHome(
-                                                  otherUserID: data.docs[index]
-                                                      ["uid"],
-                                                )));
+                                      MaterialPageRoute(
+                                        builder: (context) => AdviseeChatHome(
+                                          otherUserID: data.docs[index]["uid"],
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: Text('Chat',
                                       style: GoogleFonts.mulish(
@@ -305,13 +302,17 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                                       ),
                                       textStyle: const TextStyle(fontSize: 20)),
                                   onPressed: () {
-                                    Navigator.of(context).push(
+                                    if (data.docs[index]["uid"] != null) {
+                                      Navigator.of(context).push(
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                ViewAdvisorProfile(
-                                                  advisorUid: data.docs[index]
-                                                      ["uid"],
-                                                )));
+                                          builder: (context) =>
+                                              ViewAdvisorProfile(
+                                            advisorUid: data.docs[index]
+                                                ["uid"]!,
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
                                   child: Text(
                                     'View Profile',
@@ -329,9 +330,7 @@ class _AdviseeDashboardState extends State<AdviseeDashboard> {
                         },
                       );
                     },
-                  )
-
-            //hello
+                  ),
           ],
         ),
       ),

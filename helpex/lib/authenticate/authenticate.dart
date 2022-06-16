@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpex_app/authenticate/register.dart';
 import 'package:helpex_app/authenticate/sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({Key? key}) : super(key: key);
@@ -11,6 +12,8 @@ class Authenticate extends StatefulWidget {
 
 class _AuthenticateState extends State<Authenticate> {
   bool showSignIn = true;
+
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   void toggleView() {
     setState(() => showSignIn = !showSignIn);

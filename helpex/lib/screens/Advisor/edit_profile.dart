@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpex_app/models/advisor.dart';
+import 'package:helpex_app/models/availability.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
 import 'package:helpex_app/screens/chat/WriteMessageService.dart';
 import 'package:helpex_app/widgets/cards.dart';
 import 'package:date_field/date_field.dart';
 import 'package:images_picker/images_picker.dart';
+import 'package:intl/intl.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -40,6 +42,7 @@ class _EditProfileState extends State<EditProfile> {
   late TextEditingController socialLinkedinController;
   late TextEditingController ratesCostController;
   late TextEditingController ratesTimeController;
+  var mondayStartInit;
 
   addValuesToController() {
     aboutMeController = TextEditingController(text: profile["description"]);
@@ -54,7 +57,7 @@ class _EditProfileState extends State<EditProfile> {
     ratesTimeController = TextEditingController(text: profile["ratesTime"]);
   }
 
-  //editing controllers
+  //Image
 
   Future getImage() async {
     try {
@@ -172,12 +175,23 @@ class _EditProfileState extends State<EditProfile> {
     experience = await readExperience();
     socials = await readSocials();
     availability = await readAvailability();
+    Availability userAvailability = await Availability.fromMap(availability);
+    parseAvailability(userAvailability);
     imageUrl = profile["profilePicUrl"];
     addValuesToController();
     //DateTime.parse("${availability["mondayStart"]}");
     setState(() {
       isData = true;
     });
+  }
+
+  parseAvailability(Availability availability) {
+    var Date = DateTime.now();
+    var newFormat = DateFormat("yyyy-MM-dd");
+    String format = newFormat.format(Date);
+
+    String toParse = format + " " + availability.mondayStart + ":00";
+    var mondayStartInit = DateTime.parse(toParse);
   }
 
   updateProfile() async {
@@ -511,6 +525,7 @@ class _EditProfileState extends State<EditProfile> {
                       const SizedBox(
                         height: 10,
                       ),
+
                       // AppCard(
                       //   child: Column(
                       //       crossAxisAlignment: CrossAxisAlignment.start,

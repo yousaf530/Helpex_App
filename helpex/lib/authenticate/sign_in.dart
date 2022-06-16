@@ -7,6 +7,7 @@ import 'package:helpex_app/authenticate/register.dart';
 import 'package:helpex_app/models/user.dart';
 import 'package:helpex_app/screens/Advisee/advisee_home.dart';
 import 'package:helpex_app/screens/Advisor/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:email_validator/email_validator.dart';
@@ -26,7 +27,9 @@ class _SignInState extends State<SignIn> {
   FirebaseFirestore db = FirebaseFirestore.instance;
   bool isloading = false;
 
-  MyUser currentUser = MyUser.getMyUser();
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  late Future<MyUser> currentUser;
   //text field state
   String email = '';
   String password = '';
@@ -38,7 +41,13 @@ class _SignInState extends State<SignIn> {
 
   @override
   void initState() {
+    super.initState();
     _passwordVisible = false;
+  }
+
+  Future<void> setUser(MyUser user) async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.setString("user", user.toJson());
   }
 
   @override
@@ -170,11 +179,12 @@ class _SignInState extends State<SignIn> {
                   labels: ['Advisor', 'Advisee'],
                   onToggle: (index) {
                     if (index == 0) {
-                      isAdvisor = true;
-                      isAdvisee = false;
+                      
+                        isAdvisor = true;
+                        isAdvisee = false;
                     } else if (index == 1) {
-                      isAdvisor = false;
-                      isAdvisee = true;
+                        isAdvisor = false;
+                        isAdvisee = true;
                     }
                   },
                 ),
@@ -223,6 +233,7 @@ class _SignInState extends State<SignIn> {
                               currentUser.uid = data["uid"];
                               currentUser.isAdvisee = data["isAdvisee"];
                               currentUser.isAdvisor = data["isAdvisor"];
+                              setUser(currentUser);
                               setState(() {
                                 isloading = false;
                               });

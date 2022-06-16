@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:helpex_app/screens/wrapper.dart';
+import 'package:helpex_app/authenticate/sign_in.dart';
+import 'package:helpex_app/firebase_options.dart';
 import 'package:helpex_app/services/auth.dart';
 import 'package:helpex_app/state/userModel.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,9 @@ import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -39,10 +42,9 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const Wraper(),
+          '/': (context) => const SignIn(),
           '/edit_pro': (context) => const EditProfile(),
         },
-        // home: Wraper(),
       ),
     );
   }
